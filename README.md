@@ -4,7 +4,7 @@
 https://www.figma.com/design/7Zx2RbhwxDdRNnZVny8ov1/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C%E3%80%90%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%E3%80%91?node-id=0-1&t=yPohb3fnXBDzClK7-1
 
 ## ER図
-[![Image from Gyazo](https://i.gyazo.com/054ffac7e908ae151e3dc8eef504d5c0.png)](https://gyazo.com/054ffac7e908ae151e3dc8eef504d5c0)
+[![Image from Gyazo](https://i.gyazo.com/607ef6b26071dd7fcab7c25c31d8019a.png)](https://gyazo.com/607ef6b26071dd7fcab7c25c31d8019a)
 
 ## サービス概要
 忙しい子育ての中で、
