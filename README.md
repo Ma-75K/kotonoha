@@ -48,7 +48,7 @@ https://www.figma.com/design/7Zx2RbhwxDdRNnZVny8ov1/%E5%8D%92%E6%A5%AD%E5%88%B6%
 
 ## 技術スタック
 - バックエンド: Ruby on Rails
-- データベース: PostgreSQL(本番) / SQLite(開発)
+- データベース: PostgreSQL(環境・開発ともに)
 - ストレージ: ActiveStorage(音声保存)
 - フロントエンド: Rails標準(ERB) / Hotwire(Turbo+Stimulus) / Web Audio API(録音)
 - デプロイ: Render / Fly.io / Railway(いずれか)
