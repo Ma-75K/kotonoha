@@ -32,3 +32,25 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# IDE設定
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Node modules
+/node_modules
+/yarn-erroe.log
+yarn-debug.log*
+.yarn-integrity
+
+# PostgreSQLダンプファイル
+*.dump
+*.sql
