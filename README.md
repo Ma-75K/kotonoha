@@ -47,11 +47,229 @@ https://www.figma.com/design/7Zx2RbhwxDdRNnZVny8ov1/%E5%8D%92%E6%A5%AD%E5%88%B6%
 - 「〇年前の今日」を振り返る機能
 
 ## 技術スタック
-- バックエンド: Ruby on Rails
-- データベース: PostgreSQL(環境・開発ともに)
-- ストレージ: ActiveStorage(音声保存)
-- フロントエンド: Rails標準(ERB) / Hotwire(Turbo+Stimulus) / Web Audio API(録音)
-- デプロイ: Render / Fly.io / Railway(いずれか)
+
+### バックエンド
+- Ruby: 3.2.3
+- Rails: 8.0.4
+- アプリケーションサーバー: Puma 7.2.0
+
+### データベース
+- PostgreSQL（開発・本番環境）
+
+### ストレージ
+- ActiveStorage（音声保存）
+
+### フロントエンド
+- Rails標準（ERB）
+- Hotwire（Turbo+Stimulus）
+- Web Audio API（録音機能）
+
+### インフラ・デプロイ
+- Docker / Docker Compose（開発環境）
+- Render / Fly.io / Railway（本番環境候補）
+
+## 環境構築
+
+### 前提条件
+- Docker Desktop がインストールされていること
+- Git がインストールされていること
+
+### セットアップ手順
+1. リポジトリをクローン
+```bash
+git clone https://github.com/Ma-75K/kotonoha.git
+cd kotonoha
+```
+
+2. Dockerコンテナをビルド
+`docker compose build`
+
+3. データベースをセットアップ
+```bash
+# データベースを作成
+docker compose run --rm web rails db:create
+docker compose run --rm web rails db:migrate
+```
+
+4. アプリケーションの起動
+`docker compose up`
+
+5. ブラウザでアクセス
+http://localhost:3000
+
+## よく使うコマンド
+
+### コンテナの起動・停止
+```bash
+# コンテナの起動
+docker compose up
+
+# バックグラウンドで起動
+docker compose up -d
+
+# コンテナの停止
+docker compose down
+
+# コンテナとボリュームを削除（データベースも削除される）
+docker compose down -v
+```
+
+### データベース関連
+```bash
+# マイグレーションの実行
+docker compose exec web rails db:migrate
+
+# データベースのリセット
+docker compose exec web rails db:reset
+
+# Railsコンソールの起動
+docker compose exec web rails console
+
+# データベースを再作成
+docker compose exec web rails db:drop db:create db:migrate
+```
+
+### その他
+```bash
+# テスト実行
+docker compose exec web rspec
+
+# Gemのインストール
+docker compose exec web bundle install
+
+# コンテナ内でbashを起動
+docker compose exec web bash
+
+# ログを確認
+docker compose logs
+
+# 特定のサービスのログを確認
+docker compose logs web
+docker compose logs db
+
+# コンテナの状態を確認
+docker compose ps
+```
+
+## トラブルシューティング
+
+### 1.ポートが既に使用されている
+**エラーメッセージ**
+`Bind for 0.0.0.0:3000 failed: port is already allocated`
+
+**原因**
+他のアプリケーションがポート3000を使用している
+
+**対処法**
+```bash
+# 使用中のプロセスを確認
+lsof -i :3000
+
+# プロセスを終了（PIDは上記コマンドで確認）
+kill -9 <PID>
+
+# または、コンテナを停止してから再起動
+docker compose down
+docker compose up
+```
+
+### 2.データベースに接続できない
+**エラーメッセージ**
+`could not connect to server: Connection refused`
+
+**原因**
+- データベースコンテナが起動していない
+- データベースが作成されていない
+
+**対処法**
+```bash
+# コンテナを再起動
+docker compose down
+docker compose up -d
+
+# データベースを作成
+docker compose exec web rails db:create
+```
+
+### 3.Gemがインストールされていない
+**エラーメッセージ**
+`cannot load such file -- <gem名>`
+
+**原因**
+- Gemfileを変更したが、bundle installを実行していない
+
+**対処法**
+```bash
+# Gemを再インストール
+docker compose exec web bundle install
+
+# コンテナを再ビルド（キャッシュを使わない）
+docker compose down
+docker compose build --no-cache
+docker compose up -d
+```
+
+### 4.マイグレーションファイルが実行されていない
+**エラーメッセージ**
+`Migrations are pending. To resolve this issue, run: bin/rails db:migrate RAILS_ENV=development`
+
+**原因**
+マイグレーションファイルを作成したが、実行していない
+
+**対処法**
+```bash
+# マイグレーションファイルを実行
+docker compose exec web rails db:migrate
+```
+
+### 5.コンテナが起動しない
+**エラーメッセージ**
+`(様々なエラーメッセージ)`
+
+**原因**
+- docker-compose.yml の設定ミス
+- Dockerfile の設定ミス
+- ポートの競合
+
+**対処法**
+```bash
+# ログを確認
+docker compose logs
+
+# 特定のサービスのログを確認
+docker compose logs web
+docker compose logs db
+
+# コンテナの状態を確認
+docker compose ps
+
+# コンテナを完全に削除して再ビルド
+docker compose down -v
+docker compose build --no-cache
+docker compose up
+```
+
+### 6.データベースのデータが消えた
+**原因**
+- `docker compose down -v` を実行した
+- ボリュームが削除された
+
+**対処法**
+```bash
+# データベースを再作成
+docker compose exec web rails db:create
+docker compose exec web rails db:migrate
+docker compose exec web rails db:seed  # 初期データがある場合
+```
+**予防策**
+- データを残したい場合は`docker compose down -v`を使わない
+- 定期的にバックアップをとる
+
+## 参考リンク
+- [Docker 公式ドキュメント](https://docs.docker.com/)
+- [Docker Compose 公式ドキュメント](https://docs.docker.com/compose/)
+- [Rails 公式ガイド](https://guides.rubyonrails.org/)
+
 
 ## なぜこのサービスを作りたいのか
 
