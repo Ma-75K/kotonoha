@@ -28,6 +28,8 @@ COPY . /kotonoha
 # entrypoint.sh をコピーして実行権限を付与
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
+
+# entrypoint.sh を起動時に実行
 ENTRYPOINT ["entrypoint.sh"]
 
 # ポートの公開
@@ -35,3 +37,6 @@ EXPOSE 3000
 
 # Rails サーバーの起動
 CMD ["rails", "server", "-b", "0.0.0.0"]
+
+# アセット（CSS/JS）を本番用に最適化
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
