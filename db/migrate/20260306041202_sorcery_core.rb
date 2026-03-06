@@ -1,11 +1,6 @@
 class SorceryCore < ActiveRecord::Migration[8.0]
   def change
-    create_table :users do |t|
-      t.string :email,            null: false, index: { unique: true }
-      t.string :crypted_password
-      t.string :salt
-
-      t.timestamps                null: false
-    end
+    add_column :users, :crypted_password, :string unless column_exists?(:users, :crypted_password)
+    add_column :users, :salt, :string unless column_exists?(:users, :salt)
   end
 end
