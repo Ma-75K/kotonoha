@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :children do
-    resources :recordings, only: [:new :create]
+    resources :recordings, only: [:new, :create]
   end
 end
