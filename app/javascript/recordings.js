@@ -101,9 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
+          const data = await response.json();
           alert('録音を保存しました！');
 
-          window.location.href = `/children/${childId}/recordings`;
+          window.location.href = `/children/${childId}/recordings/${data.recording_id}`;
         } else {
             const data = await response.json();
             alert('保存に失敗しました:' + (data.errors || '不明なエラー'));
