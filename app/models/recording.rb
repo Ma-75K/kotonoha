@@ -3,7 +3,7 @@ class Recording < ApplicationRecord
   belongs_to :child
 
   has_one_attached :audio_file
-  bofore_validation :set_recorded_at, on: :create
+  before_validation :set_recorded_at, on: :create
 
   validates :recorded_at, presence: true
   validates :duration, presence: true, numericality: { greater_than: 0 }

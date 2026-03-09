@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const startButton = ducument.getElementById('start-recording');
+  const startButton = document.getElementById('start-recording');
   const stopButton = document.getElementById('stop-recording');
   const recordingDuration = document.getElementById('recording-duration');
   const previewArea = document.getElementById('preview-area');
@@ -11,15 +11,42 @@ document.addEventListener('DOMContentLoaded', () => {
   let startTime;
   let timerInterval;
   let recordingSeconds = 0;
+  let selectedMimeType = '';
+  let selectedFileExtension = '';
 
   const pathParts = window.location.pathname.split('/');
   const childId = pathParts[pathParts.indexOf('children') + 1];
+
+  function updateTimer(seconds) {
+    const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const secs = (seconds % 60).toString().padStart(2, '0');
+    recordingDuration.textContent = `${minutes}:${secs}`;
+  }
 
   startButton.addEventListener('click', async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-      mediaRecorder = new MediaRecorder(stream);
+      if (MediaRecorder.isTypeSupported('audio/mp4')) {
+        selectedMimeType = 'audio/mp4';
+        selectedFileExtension = 'mp4';
+      } else if (MediaRecorder.isTypeSupported('audio/aac')) {
+        selectedMimeType = 'audio/aac';
+        selectedFileExtension = 'aac';
+      } else if (MediaRecorder.isTypeSupported('audio/mpeg')) {
+        selectedMimeType = 'audio/mpeg';
+        selectedFileExtension = 'mp3';
+      } else if (MediaRecorder.isTypeSupported('audio/webm')) {
+        selectedMimeType = 'audio/webm';
+        selectedFileExtension = 'webm';
+      } else {
+        selectedMimeType = 'audio/webm';
+        selectedFileExtension = 'webm';
+      }
+
+      console.log('選択された MIME タイプ:', selectedMimeType);
+
+      mediaRecorder = new MediaRecorder(stream, { mimeType: selectedMimeType });
       audioChunks = [];
       
       mediaRecorder.addEventListener('dataavailable', (event) => {
@@ -29,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mediaRecorder.addEventListener('stop', () => {
         stream.getTracks().forEach(track => track.stop());
 
-        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+        const audioBlob = new Blob(audioChunks, { type: selectedMimeType });
 
         showPreview(audioBlob);
       });
@@ -55,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   stopButton.addEventListener('click', () => {
     if (mediaRecorder && mediaRecorder.state === 'recording') {
       mediaRecorder.stop();
-      clearInterval(tiumeInterval);
+      clearInterval(timerInterval);
 
       startButton.disabled = false;
       stopButton.disabled = true;
@@ -76,6 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     previewArea.style.display = 'block';
 
+    document.getElementById('audio-preview').style.display = 'block';
+
     document.querySelector('.controls').style.display = 'none';
     document.querySelector('.recording-time').style.display = 'none';
 
@@ -83,14 +112,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setupFormSubmit(audioBlob) {
-    saveForm.addEventListener('submit', async (e) => {
+    const newSaveForm = saveForm.cloneNode(true);
+    saveForm.parentNode.replaceChild(newSaveForm, saveForm);
+    
+    newSaveForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const formData = new FormData(saveForm);
-      formData.set('recording[audio_file]', audioBlob, 'recording.webm');
+      formData.set('recording[audio_file]', audioBlob, `recording.${selectedFileExtension}`);
 
       try {
-        const token = document.querySelector('[name="csrf-token"]').Content;
+        const token = document.querySelector('[name="csrf-token"]').content;
         
         const response = await fetch(saveForm.action, {
           method: 'POST',

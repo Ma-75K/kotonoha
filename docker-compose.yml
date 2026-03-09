@@ -15,23 +15,31 @@ services:
 
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && tail -f /dev/null"
+    command: >
+      bash -c "
+        rm -f tmp/pids/server.pid &&
+        bundle exec rails db:prepare &&
+        bundle exec puma -C config/puma.rb
+      "
+    tty: true
+    stdin_open: true
     volumes:
       - .:/kotonoha
       - bundle_data:/usr/local/bundle
+      - node_modules:/kotonoha/node_modules
+      - ~/.local/share/mkcert:/root/.local/share/mkcert:ro
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: password
+      TZ: Asia/Tokyo
     ports:
       - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      DATABASE_HOST: db
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: password
-    tty: true
-    stdin_open: true
 
 volumes:
   postgres_data:
   bundle_data:
-  
+  node_modules:
