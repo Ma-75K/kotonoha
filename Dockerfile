@@ -32,11 +32,8 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
-# entrypoint.sh を起動時に実行
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
-
 # ポートの公開
 EXPOSE 3000
 
-# Rails サーバーの起動
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+# entrypoint.sh を起動時に実行してから Rails サーバーを起動
+CMD ["/usr/bin/entrypoint.sh", "bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
