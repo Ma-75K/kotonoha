@@ -36,4 +36,4 @@ RUN chmod +x /usr/bin/entrypoint.sh
 EXPOSE 3000
 
 # entrypoint.sh を起動時に実行してから Rails サーバーを起動
-CMD ["/usr/bin/entrypoint.sh", "bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["/usr/bin/entrypoint.sh", "bundle", "exec", "puma", "-C", "config/puma.rb"]
