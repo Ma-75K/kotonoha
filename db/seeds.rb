@@ -7,3 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+# db/seeds.rb
+
+# ユーザーを作成
+user = User.find_or_create_by!(email: "test@example.com") do |u|
+  u.name = "まいこ"
+  u.password = "password"
+  u.password_confirmation = "password"
+end
+
+# Child を作成
+child = user.children.find_or_create_by!(name: "さき") do |c|
+  c.birthday = "2022-07-28"
+end
+
+puts "User created: #{user.email}"
+puts "Child created: #{child.name} (ID: #{child.id})"
