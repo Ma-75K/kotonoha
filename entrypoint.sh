@@ -9,7 +9,7 @@ rm -f /kotonoha/tmp/pids/server.pid
 
 # マイグレーションを実行
 echo "Running database migrations..."
-bundle exec rails db:prepare
+bundle exec rails db:migrate
 
 echo "=== entrypoint.sh completed ==="
 
