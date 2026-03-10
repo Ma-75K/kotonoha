@@ -7,7 +7,7 @@ local:
   root: <%= Rails.root.join("storage") %>
 
 # 本番環境用（まずはローカルディスクで確認）
-priduction:
+production:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
