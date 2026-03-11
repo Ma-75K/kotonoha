@@ -1,0 +1,29 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      child: お子さま
+    attributes:
+      user:
+        name: お名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+      child:
+        name: お子さまのお名前（1人目）
+        birthday: 生年月日
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "を入力してください"
+            email:
+              taken: "は既に使用されています"
+              invalid: "の形式が正しくありません"
+              blank: "を入力してください"
+            passsword:
+              blank: "を入力してください"
+              too_short: "は%{count}文字以上で入力してください"
+            password_confirmation:
+              confirmation: "とパスワードの入力が一致しません"
