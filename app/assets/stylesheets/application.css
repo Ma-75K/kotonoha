@@ -28,9 +28,10 @@
 
 .button-group {
   display: flex;
+  flex-direction: column;
   gap: 12px;
   margin-top: 20px;
-  justify-content: center;
+  align-items: center;
 }
 
 .btn {
