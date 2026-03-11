@@ -1,10 +1,16 @@
 class ApplicationController < ActionController::Base
+  before_action :require_login
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
+
+  def not_authenticated
+    flash[:alert] = "ログインしてください"
+    redirect_to login_path
+  end
 
   def record_not_found
     redirect_to root_path, alert: "指定されたデータが見つかりませんでした"
