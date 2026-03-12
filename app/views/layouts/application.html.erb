@@ -24,11 +24,16 @@
   </head>
 
   <body>
-    <!-- フラッシュメッセージ表示部分を追加 -->
+    <header>
+      <!-- ハンバーガーメニュー -->
+      <!-- ロゴとことのはの文字入れる -->
+    </header>
+
+    <!-- フラッシュメッセージは全ページで共通表示 -->
     <div class="container mt-3">
-      <% if flash[:notice] %>
+      <% if flash[:success] %>
         <div class="alert alert-success">
-          <%= flash[:notice] %>
+          <%= flash[:success] %>
         </div>
       <% end %>
 
@@ -40,8 +45,14 @@
     </div>
 
     <main class="container mx-auto mt-28 px-5 flex">
-
       <%= yield %>
     </main>
+
+    <!-- ハンバーガーメニュー実装までページ下部に仮配置 -->
+    <% if logged_in? %>
+      <div style="position: fixed; bottom: 10px; right: 10px;">
+        <%= button_to "ログアウト（仮）", logout_path, method: :delete, class: "btn btn-danger" %>
+      </div>
+    <% end %>
   </body>
 </html>
