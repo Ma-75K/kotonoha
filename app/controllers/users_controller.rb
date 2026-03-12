@@ -5,7 +5,7 @@ class UsersController < ApplicationController
       @user.assign_attributes(session[:user_params])
     end
   end
-  
+
   def create
     @user = User.new(user_params)
 
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     Rails.logger.debug "User params: #{user_params.inspect}"
     Rails.logger.debug "User valid?: #{@user.valid?}"
     Rails.logger.debug "User errors: #{@user.errors.full_messages}" unless @user.valid?
-    
+
     if @user.save
       # セッションにユーザーIDを保存（次の画面で使用）
       session[:user_id] = @user.id
@@ -26,9 +26,9 @@ class UsersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
+
   private
-  
+
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end

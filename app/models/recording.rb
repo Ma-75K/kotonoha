@@ -18,18 +18,18 @@ class Recording < ApplicationRecord
 
   def audio_file_format
     unless audio_file.attached?
-      errors.add(:audio_file, 'を添付してください')
+      errors.add(:audio_file, "を添付してください")
       return
     end
 
-    acceptable_types = ['audio/webm', 'audio/wav', 'audio/mpeg', 'audio/mp4', 'audio/ogg']
+    acceptable_types = [ "audio/webm", "audio/wav", "audio/mpeg", "audio/mp4", "audio/ogg" ]
     unless acceptable_types.include?(audio_file.content_type)
-      errors.add(:audio_file, 'は音声ファイルである必要があります')
+      errors.add(:audio_file, "は音声ファイルである必要があります")
     end
 
     max_size = 50.megabytes
     if audio_file.byte_size > max_size
-      errors.add(:audio_file, 'は50MG以下である必要があります')
+      errors.add(:audio_file, "は50MG以下である必要があります")
     end
   end
 end

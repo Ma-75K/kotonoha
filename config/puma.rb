@@ -53,10 +53,10 @@ if ENV.fetch("RAILS_ENV", "development") == "development"
 
   if File.exist?(cert_path) && File.exist?(key_path)
     puts "SSL証明書が見つかりました。HTTPSで起動します。"
-    
+
     # 既存のバインド設定をクリア
     clear_binds!
-    
+
     # SSL バインドを設定
     ssl_bind "0.0.0.0", 3000, {
       cert: cert_path,
