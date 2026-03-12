@@ -13,12 +13,12 @@ class UserSessionsController < ApplicationController
       child = @user.children.first
 
       if child
-        redirect_to new_child_recording_path(child), success: 'ログインしました'
+        redirect_to new_child_recording_path(child), success: "ログインしました"
       else
-        redirect_to new_child_path, alert: 'お子さまを登録してください'
+        redirect_to new_child_path, alert: "お子さまを登録してください"
       end
     else
-      flash.now[:alert] = 'メールアドレスまたはパスワードが正しくありません'
+      flash.now[:alert] = "メールアドレスまたはパスワードが正しくありません"
       render :new, status: :unprocessable_entity
     end
   end
@@ -26,7 +26,7 @@ class UserSessionsController < ApplicationController
   def destroy
     logout
     session[:user_id] = nil
-    flash[:success] = 'ログアウトしました'
+    flash[:success] = "ログアウトしました"
     redirect_to root_path
   end
 end

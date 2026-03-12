@@ -37,12 +37,12 @@
                     id: "save-recording-form",
                     local: false do |f| %>
         
-        <%= f.hidden_field :title, value: '無題', id: 'title-field' %>
+        <%= f.hidden_field :title, value: "無題", id: 'title-field' %>
         <%= f.hidden_field :duration, id: 'duration-field' %>
         
         <div class="form-actions">
-          <%= f.submit '保存', class: 'btn btn-success' %>
-          <%= link_to '戻る', :back, class: 'btn btn-secondary' %>
+          <%= f.submit "保存", class: 'btn btn-success' %>
+          <%= link_to "戻る", :back, class: 'btn btn-secondary' %>
         </div>
       <% end %>
     </div>
