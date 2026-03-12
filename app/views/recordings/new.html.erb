@@ -1,0 +1,51 @@
+<div class="container">
+  <h1>録音する</h1>
+
+  <div class="recording-area">
+    <!-- 録音コントロール -->
+    <div class="controls">
+      <button id="start-recording" class="btn btn-primary">
+        録音開始
+      </button>
+      <button id="stop-recording" class="btn btn-danger" disabled>
+        録音停止
+      </button>
+    </div>
+
+    <!-- 録音時間表示 -->
+    <div class="recording-time">
+      <span id="recording-duration">00:00</span>
+    </div>
+
+    <!-- プレビュー画面（録音停止後に表示） -->
+    <div id="preview-area" style="display: none;">
+      <h2>無題</h2>
+
+      <!-- 録音時間 -->
+      <p class="duration">
+        録音時間: <span id="preview-duration"></span>
+      </p>
+
+    <!-- 音声プレビュー -->
+    <div id="audio-preview" style="display: none;">
+      <audio id="audio-player" controls></audio>
+    </div>
+    
+    <!-- 保存フォーム -->
+      <%= form_with model: @recording, 
+                    url: child_recordings_path(@child), 
+                    id: "save-recording-form",
+                    local: false do |f| %>
+        
+        <%= f.hidden_field :title, value: '無題', id: 'title-field' %>
+        <%= f.hidden_field :duration, id: 'duration-field' %>
+        
+        <div class="form-actions">
+          <%= f.submit '保存', class: 'btn btn-success' %>
+          <%= link_to '戻る', :back, class: 'btn btn-secondary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+      

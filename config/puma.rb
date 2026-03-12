@@ -27,8 +27,8 @@
 threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
 threads threads_count, threads_count
 
-# Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-port ENV.fetch("PORT", 3000)
+# Specifies the `environment` that Puma will run in.
+environment ENV.fetch("RAILS_ENV", "development")
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
@@ -39,3 +39,34 @@ plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+# HTTPS設定(開発環境のみ
+if ENV.fetch("RAILS_ENV", "development") == "development"
+  cert_path = "/root/.local/share/mkcert/localhost+3.pem"
+  key_path = "/root/.local/share/mkcert/localhost+3-key.pem"
+
+  # デバック用
+  puts "証明書パス: #{cert_path}"
+  puts "秘密鍵パス: #{key_path}"
+  puts "証明書が存在するか: #{File.exist?(cert_path)}"
+  puts "秘密鍵が存在するか: #{File.exist?(key_path)}"
+
+  if File.exist?(cert_path) && File.exist?(key_path)
+    puts "SSL証明書が見つかりました。HTTPSで起動します。"
+    
+    # 既存のバインド設定をクリア
+    clear_binds!
+    
+    # SSL バインドを設定
+    ssl_bind "0.0.0.0", 3000, {
+      cert: cert_path,
+      key: key_path,
+      verify_mode: "none"
+    }
+  else
+    puts "SSL証明書が見つかりません。HTTPで起動します。"
+    port ENV.fetch("PORT") { 3000 }
+  end
+else
+  port ENV.fetch("PORT") { 3000 }
+end

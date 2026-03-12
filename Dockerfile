@@ -11,7 +11,7 @@ RUN apt-get update -qq && \
     npm install -g yarn && \
     rm -rf /var/lib/apt/lists/*
 
-# 作業ディレクトリの設定（アプリケーション名に変更）
+# 作業ディレクトリの設定
 RUN mkdir /kotonoha
 WORKDIR /kotonoha
 
@@ -25,18 +25,15 @@ RUN bundle install
 # アプリケーションのコードをコピー
 COPY . /kotonoha
 
+# アセット（CSS/JS）を本番用に最適化
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
 # entrypoint.sh をコピーして実行権限を付与
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
-# entrypoint.sh を起動時に実行
-ENTRYPOINT ["entrypoint.sh"]
-
 # ポートの公開
 EXPOSE 3000
 
-# Rails サーバーの起動
-CMD ["rails", "server", "-b", "0.0.0.0"]
-
-# アセット（CSS/JS）を本番用に最適化
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# entrypoint.sh を起動時に実行してから Rails サーバーを起動
+CMD ["/usr/bin/entrypoint.sh", "bundle", "exec", "puma", "-C", "config/puma.rb"]

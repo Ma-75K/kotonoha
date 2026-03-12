@@ -1,2 +1,2 @@
-web: bin/rails server
+web: bin/rails server -b 'ssl://0.0.0.0:3000?key=/root/.local/share/mkcert/localhost%2B3-key.pem&cert=/root/.local/share/mkcert/localhost%2B3.pem&verify_mode=none'
 css: bin/rails tailwindcss:watch
