@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def require_user_session
     unless session[:user_id]
-      redirect_to new_user_path, alert: '最初から登録してください'
+      redirect_to new_user_path, alert: "最初から登録してください"
     end
   end
 
