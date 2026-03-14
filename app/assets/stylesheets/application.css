@@ -8,9 +8,16 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/*
+ *= require_tree .
+ *= require_self
+ *= require header
+ */
+
 .alert {
   padding: 12px 20px;
-  margin-buttom: 16px;
+  margin-bottom: 16px;
   border-radius: 4px;
 }
 
@@ -42,7 +49,7 @@
   cursor: pointer;
 }
 
-.byn-primary {
+.btn-primary {
   background-color: #007bff;
   color: white;
   border: none;

@@ -1,18 +1,16 @@
 class UserSessionsController < ApplicationController
   skip_before_action :require_login, only: %i[new create]
 
-  def new
-  end
+  def new; end
 
   def create
     @user = login(params[:email], params[:password])
 
     if @user
-      session[:user_id] = @user.id
-
       child = @user.children.first
 
       if child
+        session[:current_child_id] = child.id
         redirect_to new_child_recording_path(child), success: "ログインしました"
       else
         redirect_to new_child_path, alert: "お子さまを登録してください"
@@ -25,8 +23,8 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    session[:user_id] = nil
+    session[:current_child_id] = nil
     flash[:success] = "ログアウトしました"
-    redirect_to root_path
+    redirect_to root_path, status: :see_other
   end
 end
