@@ -8,9 +8,31 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/*
+ *= require_tree .
+ *= require_self
+ *= require header
+ */
+/* ページ全体のレイアウト*/
+.html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.body-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
 .alert {
   padding: 12px 20px;
-  margin-buttom: 16px;
+  margin-bottom: 16px;
   border-radius: 4px;
 }
 
@@ -42,7 +64,7 @@
   cursor: pointer;
 }
 
-.byn-primary {
+.btn-primary {
   background-color: #007bff;
   color: white;
   border: none;

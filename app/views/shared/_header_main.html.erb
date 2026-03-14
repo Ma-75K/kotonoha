@@ -1,0 +1,44 @@
+<header class="header-main">
+  <nav class="nav-container">
+    <div class="header-left">
+      <button class="hamburger-menu" type="button">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="header-center">
+      <%= link_to root_path, class: "logo-link" do %>
+        <div class="logo-wrapper">
+          <%= image_tag 'logo.png', alt: 'ことのは', class: 'logo-image' %>
+          <span class="app-name">ことのは</span>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="header-right">
+      <div class="account-switcher">
+        <p class="switcher-label">アカウント切り替え</p>
+
+        <div class="user-info-container">
+          <div class="switcher-control">
+            <button class="user-icon-button" type="button">
+              <i class="fas fa-user-circle switcher-icon"></i>
+            </button>
+          </div>
+
+          <ul class="dropdown-menu">
+            <% current_user.children.each do |child| %>
+              <li>
+                <%= link_to child.name, switch_child_path(child), data: { turbo_method: :post }, class: "dropdown-item" %>
+              </li>
+            <% end %>
+          </ul>
+
+          <p class= "selected-child-name">
+            <%= current_child&.name || "お子様が選択されていません" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

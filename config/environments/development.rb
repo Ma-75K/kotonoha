@@ -79,4 +79,5 @@ Rails.application.configure do
   end
 
   config.hosts.clear
+  config.importmap.cache = false
 end

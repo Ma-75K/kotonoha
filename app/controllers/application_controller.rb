@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :require_login
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
+  helper_method :current_child
   allow_browser versions: :modern
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
@@ -25,6 +26,18 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
-
   helper_method :current_user
+
+  # ヘッダーの表示を切り替えるメソッド
+  def use_simple_header?
+    !logged_in?
+  end
+  helper_method :use_simple_header?
+
+  def current_child
+    return nil unless logged_in?
+    return nil unless session[:current_child_id]
+
+    @current_child ||= current_user.children.find_by(id: session[:current_child_id])
+  end
 end

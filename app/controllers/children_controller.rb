@@ -17,6 +17,15 @@ class ChildrenController < ApplicationController
     end
   end
 
+  # お子様切り替え機能
+  def switch
+    child = current_user.children.find(params[:id])
+    session[:current_child_id] = child.id
+    redirect_to new_child_recording_path(child), notice: "#{child.name}さんに切り替えました"
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: "お子様が見つかりませんでした"
+  end
+
   private
 
   def child_params
