@@ -1,0 +1,74 @@
+/* トップページ全体のコンテナ*/
+.top-container {
+  min-height: 100vh;
+  background-color: #bfe8c2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Zen Old Mincho', serif;
+}
+
+/* メインタイトル*/
+.top-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  white-space: nowrap;
+}
+
+/* ボタングループ*/
+.button-group {
+  display: flex;
+  gap: 1.5rem
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+
+.button-group .btn {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.button-group .btn-primary:hover {
+  background-color: #6A8AAD;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button-group .btn-secondary {
+  background-color: #A8C5DD;
+  border: none;
+  color: #333;
+}
+
+.button-group .btn-secondary:hover {
+  background-color: #96B3CB;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 説明文*/
+.description {
+  text-align: center;
+  padding: 3rem 4rem;
+  background: rgba(200, 230, 201, 0.8);
+  border-radius: 50%;
+  line-height: 2.2;
+  font-size:1rem;
+  color: #555;
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.15);
+  max-width: 500px;
+  margin: 0 auto;
+  font-family: 'Zen Old Mincho', serif;
+}
+
+.description br {
+  display: block;
+  margin: 0.3rem 0;
+}

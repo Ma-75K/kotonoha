@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  *= require header
+ *= require footer
+ *= require top
  */
 /* ページ全体のレイアウト*/
 .html, body {
