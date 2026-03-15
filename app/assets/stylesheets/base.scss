@@ -1,0 +1,218 @@
+// app/assets/stylesheets/base.scss
+
+/* ========================================
+   変数定義
+======================================== */
+:root {
+  /* カラーパレット */
+  --color-primary: #7FBF7F;        /* メインカラー（ヘッダー・フッター） */
+  --color-primary-light: #bfe8c2;  /* 背景色（トップページ） */
+  --color-secondary: #A8C5DD;      /* セカンダリボタン */
+  --color-secondary-hover: #96B3CB;
+  --color-text: #333;              /* テキスト色 */
+  --color-text-light: #555;        /* 薄いテキスト色 */
+  --color-text-lighter: #666;      /* さらに薄いテキスト色 */
+  --color-white: #ffffff;
+  --color-border: #e2e8f0;
+
+  /* フォント */
+  --font-main: 'Zen Old Mincho', serif;
+  --font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* スペーシング */
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-xxl: 3rem;     /* 48px */
+
+  /* ブレークポイント */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+/* ========================================
+   リセットCSS
+======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px; /* 基準フォントサイズ */
+  -webkit-text-size-adjust: 100%; /* iOS Safariでのフォントサイズ調整を防ぐ */
+}
+
+body {
+  font-family: var(--font-main);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================
+   共通レイアウト
+======================================== */
+main {
+  flex: 1; /* フッターを下部に固定するため */
+}
+
+/* ========================================
+   共通コンポーネント
+======================================== */
+
+/* ナビゲーションコンテナ（ヘッダー・フッター共通） */
+.nav-container {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  width: 100%;
+  max-width: 1200px; /* PC表示時の最大幅 */
+  margin: 0 auto; /* 中央揃え */
+}
+
+/* ロゴ関連 */
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.logo-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.app-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+/* ボタン共通スタイル */
+button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* リンク共通スタイル */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* リスト共通スタイル */
+ul, ol {
+  list-style: none;
+}
+
+/* ========================================
+   レスポンシブ対応
+======================================== */
+
+/* スマホ（〜767px） */
+@media (max-width: 767px) {
+  html {
+    font-size: 14px; /* スマホでは少し小さく */
+  }
+
+  .nav-container {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .logo-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .app-name {
+    font-size: 18px;
+  }
+}
+
+/* タブレット（768px〜991px） */
+@media (min-width: 768px) and (max-width: 991px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* PC（992px〜） */
+@media (min-width: 992px) {
+  html {
+    font-size: 16px;
+  }
+
+  .nav-container {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+}
+
+/* ========================================
+   ユーティリティクラス
+======================================== */
+
+/* テキスト配置 */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* 表示・非表示 */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+/* スマホのみ表示 */
+.show-mobile {
+  display: block;
+}
+
+.hide-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .show-mobile {
+    display: none;
+  }
+
+  .hide-mobile {
+    display: block;
+  }
+}
