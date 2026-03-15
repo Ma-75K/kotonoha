@@ -1,28 +1,36 @@
-/* トップページ全体のコンテナ*/
+// app/assets/stylesheets/top.scss
+
+/* ========================================
+   トップページ全体のコンテナ
+======================================== */
 .top-container {
   min-height: 100vh;
-  background-color: #bfe8c2;
+  background-color: var(--color-primary-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  font-family: 'Zen Old Mincho', serif;
+  padding: var(--spacing-xl);
+  font-family: var(--font-main);
 }
 
-/* メインタイトル*/
+/* ========================================
+   メインタイトル
+======================================== */
 .top-title {
   font-size: 1.8rem;
   font-weight: 600;
   text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xl);
   white-space: nowrap;
 }
 
-/* ボタングループ*/
+/* ========================================
+   ボタングループ
+======================================== */
 .button-group {
   display: flex;
-  gap: 1.5rem;
+  gap: var(--spacing-lg);
   justify-content: center;
   margin-bottom: 5rem;
 }
@@ -35,6 +43,12 @@
   font-weight: 500;
 }
 
+.button-group .btn-primary {
+  background-color: #7BA3C0;
+  border: none;
+  color: var(--color-white);
+}
+
 .button-group .btn-primary:hover {
   background-color: #6A8AAD;
   transform: translateY(-2px);
@@ -42,33 +56,99 @@
 }
 
 .button-group .btn-secondary {
-  background-color: #A8C5DD;
+  background-color: var(--color-secondary);
   border: none;
-  color: #333;
+  color: var(--color-text);
 }
 
 .button-group .btn-secondary:hover {
-  background-color: #96B3CB;
+  background-color: var(--color-secondary-hover);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* 説明文*/
+/* ========================================
+   説明文
+======================================== */
 .description {
   text-align: center;
-  padding: 3rem 4rem;
+  padding: var(--spacing-xxl) 4rem;
   background: rgba(200, 230, 201, 0.8);
   border-radius: 50%;
   line-height: 2.2;
-  font-size:1rem;
-  color: #555;
+  font-size: 1rem;
+  color: var(--color-text-light);
   box-shadow: 0 4px 20px rgba(76, 175, 80, 0.15);
   max-width: 500px;
   margin: 0 auto;
-  font-family: 'Zen Old Mincho', serif;
+  font-family: var(--font-main);
 }
 
 .description br {
   display: block;
   margin: 0.3rem 0;
+}
+
+/* ========================================
+   レスポンシブ対応
+======================================== */
+
+/* スマホ（〜767px） */
+@media (max-width: 767px) {
+  .top-container {
+    padding: var(--spacing-md);
+  }
+
+  .top-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .button-group {
+    flex-direction: column; /* 縦並び */
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xxl);
+  }
+
+  .button-group .btn {
+    width: 100%; /* ボタンを横幅いっぱいに */
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .description {
+    padding: var(--spacing-xl) var(--spacing-xl);
+    font-size: 0.9rem;
+    line-height: 2;
+    max-width: 350px;
+  }
+}
+
+/* タブレット（768px〜991px） */
+@media (min-width: 768px) and (max-width: 991px) {
+  .top-title {
+    font-size: 1.7rem;
+  }
+
+  .description {
+    max-width: 450px;
+  }
+}
+
+/* PC（992px〜） */
+@media (min-width: 992px) {
+  .top-title {
+    font-size: 2rem;
+  }
+
+  .button-group .btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .description {
+    padding: var(--spacing-xxl) 5rem;
+    font-size: 1.1rem;
+    max-width: 550px;
+  }
 }
