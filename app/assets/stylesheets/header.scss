@@ -1,95 +1,79 @@
-/* _header_simple用のスタイル */
+// app/assets/stylesheets/header.scss
+
+/* ========================================
+   ヘッダー共通
+======================================== */
+.header-simple,
+.header-main {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   _header_simple 用のスタイル
+======================================== */
 .header-simple .nav-container {
-  justify-content: center; /* 中央配置に変更 */
+  justify-content: center; /* 中央配置 */
 }
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  width: 100%;
+/* ========================================
+   _header_main 用のスタイル
+======================================== */
+.header-main .nav-container {
+  justify-content: space-between; /* 左右に配置 */
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.header-center {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
+/* ヘッダーの左・中央・右 */
+.header-left,
+.header-center,
 .header-right {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
 }
 
-/* アイコンのサイズ調整 */
-.logo-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.2px;
-}
-
-.logo-image {
-  width: 60px;
-  height: 60px;
-  object-fit: contain; /* 縦横比を保ったまま収める */
-}
-
-.app-name {
-  font-size: 20px;
-  font-weight: bold;
-  color: #7FBF7F
-}
-
+/* ========================================
+   ハンバーガーメニュー
+======================================== */
 .hamburger-menu {
-  background-color: transparent; /*背景を透明に*/
-  border: none; /*枠線なし*/
-  cursor: pointer; /*マウスを載せたときに指マークに*/
-  padding: 8px;
-  transition: all 0.3s ease; /*アニメーション効果*/
+  background-color: transparent;
+  border: none;
+  padding: var(--spacing-sm);
 }
 
-/*hamburger-menuクラスの中のiタグにスタイルを施す*/
-.hamburger-menu i { /*アイコン通常時*/
-  font-size: 24px; /*アイコンのサイズ*/
-  color: #333; /*濃いグレー*/
-    transition: color 0.3s ease; /*色の変化をなめらかに*/
+.hamburger-menu i {
+  font-size: 24px;
+  color: var(--color-white);
+  transition: color 0.3s ease;
 }
 
-.hamburger-menu:hover i { /*アイコンにマウス乗せたとき（ホバー時）*/
-  color: #007bff; /*アイコンの色を青に変更*/
+.hamburger-menu:hover i {
+  color: var(--color-border);
 }
 
-/*ボタンを押したとき*/
 .hamburger-menu:active i {
-  color: #0056b3; /*さらに濃い青*/
+  color: var(--color-text-lighter);
 }
 
-/* アカウント切り替え全体 */
+/* ========================================
+   アカウント切り替え
+======================================== */
 .account-switcher {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.15rem;
-  position: relative; /*ドロップダウンの基準点*/
+  position: relative;
 }
 
-/*ラベル*/
 .switcher-label {
   font-size: 10px;
-  color: #333;
+  color: var(--color-white);
   margin: 0;
   white-space: nowrap;
 }
 
-/*ユーザーアイコンと子どもの名前を縦並びにするコンテナ*/
 .user-info-container {
   display: flex;
   flex-direction: column;
@@ -98,7 +82,6 @@
   position: relative;
 }
 
-/*ユーザーアイコンのコンテナ*/
 .switcher-control {
   display: flex;
   align-items: center;
@@ -106,53 +89,51 @@
   position: relative;
 }
 
-/* ユーザーアイコンボタン */
 .user-icon-button {
   background: none;
   border: none;
-  cursor: pointer;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* ユーザーアイコン */
 .switcher-icon {
   font-size: 24px;
-  color: #666;
+  color: var(--color-white);
   transition: color 0.2s;
 }
 
 .user-icon-button:hover .switcher-icon {
-  color: #333;
+  color: var(--color-border);
 }
 
-/*お子様の名前のスタイル*/
 .selected-child-name {
   font-size: 12px;
   font-weight: bold;
-  color: #333;
+  color: var(--color-white);
   text-align: center;
   margin: 0;
   white-space: nowrap;
   line-height: 1.2;
 }
 
-/* ドロップダウンメニューのスタイル */
+/* ========================================
+   ドロップダウンメニュー
+======================================== */
 .dropdown-menu {
   display: none;
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%); /* 中央揃え */
-  background-color: white;
-  border: 1px solid #e2e8f0;
+  transform: translateX(-50%);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   list-style: none;
-  padding: 0.5rem 0;
-  margin: 0.5rem 0 0 0;
+  padding: var(--spacing-sm) 0;
+  margin: var(--spacing-sm) 0 0 0;
   min-width: 150px;
   z-index: 1000;
 }
@@ -161,15 +142,44 @@
   display: block;
 }
 
-/* ドロップダウンアイテム */
 .dropdown-item {
   display: block;
-  padding: 0.5rem 1rem;
-  color: #333;
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--color-text);
   text-decoration: none;
   transition: background-color 0.2s;
 }
 
 .dropdown-item:hover {
   background-color: #f5f5f5;
+}
+
+/* ========================================
+   レスポンシブ対応
+======================================== */
+
+/* スマホ（〜767px） */
+@media (max-width: 767px) {
+  .switcher-label {
+    font-size: 9px;
+  }
+
+  .selected-child-name {
+    font-size: 11px;
+  }
+
+  .switcher-icon {
+    font-size: 20px;
+  }
+
+  .hamburger-menu i {
+    font-size: 20px;
+  }
+}
+
+/* タブレット以上（768px〜） */
+@media (min-width: 768px) {
+  .header-main .nav-container {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
 }
