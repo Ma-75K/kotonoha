@@ -28,9 +28,11 @@
 
           <ul class="dropdown-menu">
             <% current_user.children.each do |child| %>
-              <li>
-                <%= link_to child.name, switch_child_path(child), data: { turbo_method: :post }, class: "dropdown-item" %>
-              </li>
+              <% if child.persisted? %>
+                <li>
+                  <%= link_to child.name, switch_child_path(child), data: { turbo_method: :post }, class: "dropdown-item" %>
+                </li>
+              <% end %>
             <% end %>
           </ul>
 
