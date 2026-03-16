@@ -30,6 +30,8 @@
 ======================================== */
 .button-group {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--spacing-lg);
   justify-content: center;
   margin-bottom: 5rem;
@@ -111,7 +113,6 @@
   }
 
   .button-group .btn {
-    width: 100%; /* ボタンを横幅いっぱいに */
     padding: 0.7rem 1.5rem;
     font-size: 1rem;
   }
