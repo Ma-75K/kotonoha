@@ -17,14 +17,12 @@ class UsersController < ApplicationController
     Rails.logger.debug "User errors: #{@user.errors.full_messages}" unless @user.valid?
 
     if @user.save
-      auto_login(@user)
-      # セッションにユーザーIDを保存（次の画面で使用）
-      session[:user_id] = @user.id
-      session[:user_params] = user_params.except(:password, :password_confirmation).to_h
+       # 一時的にユーザーIDをセッションに保存
+      session[:temp_user_id] = @user.id
+
       flash[:success] = "登録が完了しました"
       redirect_to new_child_path
     else
-      session[:user_params] = user_params.except(:password, :password_confirmation).to_h
       flash[:danger] = "ユーザー登録に失敗しました"
       render :new, status: :unprocessable_entity
     end

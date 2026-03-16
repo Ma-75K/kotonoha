@@ -5,6 +5,10 @@
 ======================================== */
 .header-simple,
 .header-main {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md);
   background-color: var(--color-primary);
   color: var(--color-white);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

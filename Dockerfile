@@ -17,7 +17,7 @@ WORKDIR /kotonoha
 
 # Gemfile と Gemfile.lock をコピー
 COPY Gemfile /kotonoha/Gemfile
-COPY Gemfile.lock /kotonoha/Gemfile.lock
+COPY Gemfile.lock* /kotonoha/
 
 # Bundler のインストールと gem のインストール
 RUN bundle install

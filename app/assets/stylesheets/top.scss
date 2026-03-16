@@ -21,7 +21,7 @@
   font-weight: 600;
   text-align: center;
   color: var(--color-text);
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 4rem;
   white-space: nowrap;
 }
 
@@ -30,9 +30,11 @@
 ======================================== */
 .button-group {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--spacing-lg);
   justify-content: center;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
 }
 
 .button-group .btn {
@@ -71,17 +73,37 @@
    説明文
 ======================================== */
 .description {
+  position: relative;  /* 疑似要素の基準位置 */
   text-align: center;
-  padding: var(--spacing-xxl) 4rem;
+  padding: var(--spacing-xxl) 3rem;
   background: rgba(200, 230, 201, 0.8);
   border-radius: 50%;
   line-height: 2.2;
   font-size: 1rem;
   color: var(--color-text-light);
-  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.15);
-  max-width: 500px;
+  max-width: 400px;
   margin: 0 auto;
+  margin-top: -1rem;
   font-family: var(--font-main);
+   z-index: 1;  /* テキストを前面に */
+}
+
+/* ぼかした枠線を疑似要素で作成 */
+.description::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 250, 240, 0.9),
+    rgba(248, 248, 255, 0.6)
+  );
+  border-radius: 50%;
+  filter: blur(9px);  /* ぼかしを適用 */
+  z-index: -1;  /* 背景の後ろに配置 */
 }
 
 .description br {
@@ -101,17 +123,16 @@
 
   .top-title {
     font-size: 1.5rem;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 6rem;
   }
 
   .button-group {
     flex-direction: column; /* 縦並び */
     gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xxl);
+    margin-bottom: 6rem;
   }
 
   .button-group .btn {
-    width: 100%; /* ボタンを横幅いっぱいに */
     padding: 0.7rem 1.5rem;
     font-size: 1rem;
   }
@@ -120,7 +141,7 @@
     padding: var(--spacing-xl) var(--spacing-xl);
     font-size: 0.9rem;
     line-height: 2;
-    max-width: 350px;
+    max-width: 300px;
   }
 }
 
@@ -131,7 +152,7 @@
   }
 
   .description {
-    max-width: 450px;
+    max-width: 380px;
   }
 }
 
@@ -141,14 +162,18 @@
     font-size: 2rem;
   }
 
+  .button-group {
+    margin-bottom: 3rem;
+  }
+
   .button-group .btn {
     padding: 1rem 2.5rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .description {
     padding: var(--spacing-xxl) 5rem;
-    font-size: 1.1rem;
-    max-width: 550px;
+    font-size: 1rem;
+    max-width: 420px;
   }
 }

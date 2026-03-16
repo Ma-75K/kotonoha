@@ -9,10 +9,17 @@ class ChildrenController < ApplicationController
     @child = current_user.children.build(child_params)
 
     if @child.save
-      session.delete(:user_params)
-      flash[:success] = "お子さま情報の登録が完了しました"
+      # ここではじめてログイン
+      user = User.find(session[:temp_user_id])
+      auto_login(user)
+
+      session[:selected_child_id] = @child.id
+      session.delete(:temp_user_id)
+
+      flash[:success] = "登録が完了しました"
       redirect_to new_child_recording_path(@child)
     else
+      flash.now[:danger] = "お子様の登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
   end
