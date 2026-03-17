@@ -32,10 +32,10 @@ class ApplicationController < ActionController::Base
     @current_child ||= if session[:current_child_id]
                          # セッションにIDがある場合、そのお子様を取得
                          current_user.children.find_by(id: session[:current_child_id]) || current_user.children.first
-                       else
+    else
                          # セッションにIDがない場合、最初のお子様を取得
                          current_user.children.first
-                       end
+    end
   end
   helper_method :current_child
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new  confirm]
+  skip_before_action :require_login, only: %i[new confirm]
 
   def new
     @user = User.new
