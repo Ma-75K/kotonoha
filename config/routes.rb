@@ -11,11 +11,9 @@ Rails.application.routes.draw do
   resources :children, only: [ :new, :create ] do
     # お子様切り替え機能
     member do
-      post :switch
+      # 録音機能（お子様に紐付く）
+      resources :recordings, only: [ :new, :create ]
     end
-
-    # 録音機能（お子様に紐付く）
-    resources :recordings, only: [ :new, :create ]
   end
 
   # ログイン・ログアウト
