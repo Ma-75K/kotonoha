@@ -1,41 +1,41 @@
 class ChildrenController < ApplicationController
-  before_action :require_user_session
+before_action :require_user_session
 
-  def new
-    @child = current_user.children.build
-  end
+def new
+@child = current_user.children.build
+end
 
-  def create
-    @child = current_user.children.build(child_params)
+def create
+@child = current_user.children.build(child_params)
 
-    if @child.save
-      # ここではじめてログイン
-      user = User.find(session[:temp_user_id])
-      auto_login(user)
+if @child.save
+  # ここではじめてログイン
+  user = User.find(session[:temp_user_id])
+  auto_login(user)
 
-      session[:selected_child_id] = @child.id
-      session.delete(:temp_user_id)
+  session[:selected_child_id] = @child.id
+  session.delete(:temp_user_id)
 
-      flash[:success] = "登録が完了しました"
-      redirect_to new_child_recording_path(@child)
-    else
-      flash.now[:danger] = "お子様の登録に失敗しました"
-      render :new, status: :unprocessable_entity
-    end
-  end
+  flash[:success] = "登録が完了しました"
+  redirect_to new_child_recording_path(@child)
+else
+  flash.now[:danger] = "お子様の登録に失敗しました"
+  render :new, status: :unprocessable_entity
+end
+end
 
-  # お子様切り替え機能
-  def switch
-    child = current_user.children.find(params[:id])
-    session[:current_child_id] = child.id
-    redirect_to new_child_recording_path(child), notice: "#{child.name}さんに切り替えました"
-  rescue ActiveRecord::RecordNotFound
-    redirect_to root_path, alert: "お子様が見つかりませんでした"
-  end
+お子様切り替え機能
+def switch
+child = current_user.children.find(params[:id])
+session[:current_child_id] = child.id
+redirect_to new_child_recording_path(child), notice: "#{child.name}さんに切り替えました"
+rescue ActiveRecord::RecordNotFound
+redirect_to root_path, alert: "お子様が見つかりませんでした"
+end
 
-  private
+private
 
-  def child_params
-    params.require(:child).permit(:name, :birthday)
-  end
+def child_params
+params.require(:child).permit(:name, :birthday)
+end
 end
