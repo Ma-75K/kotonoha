@@ -1,29 +1,25 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
+  skip_before_action :require_login, only: %i[new  confirm]
 
   def new
     @user = User.new
+
+    # 戻るボタンで戻ってきた場合、入力内容を復元
     if session[:user_params]
       @user.assign_attributes(session[:user_params])
     end
   end
 
-  def create
+  def confirm
     @user = User.new(user_params)
 
-    # デバック用のログ出力
-    Rails.logger.debug "User params: #{user_params.inspect}"
-    Rails.logger.debug "User valid?: #{@user.valid?}"
-    Rails.logger.debug "User errors: #{@user.errors.full_messages}" unless @user.valid?
-
-    if @user.save
-       # 一時的にユーザーIDをセッションに保存
-      session[:temp_user_id] = @user.id
-
-      flash[:success] = "登録が完了しました"
-      redirect_to new_child_path
+    # バリデーションチェック
+    if @user.valid?
+      # sessionに一時保存
+      session[:user_params] = user_params.to_h
+      render :confirm
     else
-      flash[:danger] = "ユーザー登録に失敗しました"
+      flash.now[:danger] = "入力内容に誤りがあります"
       render :new, status: :unprocessable_entity
     end
   end

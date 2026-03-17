@@ -1,36 +1,60 @@
 class ChildrenController < ApplicationController
-  before_action :require_user_session
+  # 登録中は認証をスキップ
+  skip_before_action :require_login, only: %i[new create]
 
   def new
-    @child = current_user.children.build
+    # session からユーザー情報を取得
+    unless session[:user_params]
+      flash[:danger] = "ユーザー情報が見つかりません"
+      redirect_to new_user_path
+      return
+    end
+
+    # 一時的な User オブジェクトを作成（DB には保存しない）
+    @user = User.new(session[:user_params])
+    @child = @user.children.build
   end
 
   def create
-    @child = current_user.children.build(child_params)
+    # session からユーザー情報を取得
+    unless session[:user_params]
+      flash[:danger] = "ユーザー情報が見つかりません"
+      redirect_to new_user_path
+      return
+    end
 
-    if @child.save
-      # ここではじめてログイン
-      user = User.find(session[:temp_user_id])
-      auto_login(user)
+    # ユーザーと子どもを作成
+    @user = User.new(session[:user_params])
+    @child = @user.children.build(child_params)
 
-      session[:selected_child_id] = @child.id
-      session.delete(:temp_user_id)
+    # トランザクションで両方を保存
+    ActiveRecord::Base.transaction do
+      @user.save!
+      @child.save!
+
+      # ログイン処理
+      auto_login(@user)
+
+      # session をクリア
+      session.delete(:user_params)
 
       flash[:success] = "登録が完了しました"
-      redirect_to new_child_recording_path(@child)
-    else
-      flash.now[:danger] = "お子様の登録に失敗しました"
-      render :new, status: :unprocessable_entity
+      redirect_to new_child_recording_path(@child.id)
     end
+  rescue ActiveRecord::RecordInvalid => e
+    flash.now[:danger] = "登録に失敗しました: #{e.message}"
+    render :new, status: :unprocessable_entity
   end
 
-  # お子様切り替え機能
   def switch
-    child = current_user.children.find(params[:id])
-    session[:current_child_id] = child.id
-    redirect_to new_child_recording_path(child), notice: "#{child.name}さんに切り替えました"
-  rescue ActiveRecord::RecordNotFound
-    redirect_to root_path, alert: "お子様が見つかりませんでした"
+    @child = current_user.children.find(params[:id])
+    session[:current_child_id] = @child.id
+
+    flash[:success] = "#{@child.name}さんに切り替えました"
+    redirect_to new_child_recording_path(@child.id)
+  rescue ActiveRecord::RecordNtoFound
+    flash[:danger] = "お子様が見つかりませんでした"
+    redirect_to root_path
   end
 
   private

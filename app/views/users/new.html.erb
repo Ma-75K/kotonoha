@@ -1,13 +1,23 @@
 <div class= "container">
   <div class= "row">
     <div class= "col-md-10 col-lg-8 mx-auto">
-      <h1 class="mb-4 text-center">アカウント情報</h1>
+      <h1 class="mt-4 mb-4 text-center">アカウント情報</h1>
 
       <div class="mb-5">
-        <!-- ここにステップ1～2のアイコン入れる -->
+        <!-- ステップインジケーター -->
+        <div class="d-flex juistify-content-between">
+          <div class="text-center">
+            <div class="badge bg-primary">1</div>
+            <div>アカウント情報</div>
+          </div>
+          <div class="text-center text-muted">
+            <div class="badge bg-secondary">2</div>
+            <div>お子様情報</div>
+          </div>
+        </div>
       </div>
 
-      <%= form_with model: @user, url: users_path, method: :post do |f| %>
+      <%= form_with model: @user, url: confirm_users_path, method: :post, data: { turbo: false } do |f| %>
 
         <div class="mb-3">
           <%= f.label :name, class: "form-label" %>
@@ -52,7 +62,7 @@
             </div>
           <% end %>
         </div>
-        
+
         <div class="button-group">
           <%= f.submit "[ 次へ ]", class: "btn btn-primary" %>
           <%= link_to "[ 戻る ]", root_path, class: "btn btn-secondary" %>
