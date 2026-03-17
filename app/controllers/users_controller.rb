@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
+  skip_before_action :require_login, only: %i[new  confirm]
 
   def new
     @user = User.new
@@ -12,13 +12,12 @@ class UsersController < ApplicationController
 
   def confirm
     @user = User.new(user_params)
+
     # バリデーションチェック
     if @user.valid?
       # sessionに一時保存
       session[:user_params] = user_params.to_h
-
-      flash[:success] = "ユーザー情報を登録しました。お子様の情報を入力してください"
-      redirect_to new_child_path
+      render :confirm
     else
       flash.now[:danger] = "入力内容に誤りがあります"
       render :new, status: :unprocessable_entity
