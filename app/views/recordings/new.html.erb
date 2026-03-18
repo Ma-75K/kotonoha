@@ -1,4 +1,7 @@
 <div class="container">
+  <div id="success-messages"></div>
+  <div id="error-messages"></div>
+
   <h1>録音する</h1>
 
   <div class="recording-area">
@@ -30,16 +33,16 @@
     <div id="audio-preview" style="display: none;">
       <audio id="audio-player" controls></audio>
     </div>
-    
+
     <!-- 保存フォーム -->
-      <%= form_with model: @recording, 
-                    url: child_recordings_path(@child), 
+      <%= form_with model: @recording,
+                    url: child_recordings_path(@child),
                     id: "save-recording-form",
                     local: false do |f| %>
-        
+
         <%= f.hidden_field :title, value: "無題", id: 'title-field' %>
         <%= f.hidden_field :duration, id: 'duration-field' %>
-        
+
         <div class="form-actions">
           <%= f.submit "保存", class: 'btn btn-success' %>
           <%= link_to "戻る", :back, class: 'btn btn-secondary' %>
@@ -48,4 +51,3 @@
     </div>
   </div>
 </div>
-      

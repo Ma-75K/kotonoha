@@ -1,3 +1,35 @@
+// エラーメッセージ表示用の関数
+function showError(message) {
+  const errorDiv = document.getElementById('error-messages');
+  if (errorDiv) {
+    errorDiv.innerHTML = `
+      <div class="alert alert-danger" role="alert">
+        ${message}
+      </div>
+    `;
+    errorDiv.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    // error-messages要素が見つからない場合はalertにフォールバック
+    alert(message);
+  }
+}
+
+// 成功メッセージ表示用の関数
+function showSuccess(message) {
+  const successDiv = document.getElementById('success-messages');
+  if (successDiv) {
+    successDiv.innerHTML = `
+      <div class="alert alert-success" role="alert">
+        ${message}
+      </div>
+    `;
+    successDiv.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    // success-messages要素が見つからない場合はalertにフォールバック
+    alert(message);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const startButton = document.getElementById('start-recording');
   const stopButton = document.getElementById('stop-recording');
@@ -48,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       mediaRecorder = new MediaRecorder(stream, { mimeType: selectedMimeType });
       audioChunks = [];
-      
+
       mediaRecorder.addEventListener('dataavailable', (event) => {
         audioChunks.push(event.data);
       });
@@ -75,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } catch (error) {
       console.error('マイクへのアクセスエラー:', error);
-      alert('マイクへのアクセスが許可されていません。ブラウザの設定を確認してください。');
+      ahowError('マイクへのアクセスが許可されていません。ブラウザの設定を確認してください。');
     }
   });
 
@@ -98,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const minutes = Math.floor(recordingSeconds / 60).toString().padStart(2, '0');
     const seconds = (recordingSeconds % 60).toString().padStart(2, '0');
     previewDuration.textContent = `${minutes}:${seconds}`;
-    
+
     durationField.value = recordingSeconds;
 
     previewArea.style.display = 'block';
@@ -112,19 +144,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setupFormSubmit(audioBlob) {
+    // フォームのクローンを作成
     const newSaveForm = saveForm.cloneNode(true);
     saveForm.parentNode.replaceChild(newSaveForm, saveForm);
-    
+    // 新しいフォームにイベントリスナーを追加
     newSaveForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      const formData = new FormData(saveForm);
+      // 新しいフォームからFormDataを取得
+      const formData = new FormData(newSaveForm);
       formData.set('recording[audio_file]', audioBlob, `recording.${selectedFileExtension}`);
 
       try {
         const token = document.querySelector('[name="csrf-token"]').content;
-        
-        const response = await fetch(saveForm.action, {
+        // newSaveFormのactionを使用
+        const response = await fetch(newSaveForm.action, {
           method: 'POST',
           headers: {
             'X-CSRF-Token': token
@@ -134,15 +167,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok) {
           const data = await response.json();
-          alert('録音を保存しました！');
+          showSuccess('録音を保存しました！');
 
+          setTimeout(() => {
           window.location.href = `/children/${childId}/recordings/${data.recording_id}`;
+          }, 1000);
         } else {
-            const data = await response.json();
-            alert('保存に失敗しました:' + (data.errors || '不明なエラー'));
+          const data = await response.json();
+          showError('保存に失敗しました:' + (data.errors || '不明なエラー'));
         }
       } catch (error) {
-        alert('エラーが発生しました');
+        showError('エラーが発生しました');
         console.error('エラー:', error);
       }
     });
