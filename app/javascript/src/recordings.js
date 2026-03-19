@@ -30,7 +30,19 @@ function showSuccess(message) {
   }
 }
 
+// 画面切り替え関数を追加
+function showScreen(screen) {
+  document.getElementById('initial-screen').style.display = 'none';
+  document.getElementById('recording-screen').style.display = 'none';
+  document.getElementById('preview-area').style.display = 'none';
+
+  document.getElementById(screen).style.display = 'block';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+
+  showScreen('initial-screen');
+
   const startButton = document.getElementById('start-recording');
   const stopButton = document.getElementById('stop-recording');
   const recordingDuration = document.getElementById('recording-duration');
