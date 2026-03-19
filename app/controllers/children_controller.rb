@@ -57,6 +57,9 @@ class ChildrenController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    
+
   private
 
   def child_params

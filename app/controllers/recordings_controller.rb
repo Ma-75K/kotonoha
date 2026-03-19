@@ -9,7 +9,7 @@ class RecordingsController < ApplicationController
 
   def create
     @recording = @child.recordings.build(recording_params)
-    # @recording.user = current_user ←あとでコメントアウト外す
+    @recording.user = current_user
 
     # 一時的に仮のユーザーを設定
     @recording.user = User.first  # ← 一時的な対応
