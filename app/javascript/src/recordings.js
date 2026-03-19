@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   startButton.addEventListener('click', async () => {
+    showScreen('recording-screen');
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
@@ -119,11 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } catch (error) {
       console.error('マイクへのアクセスエラー:', error);
-      ahowError('マイクへのアクセスが許可されていません。ブラウザの設定を確認してください。');
+      showError('マイクへのアクセスが許可されていません。ブラウザの設定を確認してください。');
     }
   });
 
   stopButton.addEventListener('click', () => {
+    showScreen('preview-area');
+
     if (mediaRecorder && mediaRecorder.state === 'recording') {
       mediaRecorder.stop();
       clearInterval(timerInterval);
