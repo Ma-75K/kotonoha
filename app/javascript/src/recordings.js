@@ -31,7 +31,7 @@ function showSuccess(message) {
 }
 
 // 画面切り替え関数を追加
-window.showScreen = function(screen) {
+function showScreen(screen) {
   document.getElementById('initial-screen').style.display = 'none';
   document.getElementById('recording-screen').style.display = 'none';
   document.getElementById('preview-area').style.display = 'none';
