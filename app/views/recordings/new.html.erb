@@ -59,9 +59,8 @@
     <div id="audio-preview" style="display: none;">
       <audio id="audio-player" controls></audio>
     </div>
-  </div>
 
-  <!-- 保存フォーム -->
+    <!-- 保存フォーム -->
     <%= form_with model: @recording,
                   url: child_recordings_path(@child),
                   id: "save-recording-form",
