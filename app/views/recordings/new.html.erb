@@ -46,33 +46,53 @@
     </div>
   -->
 
-  <!-- プレビュー画面（録音停止後に表示） -->
+  <!-- プレビュー画面 -->
   <div id="preview-area" style="display: none;">
     <h2>無題</h2>
 
-    <!-- 録音時間 -->
-    <p class="duration">
-      録音時間: <span id="preview-duration"></span>
-    </p>
-
-    <!-- 音声プレビュー -->
-    <div id="audio-preview" style="display: none;">
-      <audio id="audio-player" controls></audio>
+    <!-- 録音時間（数字だけ） -->
+    <div class="duration">
+      <span id="preview-duration">00:00</span>
     </div>
 
-    <!-- 保存フォーム -->
-    <%= form_with model: @recording,
-                  url: child_recordings_path(@child),
-                  id: "save-recording-form",
-                  local: false do |f| %>
+    <!-- 再生バー -->
+    <input type="range" id="seek-bar" value="0">
 
-      <%= f.hidden_field :title, value: "無題", id: 'title-field' %>
-      <%= f.hidden_field :duration, id: 'duration-field' %>
+    <!-- 経過時間 -->
+    <div class="current-time">
+      <span id="current-time">00:00</span>
+    </div>
 
-      <div class="form-actions">
-        <%= f.submit "保存", class: 'btn btn-success' %>
-        <%= link_to "戻る", :back, class: 'btn btn-secondary' %>
-      </div>
-    <% end %>
+    <!-- 音声 -->
+    <audio id="audio-player"></audio>
+
+    <!-- 初期UI（再生前）⇒ 再生中UI -->
+    <div class="audio-controls">
+      <button id="play-toggle-button" type="button">
+        <i id="play-icon" class="fa-solid fa-play"></i>
+      </button>
+    </div>
+
+    <!-- 保存 -->
+    <div class="form-action">
+      <button>保存</button>
+      <button onclick="history.back()">戻る</button>
+    </div>
   </div>
+
+  <!-- 保存フォーム
+  <%= form_with model: @recording,
+                url: child_recordings_path(@child),
+                id: "save-recording-form",
+                local: false do |f| %>
+
+    <%= f.hidden_field :title, value: "無題", id: 'title-field' %>
+    <%= f.hidden_field :duration, id: 'duration-field' %>
+
+    <div class="form-actions">
+      <%= f.submit "保存", class: 'btn btn-success' %>
+      <%= link_to "戻る", :back, class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
+  -->
 </div>
