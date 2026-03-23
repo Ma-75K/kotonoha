@@ -1,5 +1,5 @@
 class RecordingsController < ApplicationController
-  # before_action :require_login ※一時的にコメントアウト中
+  before_action :require_login
   before_action :set_child, except: [ :new ] # except: [:new]は一時的に追加しているため後で削除する
 
   def new
@@ -11,8 +11,7 @@ class RecordingsController < ApplicationController
     @recording = @child.recordings.build(recording_params)
     @recording.user = current_user
 
-    # 一時的に仮のユーザーを設定
-    @recording.user = User.first  # ← 一時的な対応
+    @recording.user = User.first
 
     if @recording.save
       render json: {
