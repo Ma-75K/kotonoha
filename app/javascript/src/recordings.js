@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const startButton = document.getElementById('start-recording');
   const stopRecordingButton = document.getElementById('stop-recording');
   const recordingDuration = document.getElementById('recording-duration');
-  //const saveForm = document.getElementById('save-recording-form');
-  //const durationField = document.getElementById('duration-field');
+  const saveForm = document.getElementById('save-recording-form');
+  const durationField = document.getElementById('duration-field');
 
   let mediaRecorder;
   let audioChunks = [];
@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let recordingSeconds = 0;
   let selectedMimeType = '';
   let selectedFileExtension = '';
+  let recordedAudioBlob = null;
 
   const pathParts = window.location.pathname.split('/');
   const childId = pathParts[pathParts.indexOf('children') + 1];
@@ -130,6 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function showPreview(audioBlob) {
+    recordedAudioBlob = audioBlob;
+
     const audioUrl = URL.createObjectURL(audioBlob);
     const audioPlayer = document.getElementById('audio-player');
     audioPlayer.src = audioUrl;
@@ -139,51 +142,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const seconds = (recordingSeconds % 60).toString().padStart(2, '0');
     previewDuration.textContent = `${minutes}:${seconds}`;
 
-    // durationField.value = recordingSeconds;
+    const durationField = document.getElementById('duration-field');
+    if (durationField) {
+      durationField.value = recordingSeconds;
+    }
 
     showScreen('preview-area');
-
-    // setupFormSubmit(audioBlob);
     setupAudioControls();
   }
 
-  /*以下、保存処理なので次のISSUEで実装する
-  function setupFormSubmit(audioBlob) {
-    フォームのクローンを作成
-    const newSaveForm = saveForm.cloneNode(true);
-    saveForm.parentNode.replaceChild(newSaveForm, saveForm);
-    新しいフォームにイベントリスナーを追加
-    newSaveForm.addEventListener('submit', async (e) => {
+  function setupFormSubmit() {
+    if (!saveForm) return;
+
+    saveForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      新しいフォームからFormDataを取得
-      const formData = new FormData(newSaveForm);
-      formData.set('recording[audio_file]', audioBlob, `recording.${selectedFileExtension}`);
+
+      if (!recordedAudioBlob) {
+        showError('保存する音声がありません。先に録音してください。');
+        return;
+      }
+
+      const formData = new FormData(saveForm);
+      formData.set(
+        'recording[audio_file]',
+        recordedAudioBlob,
+        `recording.${selectedFileExtension}`
+      );
 
       try {
         const token = document.querySelector('[name="csrf-token"]').content;
-        // newSaveFormのactionを使用
-        const response = await fetch(newSaveForm.action, {
+
+        const response = await fetch(saveForm.action, {
           method: 'POST',
           headers: {
-            'X-CSRF-Token': token
+            'X-CSRF-Token': token,
+            'Accept': 'application/json'
           },
           body: formData
         });
 
+        const data = await response.json();
         if (response.ok) {
-          const data = await response.json();
           showSuccess('録音を保存しました！');
 
           setTimeout(() => {
-          window.location.href = `/children/${childId}/recordings/${data.recording_id}`;
-          }, 1000);
+            window.location.href = `/children/${childId}/recordings/${data.recording_id}`;
+          }, 800);
         } else {
-          const data = await response.json();
-          showError('保存に失敗しました:' + (data.errors || '不明なエラー'));
+          showError('保存に失敗しました: ' + (data.errors || '不明なエラー'));
         }
       } catch (error) {
-        showError('エラーが発生しました');
-        console.error('エラー:', error);
+        console.error('保存エラー:', error);
+        showError('保存中にエラーが発生しました。');
       }
     });
   }
@@ -209,9 +219,8 @@ document.addEventListener('DOMContentLoaded', () => {
     currentTime
   ) {
     playButton.addEventListener('click', () => {
-      if (sudioPlayer.paused) {
+      if (audioPlayer.paused) {
         audioPlayer.play();
-        playButton.textContent = ''
       }
       audioPlayer.play();
       previewInitial.style.display = 'none';
@@ -243,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const time = audioPlayer.duration * (seekBar.value / 100);
       audioPlayer.currentTime = time;
     });
-    */
+  }
 
   // ▶ 再生ボタン制御
   function setupAudioControls() {
@@ -296,4 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
       audioPlayer.currentTime = seekTime;
     });
   }
+
+  setupFormSubmit();
 });

@@ -25,27 +25,6 @@
     </button>
   </div>
 
-  <!-- ①の実装にてコメントアウト
-  <div class="recording-area">
-    録音コントロール
-    <div class="controls">
-      <button id="start-recording" class="btn btn-primary">
-        録音開始
-      </button>
-      <button id="stop-recording" class="btn btn-danger" disabled>
-        録音停止
-      </button>
-    </div>
-  </div>
-  -->
-
-  <!-- ①:recording-screen側に移動するため一旦コメントアウト
-    録音時間表示
-    <div class="recording-time">
-      <span id="recording-duration">00:00</span>
-    </div>
-  -->
-
   <!-- プレビュー画面 -->
   <div id="preview-area" style="display: none;">
     <h2>無題</h2>
@@ -73,26 +52,18 @@
       </button>
     </div>
 
-    <!-- 保存 -->
-    <div class="form-action">
-      <button>保存</button>
-      <button onclick="history.back()">戻る</button>
-    </div>
-  </div>
-
-  <!-- 保存フォーム
+  <!-- 保存フォーム -->
   <%= form_with model: @recording,
                 url: child_recordings_path(@child),
                 id: "save-recording-form",
                 local: false do |f| %>
 
     <%= f.hidden_field :title, value: "無題", id: 'title-field' %>
-    <%= f.hidden_field :duration, id: 'duration-field' %>
+    <%= f.hidden_field :duration, id: "duration-field" %>
 
     <div class="form-actions">
-      <%= f.submit "保存", class: 'btn btn-success' %>
-      <%= link_to "戻る", :back, class: 'btn btn-secondary' %>
+      <%= f.submit "保存", class: "btn btn-success", id: "save-button" %>
+      <button type="button", class="btn btn-secondary" onclick="history.back()">戻る</button>
     </div>
   <% end %>
-  -->
 </div>
