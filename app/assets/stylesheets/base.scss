@@ -1,19 +1,18 @@
-// app/assets/stylesheets/base.scss
-
 /* ========================================
    変数定義
 ======================================== */
 :root {
   /* カラーパレット */
-  --color-primary: #7FBF7F;        /* メインカラー（ヘッダー・フッター） */
-  --color-primary-light: #bfe8c2;  /* 背景色（トップページ） */
-  --color-secondary: #A8C5DD;      /* セカンダリボタン */
-  --color-secondary-hover: #96B3CB;
-  --color-text: #333;              /* テキスト色 */
-  --color-text-light: #555;        /* 薄いテキスト色 */
-  --color-text-lighter: #666;      /* さらに薄いテキスト色 */
-  --color-white: #ffffff;
-  --color-border: #e2e8f0;
+  --color-primary: #7FB77E; /* メインカラー（やさしい緑） */
+  --color-primary-light: #F7F4EF; /* 背景色（ベージュよりで柔らかく） */
+  --color-accent: #5C9D7A; /*アクセント（少し深い緑）*/
+  --color-secondary: #D8D2C2; /* サブカラー（グレージュ） */
+  --color-secondary-hover: #C9C3B4;
+  --color-text: #3A3A3A; /* テキスト色 */
+  --color-text-light: #6B6B6B;
+  --color-text-lighter: #9A9A9A;
+  --color-white: #ffffff; /* ベース */
+  --color-border: #E5E1D8;
 
   /* フォント */
   --font-main: 'Zen Old Mincho', serif;
@@ -34,7 +33,7 @@
   --breakpoint-xl: 1200px;
 }
 
-/* ========================================
+/* ============================B============
    リセットCSS
 ======================================== */
 * {
