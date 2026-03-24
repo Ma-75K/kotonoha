@@ -39,10 +39,9 @@ function showScreen(screen) {
   document.getElementById(screen).style.display = 'block';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  let audioControlsInitialized = false;
-
-  showScreen('initial-screen');
+document.addEventListener('turbo:load', () => {
+  const page = document.getElementById('recording-page');
+  if (!page) return;
 
   const startButton = document.getElementById('start-recording');
   const stopRecordingButton = document.getElementById('stop-recording');
@@ -50,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveForm = document.getElementById('save-recording-form');
   const durationField = document.getElementById('duration-field');
 
+  if (!startButton || !stopRecordingButton || !recordingDuration) return;
+
+  let audioControlsInitialized = false;
   let mediaRecorder;
   let audioChunks = [];
   let timerInterval;
@@ -60,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pathParts = window.location.pathname.split('/');
   const childId = pathParts[pathParts.indexOf('children') + 1];
+
+  showScreen('initial-screen');
 
   function updateTimer(seconds) {
     const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
@@ -112,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       startButton.disabled = true;
       stopRecordingButton.disabled = false;
-
     } catch (error) {
       console.error('マイクへのアクセスエラー:', error);
       showError('マイクへのアクセスが許可されていません。ブラウザの設定を確認してください。');
@@ -182,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const data = await response.json();
+
         if (response.ok) {
           showSuccess('録音を保存しました！');
 
@@ -195,62 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('保存エラー:', error);
         showError('保存中にエラーが発生しました。');
       }
-    });
-  }
-
-  //再生前と再生中の状態切り替え
-  const playButton = document.getElementById('play-button');
-  const stopPlaybackButton = document.getElementById('stop-button');
-  const pauseButton = document.getElementById('pause-button');
-  const previewInitial = document.getElementById('preview-initial');
-  const previewPlaying = document.getElementById('preview-playing');
-  const audioPlayer = document.getElementById('audio-player');
-  const seekBar = document.getElementById('seek-bar');
-  const currentTime = document.getElementById('current-time');
-
-  if (
-    audioPlayer &&
-    playButton &&
-    pauseButton &&
-    stopPlaybackButton &&
-    previewInitial &&
-    previewPlaying &&
-    seekBar &&
-    currentTime
-  ) {
-    playButton.addEventListener('click', () => {
-      if (audioPlayer.paused) {
-        audioPlayer.play();
-      }
-      audioPlayer.play();
-      previewInitial.style.display = 'none';
-      previewPlaying.style.display = 'block';
-    });
-
-    pauseButton.addEventListener('click', () => {
-      audioPlayer.pause();
-      previewInitial.style.display = 'block';
-      previewPlaying.style.display = 'none';
-    });
-
-    audioPlayer.addEventListener('ended', () => {
-      previewInitial.style.display = 'block';
-      previewPlaying.style.display = 'none';
-    });
-
-    // 再生バー
-    audioPlayer.addEventListener('timeupdate', () => {
-      const value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-      seekBar.value = value || 0;
-
-      const min = Math.floor(audioPlayer.currentTime / 60).toString().padStart(2, '0');
-      const sec = Math.floor(audioPlayer.currentTime % 60).toString().padStart(2, '0');
-      currentTime.textContent = `${min}:${sec}`;
-    });
-
-    seekBar.addEventListener('input', () => {
-      const time = audioPlayer.duration * (seekBar.value / 100);
-      audioPlayer.currentTime = time;
     });
   }
 
