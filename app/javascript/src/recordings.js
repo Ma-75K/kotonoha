@@ -1,21 +1,69 @@
-document.addEventListener('DOMContentLoaded', () => {
+// エラーメッセージ表示用の関数
+function showError(message) {
+  const errorDiv = document.getElementById('error-messages');
+  if (errorDiv) {
+    errorDiv.innerHTML = `
+      <div class="alert alert-danger" role="alert">
+        ${message}
+      </div>
+    `;
+    errorDiv.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    // error-messages要素が見つからない場合はalertにフォールバック
+    alert(message);
+  }
+}
+
+// 成功メッセージ表示用の関数
+function showSuccess(message) {
+  const successDiv = document.getElementById('success-messages');
+  if (successDiv) {
+    successDiv.innerHTML = `
+      <div class="alert alert-success" role="alert">
+        ${message}
+      </div>
+    `;
+    successDiv.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    // success-messages要素が見つからない場合はalertにフォールバック
+    alert(message);
+  }
+}
+
+// 画面切り替え関数を追加
+function showScreen(screen) {
+  document.getElementById('initial-screen').style.display = 'none';
+  document.getElementById('recording-screen').style.display = 'none';
+  document.getElementById('preview-area').style.display = 'none';
+
+  document.getElementById(screen).style.display = 'block';
+}
+
+document.addEventListener('turbo:load', () => {
+  const page = document.getElementById('recording-page');
+  if (!page) return;
+
   const startButton = document.getElementById('start-recording');
-  const stopButton = document.getElementById('stop-recording');
+  const stopRecordingButton = document.getElementById('stop-recording');
   const recordingDuration = document.getElementById('recording-duration');
-  const previewArea = document.getElementById('preview-area');
   const saveForm = document.getElementById('save-recording-form');
   const durationField = document.getElementById('duration-field');
 
+  if (!startButton || !stopRecordingButton || !recordingDuration) return;
+
+  let audioControlsInitialized = false;
   let mediaRecorder;
   let audioChunks = [];
-  let startTime;
   let timerInterval;
   let recordingSeconds = 0;
   let selectedMimeType = '';
   let selectedFileExtension = '';
+  let recordedAudioBlob = null;
 
   const pathParts = window.location.pathname.split('/');
   const childId = pathParts[pathParts.indexOf('children') + 1];
+
+  showScreen('initial-screen');
 
   function updateTimer(seconds) {
     const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
@@ -24,6 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   startButton.addEventListener('click', async () => {
+    showScreen('recording-screen');
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
@@ -36,9 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (MediaRecorder.isTypeSupported('audio/mpeg')) {
         selectedMimeType = 'audio/mpeg';
         selectedFileExtension = 'mp3';
-      } else if (MediaRecorder.isTypeSupported('audio/webm')) {
-        selectedMimeType = 'audio/webm';
-        selectedFileExtension = 'webm';
       } else {
         selectedMimeType = 'audio/webm';
         selectedFileExtension = 'webm';
@@ -55,14 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       mediaRecorder.addEventListener('stop', () => {
         stream.getTracks().forEach(track => track.stop());
-
         const audioBlob = new Blob(audioChunks, { type: selectedMimeType });
-
         showPreview(audioBlob);
       });
 
       mediaRecorder.start();
-      startTime = Date.now();
       recordingSeconds = 0;
 
       timerInterval = setInterval(() => {
@@ -71,25 +115,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1000);
 
       startButton.disabled = true;
-      stopButton.disabled = false;
-
+      stopRecordingButton.disabled = false;
     } catch (error) {
       console.error('マイクへのアクセスエラー:', error);
-      alert('マイクへのアクセスが許可されていません。ブラウザの設定を確認してください。');
+      showError('マイクへのアクセスが許可されていません。ブラウザの設定を確認してください。');
     }
   });
 
-  stopButton.addEventListener('click', () => {
+  stopRecordingButton.addEventListener('click', () => {
+
     if (mediaRecorder && mediaRecorder.state === 'recording') {
       mediaRecorder.stop();
       clearInterval(timerInterval);
 
       startButton.disabled = false;
-      stopButton.disabled = true;
+      stopRecordingButton.disabled = true;
     }
   });
 
   function showPreview(audioBlob) {
+    recordedAudioBlob = audioBlob;
+
     const audioUrl = URL.createObjectURL(audioBlob);
     const audioPlayer = document.getElementById('audio-player');
     audioPlayer.src = audioUrl;
@@ -101,25 +147,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     durationField.value = recordingSeconds;
 
-    previewArea.style.display = 'block';
+    const durationField = document.getElementById('duration-field');
+    if (durationField) {
+      durationField.value = recordingSeconds;
+    }
 
-    document.getElementById('audio-preview').style.display = 'block';
-
-    document.querySelector('.controls').style.display = 'none';
-    document.querySelector('.recording-time').style.display = 'none';
-
-    setupFormSubmit(audioBlob);
+    showScreen('preview-area');
+    setupAudioControls();
   }
 
+<<<<<<< HEAD
   function setupFormSubmit(audioBlob) {
     const newSaveForm = saveForm.cloneNode(true);
     saveForm.parentNode.replaceChild(newSaveForm, saveForm);
 
     newSaveForm.addEventListener('submit', async (e) => {
+=======
+  function setupFormSubmit() {
+    if (!saveForm) return;
+
+    saveForm.addEventListener('submit', async (e) => {
+>>>>>>> origin/main
       e.preventDefault();
 
+      if (!recordedAudioBlob) {
+        showError('保存する音声がありません。先に録音してください。');
+        return;
+      }
+
       const formData = new FormData(saveForm);
+<<<<<<< HEAD
       formData.set('recording[audio]', audioBlob, `recording.${selectedFileExtension}`);
+=======
+      formData.set(
+        'recording[audio_file]',
+        recordedAudioBlob,
+        `recording.${selectedFileExtension}`
+      );
+>>>>>>> origin/main
 
       try {
         const token = document.querySelector('[name="csrf-token"]').content;
@@ -127,24 +192,81 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch(saveForm.action, {
           method: 'POST',
           headers: {
-            'X-CSRF-Token': token
+            'X-CSRF-Token': token,
+            'Accept': 'application/json'
           },
           body: formData
         });
 
-        if (response.ok) {
-          const data = await response.json();
-          alert('録音を保存しました！');
+        const data = await response.json();
 
-          window.location.href = `/children/${childId}/recordings/${data.recording_id}`;
+        if (response.ok) {
+          showSuccess('録音を保存しました！');
+
+          setTimeout(() => {
+            window.location.href = `/children/${childId}/recordings/${data.recording_id}`;
+          }, 800);
         } else {
-            const data = await response.json();
-            alert('保存に失敗しました:' + (data.errors || '不明なエラー'));
+          showError('保存に失敗しました: ' + (data.errors || '不明なエラー'));
         }
       } catch (error) {
-        alert('エラーが発生しました');
-        console.error('エラー:', error);
+        console.error('保存エラー:', error);
+        showError('保存中にエラーが発生しました。');
       }
     });
   }
+
+  // ▶ 再生ボタン制御
+  function setupAudioControls() {
+    if (audioControlsInitialized) return;
+
+    const audioPlayer = document.getElementById('audio-player');
+    const playToggleButton = document.getElementById('play-toggle-button');
+    const playIcon = document.getElementById('play-icon');
+    const seekBar = document.getElementById('seek-bar');
+    const currentTime = document.getElementById('current-time');
+
+    if (!audioPlayer || !playToggleButton || !playIcon) {
+      console.log('audio controls not found');
+      return;
+    }
+
+    audioControlsInitialized = true;
+
+    playToggleButton.addEventListener('click', () => {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        playIcon.classList.replace('fa-play', 'fa-pause');
+      } else {
+        audioPlayer.pause();
+        playIcon.classList.replace('fa-pause', 'fa-play');
+      }
+    });
+
+    audioPlayer.addEventListener('ended', () => {
+      playIcon.classList.replace('fa-pause', 'fa-play');
+      seekBar.value = 0;
+      currentTime.textContent = '00:00';
+    });
+
+    audioPlayer.addEventListener('timeupdate', () => {
+      if (!audioPlayer.duration) return;
+
+      const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+      seekBar.value = progress;
+
+      const minutes = Math.floor(audioPlayer.currentTime / 60).toString().padStart(2, '0');
+      const seconds = Math.floor(audioPlayer.currentTime % 60).toString().padStart(2, '0');
+      currentTime.textContent = `${minutes}:${seconds}`;
+    });
+
+    seekBar.addEventListener('input', () => {
+      if (!audioPlayer.duration) return;
+
+      const seekTime = audioPlayer.duration * (seekBar.value / 100);
+      audioPlayer.currentTime = seekTime;
+    });
+  }
+
+  setupFormSubmit();
 });
