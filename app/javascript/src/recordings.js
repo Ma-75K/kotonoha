@@ -134,6 +134,7 @@ document.addEventListener('turbo:load', () => {
   });
 
   function showPreview(audioBlob) {
+    console.log("showPreview呼ばれた");
     recordedAudioBlob = audioBlob;
 
     const audioUrl = URL.createObjectURL(audioBlob);
@@ -145,8 +146,6 @@ document.addEventListener('turbo:load', () => {
     const seconds = (recordingSeconds % 60).toString().padStart(2, '0');
     previewDuration.textContent = `${minutes}:${seconds}`;
 
-    durationField.value = recordingSeconds;
-
     const durationField = document.getElementById('duration-field');
     if (durationField) {
       durationField.value = recordingSeconds;
@@ -156,18 +155,10 @@ document.addEventListener('turbo:load', () => {
     setupAudioControls();
   }
 
-<<<<<<< HEAD
-  function setupFormSubmit(audioBlob) {
-    const newSaveForm = saveForm.cloneNode(true);
-    saveForm.parentNode.replaceChild(newSaveForm, saveForm);
-
-    newSaveForm.addEventListener('submit', async (e) => {
-=======
   function setupFormSubmit() {
     if (!saveForm) return;
 
     saveForm.addEventListener('submit', async (e) => {
->>>>>>> origin/main
       e.preventDefault();
 
       if (!recordedAudioBlob) {
@@ -176,15 +167,11 @@ document.addEventListener('turbo:load', () => {
       }
 
       const formData = new FormData(saveForm);
-<<<<<<< HEAD
-      formData.set('recording[audio]', audioBlob, `recording.${selectedFileExtension}`);
-=======
       formData.set(
         'recording[audio_file]',
         recordedAudioBlob,
         `recording.${selectedFileExtension}`
       );
->>>>>>> origin/main
 
       try {
         const token = document.querySelector('[name="csrf-token"]').content;
