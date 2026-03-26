@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       mediaRecorder = new MediaRecorder(stream, { mimeType: selectedMimeType });
       audioChunks = [];
-      
+
       mediaRecorder.addEventListener('dataavailable', (event) => {
         audioChunks.push(event.data);
       });
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const minutes = Math.floor(recordingSeconds / 60).toString().padStart(2, '0');
     const seconds = (recordingSeconds % 60).toString().padStart(2, '0');
     previewDuration.textContent = `${minutes}:${seconds}`;
-    
+
     durationField.value = recordingSeconds;
 
     previewArea.style.display = 'block';
@@ -114,16 +114,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function setupFormSubmit(audioBlob) {
     const newSaveForm = saveForm.cloneNode(true);
     saveForm.parentNode.replaceChild(newSaveForm, saveForm);
-    
+
     newSaveForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const formData = new FormData(saveForm);
-      formData.set('recording[audio_file]', audioBlob, `recording.${selectedFileExtension}`);
+      formData.set('recording[audio]', audioBlob, `recording.${selectedFileExtension}`);
 
       try {
         const token = document.querySelector('[name="csrf-token"]').content;
-        
+
         const response = await fetch(saveForm.action, {
           method: 'POST',
           headers: {
