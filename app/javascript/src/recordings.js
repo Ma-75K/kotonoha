@@ -168,7 +168,7 @@ document.addEventListener('turbo:load', () => {
 
       const formData = new FormData(saveForm);
       formData.set(
-        'recording[audio_file]',
+        'recording[audio]',
         recordedAudioBlob,
         `recording.${selectedFileExtension}`
       );

@@ -15,7 +15,7 @@ class RecordingsController < ApplicationController
     # 一時的に仮のユーザーを設定
     #@recording.user = User.first  # ← 一時的な対応
 
-    @recording.title = "無題" if @recording.title.blanck?
+    @recording.title = "無題" if @recording.title.blank?
 
     if @recording.save
       render json: {
@@ -32,7 +32,7 @@ class RecordingsController < ApplicationController
   end
 
   def show
-    @recording = @child.recording.find(params[:id])
+    @recording = @child.recordings.find(params[:id])
   end
 
   private
