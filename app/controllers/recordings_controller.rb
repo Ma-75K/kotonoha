@@ -9,9 +9,13 @@ class RecordingsController < ApplicationController
 
   def create
     @recording = @child.recordings.build(recording_params)
-    @recording.user = current_user
 
-    @recording.user = User.first
+    @recording.user = current_user # コメントアウト外した
+
+    # 一時的に仮のユーザーを設定
+    # @recording.user = User.first  # ← 一時的な対応
+
+    @recording.title = "無題" if @recording.title.blank?
 
     if @recording.save
       render json: {
@@ -25,6 +29,10 @@ class RecordingsController < ApplicationController
         errors: @recording.errors.full_messages
       }, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @recording = @child.recordings.find(params[:id])
   end
 
   private
@@ -43,7 +51,7 @@ class RecordingsController < ApplicationController
       :comment,
       :recorded_at,
       :duration,
-      :audio_file
+      :audio
     )
   end
 end

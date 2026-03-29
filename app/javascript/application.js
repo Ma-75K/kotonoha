@@ -1,4 +1,5 @@
 import "./src/recordings"
+import "./src/recording_show"
 import "@hotwired/turbo-rails"
 import "controllers"
 import { initDropdown } from "src/dropdown"

@@ -134,6 +134,7 @@ document.addEventListener('turbo:load', () => {
   });
 
   function showPreview(audioBlob) {
+    console.log("showPreview呼ばれた");
     recordedAudioBlob = audioBlob;
 
     const audioUrl = URL.createObjectURL(audioBlob);
@@ -167,7 +168,7 @@ document.addEventListener('turbo:load', () => {
 
       const formData = new FormData(saveForm);
       formData.set(
-        'recording[audio_file]',
+        'recording[audio]',
         recordedAudioBlob,
         `recording.${selectedFileExtension}`
       );
