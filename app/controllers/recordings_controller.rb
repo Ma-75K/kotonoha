@@ -10,10 +10,10 @@ class RecordingsController < ApplicationController
   def create
     @recording = @child.recordings.build(recording_params)
 
-    @recording.user = current_user #コメントアウト外した
+    @recording.user = current_user # コメントアウト外した
 
     # 一時的に仮のユーザーを設定
-    #@recording.user = User.first  # ← 一時的な対応
+    # @recording.user = User.first  # ← 一時的な対応
 
     @recording.title = "無題" if @recording.title.blank?
 
