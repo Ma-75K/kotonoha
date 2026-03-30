@@ -1,6 +1,6 @@
 class RecordingsController < ApplicationController
   before_action :require_login
-  before_action :set_child, except: [ :new ] # except: [:new]は一時的に追加しているため後で削除する
+  before_action :set_child
 
   def new
     @child = Child.find(params[:child_id]) # 一時的に追加しているため後で削除する
@@ -35,12 +35,18 @@ class RecordingsController < ApplicationController
     @recording = @child.recordings.find(params[:id])
   end
 
+  def index
+    @child = current_user.children.find(params[:child_id])
+    @recordings = @child.recordings
+                        .order(recorded_at: :desc)
+                        .page(params[:page])
+                        .per(5)
+  end
+
   private
 
   def set_child
-    # current_user を使わずに Child を取得
-    @child = Child.find(params[:child_id]) # ←あとで削除
-    # @child = current_user.children.find(params[:child_id]) ←あとでコメントアウト外す
+    @child = current_user.children.find(params[:child_id])
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path, alert: "アクセス権限がありません"
   end

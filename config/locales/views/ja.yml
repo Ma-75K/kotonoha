@@ -7,13 +7,20 @@ ja:
     label:
       email: メールアドレス
       password: パスワード
-    user_sessions:
-      new:
-        title: ログイン
-        login: ログイン
-        to_register_page: 登録ページへ
-        password_forget: パスワードをお忘れの方はこちら
-    users:
-      new:
-        title: ユーザー登録
-        to_login_page: ログインページへ
+  user_sessions:
+    new:
+      title: ログイン
+      login: ログイン
+      to_register_page: 登録ページへ
+      password_forget: パスワードをお忘れの方はこちら
+  users:
+    new:
+      title: ユーザー登録
+      to_login_page: ログインページへ
+  views:
+    pagination:
+      first: 最初
+      last: 最後
+      previous: 前へ
+      next: 次へ
+      truncate: "..."
