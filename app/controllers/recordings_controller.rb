@@ -36,11 +36,11 @@ class RecordingsController < ApplicationController
   end
 
   def index
-    @child = current_user.children.find(pareams[:child_id])
+    @child = current_user.children.find(params[:child_id])
     @recordings = @child.recordings
                         .order(recorded_at: :desc)
                         .page(params[:page])
-                        .per(10)
+                        .per(5)
   end
 
   private

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
 
     # 録音機能（お子様に紐付く）
-    resources :recordings, only: %i[new create show] do
+    resources :recordings, only: %i[index new create show] do
       collection do
         get :preview
       end

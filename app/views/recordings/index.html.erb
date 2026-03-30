@@ -1,7 +1,7 @@
-<div class="recording-index-page">
+<div id="recordings-index-page">
   <div class="recordings-index-card">
 
-    <h1 class="page-title"><%= @child.name %>の記録一覧</h1>
+    <h1 class="page-title">ことばのきろく</h1>
 
     <% if @recordings.any? %>
       <div class="recordings-list">
@@ -9,13 +9,14 @@
           <%= link_to child_recording_path(@child, recording), class: "recording-item" do %>
             <div class="recording-item-left">
               <p class="recording-title"><%= recording.title %></p>
-              <p class="recording-date"><%= recording.recorded_at.strftime("%y/%m/%d") %></p>
-            </div>
-
-            <div class="recording-item-right">
               <p class="recording-duration">
                 <%= format_duration(recording.duration) %>
               </p>
+            </div>
+
+            <div class="recording-item-right">
+              <p class="recording-date"><%= recording.recorded_at.strftime("%Y/%m/%d") %></p>
+              <!-- ここに月齢表示入れる -->
             </div>
           <% end %>
         <% end %>
