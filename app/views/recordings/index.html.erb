@@ -1,0 +1,35 @@
+<div class="recording-index-page">
+  <div class="recordings-index-card">
+
+    <h1 class="page-title"><%= @child.name %>の記録一覧</h1>
+
+    <% if @recordings.any? %>
+      <div class="recordings-list">
+        <% @recordings.each do |recording| %>
+          <%= link_to child_recording_path(@child, recording), class: "recording-item" do %>
+            <div class="recording-item-left">
+              <p class="recording-title"><%= recording.title %></p>
+              <p class="recording-date"><%= recording.recorded_at.strftime("%y/%m/%d") %></p>
+            </div>
+
+            <div class="recording-item-right">
+              <p class="recording-duration">
+                <%= format_duration(recording.duration) %>
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="pagination-area">
+        <%= paginate @recordings %>
+      </div>
+    <% else %>
+      <p class="empty-message">まだ記録がありません</p>
+    <% end %>
+
+    <div class="back-home-area">
+      <%= link_to "[ ホームへ ]", new_child_recording_path(@child.id), class: "home-btn" %>
+    </div>
+  </div>
+</div>
