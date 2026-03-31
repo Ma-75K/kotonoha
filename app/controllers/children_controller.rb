@@ -55,7 +55,7 @@ class ChildrenController < ApplicationController
 
     flash[:success] = "#{@child.name}さんに切り替えました"
     redirect_to new_child_recording_path(@child.id)
-  rescue ActiveRecord::RecordNtoFound
+  rescue ActiveRecord::RecordNotFound
     flash[:danger] = "お子様が見つかりませんでした"
     redirect_to root_path
   end
