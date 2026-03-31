@@ -43,6 +43,21 @@ class RecordingsController < ApplicationController
                         .per(5)
   end
 
+  def edit
+    @child = current_user.children.find(params[:child_id])
+    @recording = @child.recordings.find(params[:id])
+  end
+
+  def update
+    @recording = @child.recordings.find(params[:id])
+
+    if @recording.update(recording_params)
+      redirect_to child_recording_path(@child, @recording), notice: "更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_child

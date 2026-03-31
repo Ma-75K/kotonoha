@@ -7,7 +7,7 @@
   <!-- タイトル -->
   <div class="detail-section">
     <p class="detail-label">タイトル</p>
-    <p class="detail-value"><%= @recording.title %></p>
+    <p class="detail-value detail-title"><%= @recording.title %></p>
   </div>
 
   <!-- ひとこと -->
@@ -20,7 +20,7 @@
 
   <!-- 編集ボタン -->
   <div class="edit-area">
-    <%= link_to "編集", root_path, class: "edit-btn" %> <!-- 現在のroot_pathをedit_child_recording_path(@recording.child, @recording)の編集画面へのパスに変える-->
+    <%= link_to "編集", edit_child_recording_path(@recording.child, @recording), class: "edit-btn" %>
   </div>
 
   <!-- 録音日時 -->
