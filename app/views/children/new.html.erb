@@ -17,30 +17,42 @@
         </div>
       </div>
 
-      <%= form_with model: @child, url: children_path, method: :post do |f| %>
-        <div class="mb-3">
-          <%= f.label :name, class: "form-label" %>
-          <%= f.text_field :name, class: "form-control" %>
+      <%= form_with model: @user, url: children_path, method: :post, local: true do |f| %>
+        <div id="children-fields">
+          <%= f.fields_for :children do |child_form| %>
+            <div class="child-fields mb-4">
+              <div class="mb-3">
+                <%= child_form.label :name, class: "form-label" %>
+                <%= child_form.text_field :name, class: "form-control" %>
 
-          <% if @child.errors[:name].any? %>
+          <% if child_form.object.errors[:name].any? %>
             <div class="errors-message">
-              <%= @child.errors.full_messages_for[:name].join(", ") %>
+              <%= child_form.object.errors.full_messages_for(:name).join(", ") %>
             </div>
           <% end %>
         </div>
 
         <div class="mb-3">
-          <%= f.label :birthday, class: "form-label" %>
-          <%= f.date_field :birthday, class: "form-control" %>
+          <%= child_form.label :birthday, class: "form-label" %>
+          <%= child_form.date_field :birthday, class: "form-control" %>
 
-          <% if @child.errors[:birthday].any? %>
+          <% if child_form.object.errors[:birthday].any? %>
             <div class= "errors-message">
-              <%= @child.errors.full_messages_for[:birthday].join(", ") %>
+              <%= child_form.object.errors.full_messages_for(:birthday).join(", ") %>
             </div>
           <% end %>
         </div>
+      </div>
+    <% end %>
+  </div>
 
-        <div class="button-group">
+  <div class="mb-4 text-center">
+    <button type="button" id="add-child-button" class="btn btn-outline-success">
+      [ + 子どもを追加 ]
+    </button>
+  </div>
+
+  <div class="button-group">
           <%= f.submit "[ 登録完了 ]", class: "btn btn-primary" %>
           <%= link_to "[ 戻る ]", new_user_path, class: "btn btn-secondary" %>
         </div>
