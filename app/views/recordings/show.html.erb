@@ -1,72 +1,81 @@
 <div id="recording-detail-page">
   <div class="recording-detail-card">
 
-  <!-- 子どもの名前 -->
-  <p class="child-name"><%= @recording.child.name %></p>
+    <!-- 子どもの名前 -->
+    <p class="child-name"><%= @recording.child.name %></p>
 
-  <!-- タイトル -->
-  <div class="detail-section">
-    <p class="detail-label">タイトル</p>
-    <p class="detail-value detail-title"><%= @recording.title %></p>
-  </div>
+    <!-- タイトル -->
+    <div class="detail-section">
+      <p class="detail-label">タイトル</p>
+      <p class="detail-value detail-title"><%= @recording.title %></p>
+    </div>
 
-  <!-- ひとこと -->
-  <div class="detail-section">
-    <p class="detail-label">ひとこと</p>
-    <p class="detail-value detail-comment <%= 'is-empty' if @recording.comment.blank? %>">
-      <%= @recording.comment.presence || "まだ入力されていません" %>
-    </p>
-  </div>
+    <!-- ひとこと -->
+    <div class="detail-section">
+      <p class="detail-label">ひとこと</p>
+      <p class="detail-value detail-comment <%= 'is-empty' if @recording.comment.blank? %>">
+        <%= @recording.comment.presence || "まだ入力されていません" %>
+      </p>
+    </div>
 
-  <!-- 編集ボタン -->
-  <div class="edit-area">
-    <%= link_to "編集", edit_child_recording_path(@recording.child, @recording), class: "edit-btn" %>
-  </div>
+    <!-- 編集ボタン -->
+    <div class="edit-area">
+      <%= link_to "編集", edit_child_recording_path(@recording.child, @recording), class: "edit-btn" %>
+    </div>
 
-  <!-- 録音日時 -->
-  <div class="detail-section recording-date-section">
-    <p class="detail-label">録音日時</p>
-    <p class="detail-value"><%= @recording.created_at.strftime("%Y/%m/%d") %></p>
-  </div>
+    <!-- 録音日時と月齢表示 -->
+    <div class="detail-section recording-date-section">
+      <p class="detail-label">録音日時</p>
 
-  <!-- 再生 -->
-  <div class="seek-bar-area">
-    <!-- 再生バー -->
-    <input type="range" id="seek-bar" value="0" min="0" max="100">
-    <!-- 再生時間 -->
+      <div class="recording-meta">
+        <p class="recording-date-value">
+          <%= @recording.recorded_at.strftime("%Y/%m/%d") %>
+        </p>
+        <p class="recording-age-text">
+          録音時 <%= @child.age_at(@recording.recorded_at) %>
+        </p>
+      </div>
+    </div>
+
+    <!-- 再生 -->
+    <div class="seek-bar-area">
+      <!-- 再生バー -->
+      <input type="range" id="seek-bar" value="0" min="0" max="100">
+      <!-- 再生時間 -->
     <div class="current-time">
-      <span id="current-time">00:00</span>
+        <span id="current-time">00:00</span>
+      </div>
     </div>
-  </div>
 
-  <div class="audio-buttons">
-    <!-- 再生ボタン -->
-    <button id="play-toggle-button" class="audio-action-btn play-btn" type="button">
-      <span class="btn-inner">
-        <i id="play-icon" class="fa-solid fa-play"></i>
-        <span class="btn-text">きく</span>
-      </span>
-    </button>
+    <div class="audio-buttons">
+      <!-- 再生ボタン -->
+      <button id="play-toggle-button" class="audio-action-btn play-btn" type="button">
+        <span class="btn-inner">
+          <i id="play-icon" class="fa-solid fa-play"></i>
+          <span class="btn-text">きく</span>
+        </span>
+      </button>
 
-    <!-- 削除 -->
-    <div class="delete-button-wrap">
-      <%= button_to "削除",
-        child_recording_path(@recording.child, @recording),
-        method: :delete,
-        data: { confirm: "削除します。よろしいですか？" },
-        class: "audio-action-btn delete-btn" %>
+      <!-- 削除 -->
+      <div class="delete-button-wrap">
+        <%= button_to "削除",
+          child_recording_path(@recording.child, @recording),
+          method: :delete,
+          data: { confirm: "削除します。よろしいですか？" },
+          class: "audio-action-btn delete-btn" %>
+      </div>
     </div>
-  </div>
 
-  <!-- 裏のaudio -->
-  <audio id="audio-player" >
-    <% if @recording.audio.attached? %>
-      <source src="<%= url_for(@recording.audio) %>" type="<%= @recording.audio.blob.content_type %>">
-    <% end %>
-  </audio>
+    <!-- 裏のaudio -->
+    <audio id="audio-player" >
+      <% if @recording.audio.attached? %>
+        <source src="<%= url_for(@recording.audio) %>" type="<%= @recording.audio.blob.content_type %>">
+      <% end %>
+    </audio>
 
-  <!-- 戻る -->
-  <div class="back-section">
-    <%= link_to "[ 一覧に戻る] ", child_recordings_path(@recording.child), class: "back-btn" %>
+    <!-- 戻る -->
+    <div class="back-section">
+      <%= link_to "[ 一覧に戻る] ", child_recordings_path(@recording.child), class: "back-btn" %>
+    </div>
   </div>
 </div>

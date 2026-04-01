@@ -10,7 +10,7 @@ class ChildDecorator < Draper::Decorator
     years = target_date.year - birth_date.year
     months = target_date.month - birth_date.month
 
-    if target_date.day < birthd_date.day
+    if target_date.day < birth_date.day
       months -= 1
     end
 

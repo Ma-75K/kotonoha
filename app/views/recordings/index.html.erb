@@ -16,7 +16,7 @@
 
             <div class="recording-item-right">
               <p class="recording-date"><%= recording.recorded_at.strftime("%Y/%m/%d") %></p>
-              <!-- ここに月齢表示入れる -->
+              <p class="recording-age"><%= @child.age_at(recording.recorded_at) %></p>
             </div>
           <% end %>
         <% end %>
