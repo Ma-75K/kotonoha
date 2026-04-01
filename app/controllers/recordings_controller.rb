@@ -32,11 +32,15 @@ class RecordingsController < ApplicationController
   end
 
   def show
+    child = current_user.children.find(params[:child_id])
     @recording = @child.recordings.find(params[:id])
+
+    @child = child.decorate
   end
 
   def index
-    @child = current_user.children.find(params[:child_id])
+    child = current_user.children.find(params[:child_id])
+    @child = child.decorate
     @recordings = @child.recordings
                         .order(recorded_at: :desc)
                         .page(params[:page])

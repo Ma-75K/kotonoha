@@ -64,7 +64,7 @@ class ChildrenController < ApplicationController
 
   def user_children_params
     params.require(:user).permit(
-      children_attributes: [:name, :birthday]
+      children_attributes: [ :name, :birthday ]
     )
   end
 end
