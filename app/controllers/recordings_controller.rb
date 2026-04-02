@@ -62,6 +62,16 @@ class RecordingsController < ApplicationController
     end
   end
 
+  def on_this_day
+    @child = current_child
+    @target_date = Date.current.prev_year
+
+    @recordings = @child.recordings
+      .where('MONTH(recorded_at) = ? AND DAY(recorded_at) = ?',
+             @target_date.month, @target_date.day)
+      .order(recrded_at: :desc)
+  end
+
   private
 
   def set_child
