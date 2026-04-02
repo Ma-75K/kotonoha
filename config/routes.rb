@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :recordings, only: %i[index new create show edit update] do
       collection do
         get :preview
+        get :on_this_day
       end
     end
   end
