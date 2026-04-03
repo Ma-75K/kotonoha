@@ -63,13 +63,15 @@ class RecordingsController < ApplicationController
   end
 
   def on_this_day
-    @child = current_child
+    child = current_user.children.find(params[:child_id])
+    @child = child.decorate
     @target_date = Date.current.prev_year
 
     @recordings = @child.recordings
-      .where('MONTH(recorded_at) = ? AND DAY(recorded_at) = ?',
-             @target_date.month, @target_date.day)
-      .order(recrded_at: :desc)
+      .where(recorded_at: @target_date.all_day)
+      .order(recorded_at: :desc)
+      .page(params[:page])
+      .per(5)
   end
 
   private
