@@ -62,6 +62,18 @@ class RecordingsController < ApplicationController
     end
   end
 
+  def on_this_day
+    child = current_user.children.find(params[:child_id])
+    @child = child.decorate
+    @target_date = Date.current.prev_year
+
+    @recordings = @child.recordings
+      .where(recorded_at: @target_date.all_day)
+      .order(recorded_at: :desc)
+      .page(params[:page])
+      .per(5)
+  end
+
   private
 
   def set_child
