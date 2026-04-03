@@ -720,3 +720,188 @@
     }
   }
 }
+
+/* ========================================
+   recordings#on_this_day - 一年前の今日
+======================================== */
+#on-this-day-page {
+  background-color: var(--color-primary-light);
+  min-height: 100vh;
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.on-this-day-card {
+  max-width: 420px;
+  margin: var(--spacing-lg) auto;
+  background-color: var(--color-white);
+  border-radius: 20px;
+  padding: var(--spacing-lg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.page-title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text);
+}
+
+.target-date-main {
+  margin-bottom: 2px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.target-date-sub {
+  margin-bottom: var(--spacing-xl);
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.recordings-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.recording-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.recording-item-left {
+  flex:1;
+  min-width: 0;
+}
+
+.recording-item-right {
+  flex-shrink: 0;
+  margin-left: var(--spacing-sm);
+}
+
+.recording-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 4px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.recording-date {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.recording-age {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  line-height: 1.3;
+}
+
+.recording-duration {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  white-space: nowrap;
+}
+
+.pagination-area {
+  margin-top: var(--spacing-lg);
+  text-align: center;
+}
+
+.pagination-area .pagination {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pagination-area .page,
+.pagination-area .first,
+.pagination-area .last,
+.pagination-area .prev,
+.pagination-area .next {
+  display: inline-flex;
+}
+
+.pagination-area a,
+.pagination-area span {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--spacing-border);
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  display: inline-flex;
+  text-decoration: none;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  font-size: 0.9rem;
+}
+
+.pagination-area .current span,
+.pagination-area .current {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.empty-message {
+  text-align: center;
+  color: var(--color-text-light);
+  padding: var(--spacing-xl);
+  line-height: 1.6;
+}
+
+.back-home-area {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+}
+
+.home-btn {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: 0 4px 10px rgba(127, 183, 126, 0.25);
+  display: inline-flex;
+  min-width: 110px;
+  height: 50px;
+  border: none;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .on-this-day-card {
+    padding: var(--spacing-lg);
+  }
+
+  .recording-item {
+    padding: 12px 0;
+    pag: var(--spacing-sm);
+  }
+
+  .recording-title {
+    font-size: 1rem;
+  }
+
+  .recording-date,
+  .recording-duration,
+  .recording-age {
+    font-size: 0.95rem;
+  }
+}
