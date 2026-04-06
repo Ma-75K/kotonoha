@@ -24,9 +24,49 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_name
+    @user = current_user
+  end
+
+  def update_name
+    @user = current_user
+
+    if @user.update(name_params)
+      flash[:success] = "お名前を変更しました"
+      redirect_to settings_path
+    else
+      flash.now[:alert] = "お名前を変更できませんでした"
+      render :edit_name, status: :unprocessable_entity
+    end
+  end
+
+  def edit_email
+    @user = current_user
+  end
+
+  def update_email
+    @user = current_user
+
+    if @user.update(email_params)
+      flash[:success] = "メールアドレスを変更しました"
+      redirect_to settings_path
+    else
+      flash.now[:alert] = "メールアドレスを変更できませんでした"
+      render :edit_email, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def name_params
+    params.require(:user).permit(:name)
+  end
+
+  def email_params
+    params.require(:user).permit(:email)
   end
 end
