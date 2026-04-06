@@ -26,6 +26,13 @@ Rails.application.routes.draw do
         get :on_this_day
       end
     end
+
+    resource :user, only: [] do
+      get :edit_name
+      patch :update_name
+      get :edit_email
+      patch :update_email
+    end
   end
 
   # ログイン・ログアウト
