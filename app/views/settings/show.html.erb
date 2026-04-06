@@ -5,18 +5,18 @@
     <div class="settings-section">
       <div class="setting-item">
         <p class="setting-label">お名前</p>
-        <div class="setting-box">
+        <%= link_to edit_name_user_path, class: "setting-box" do %>
           <span><%= @user.name %></span>
           <span class="arrow">＞</span>
-        </div>
+        <% end %>
       </div>
 
       <div class="setting-item">
         <p class="setting-label">メールアドレス</p>
-        <div class="setting-box">
+        <%= link_to edit_email_user_path, class: "setting-box" do %>
           <span><%= @user.email %></span>
           <span class="arrow">＞</span>
-        </div>
+        <% end %>
       </div>
 
       <div class="setting-item">
