@@ -1,0 +1,17 @@
+<div id="user-edit-page">
+  <div class="user-edit-card">
+    <h1 class="edit-page-title">メールアドレス変更</h1>
+
+    <%= form_with model: @user, url: update_email_user_path, method: :patch, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :email, "メールアドレス", class: "form-label" %>
+        <%= f.text_field :email, class: "form-field" %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "保存", class: "save-btn" %>
+        <%= link_to "もどる", settings_path, class: "back-btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>
