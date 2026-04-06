@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "settings/show"
   root "top#index"
 
   # ヘルスチェック
@@ -31,4 +32,7 @@ Rails.application.routes.draw do
   get "login", to: "user_sessions#new"
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
+
+  # 設定画面
+  get "settings", to: "settings#show"
 end
