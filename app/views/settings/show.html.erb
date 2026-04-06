@@ -1,0 +1,58 @@
+<div id="settings-page">
+  <div class="settings-card">
+    <h1 class="settings-title">アカウント設定</h1>
+
+    <div class="settings-section">
+      <div class="setting-item">
+        <p class="setting-label">お名前</p>
+        <div class="setting-box">
+          <span><%= @user.name %></span>
+          <span class="arrow">＞</span>
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <p class="setting-label">メールアドレス</p>
+        <div class="setting-box">
+          <span><%= @user.email %></span>
+          <span class="arrow">＞</span>
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-box">
+          <span>パスワードリセット</span>
+          <span class="arrow">＞</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="settings-subtitle">お子さま情報設定</h2>
+
+    <div class="children-settings-list">
+      <% @children.each_with_index do |child, index| %>
+        <div class="setting-item">
+          <p class="setting-label"><%= index + 1 %>人目</p>
+
+          <div class="setting-box child-setting-box">
+            <!-- 左側 -->
+            <div class="child-info">
+              <p class="child-setting-name"><%= child.name %></p>
+              <p class="child-setting-birthday"><%= child.birthday.strftime("%Y/%m/%d") %></p>
+            </div>
+
+            <!-- 右側 -->
+            <div class="arrow-wrapper">
+              <span class="arrow">＞</span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="settings-actions">
+      <%= link_to "もどる", new_child_recording_path(current_child), class: "back-btn" %>
+      <%= button_to "ログアウト", logout_path, method: :delete, class: "logout-btn" %>
+    </div>
+  </div>
+</div>
