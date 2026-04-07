@@ -34,7 +34,7 @@
         <div class="setting-item">
           <p class="setting-label"><%= index + 1 %>人目</p>
 
-          <div class="setting-box child-setting-box">
+          <%= link_to edit_child_path(child), class: "setting-box child-setting-box" do %>
             <!-- 左側 -->
             <div class="child-info">
               <p class="child-setting-name"><%= child.name %></p>
@@ -45,7 +45,7 @@
             <div class="arrow-wrapper">
               <span class="arrow">＞</span>
             </div>
-          </div>
+          <% end %>
         </div>
       <% end %>
     </div>

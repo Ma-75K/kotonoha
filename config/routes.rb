@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   # お子様登録
-  resources :children, only: %i[new create] do
+  resources :children, only: %i[new create edit update destroy] do
     # お子様切り替え機能
     member do
       post :switch
