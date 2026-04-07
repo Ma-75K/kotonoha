@@ -94,6 +94,22 @@ class ChildrenController < ApplicationController
     redirect_to root_path
   end
 
+  def new_from_settings
+    @child = current_user.children.build
+  end
+
+  def create_from_settings
+    @child = current_user.children.build(child_params)
+
+    if @child.save
+      flash[:success] = "お子さまを追加しました"
+      redirect_to settings_path
+    else
+      flash.now[:alert] = "お子さまを追加できませんでした"
+      render :new_from_settings, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_children_params
