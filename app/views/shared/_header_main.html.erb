@@ -1,7 +1,7 @@
 <header class="header-main">
   <nav class="nav-container">
     <div class="header-left">
-      <button class="hamburger-menu" type="button">
+      <button class="hamburger-menu" type="button" id="hamburger-button" aria-label="メニューを開く">
         <i class="fas fa-bars"></i>
       </button>
     </div>
@@ -46,4 +46,39 @@
       </div>
     </div>
   </nav>
+
+  <!-- 背景オーバーレイ -->
+  <div id="menu-overlay" class="menu-overlay"></div>
+
+  <!-- サイドメニュー -->
+  <aside id="side-menu" class="side-menu">
+    <div class="side-menu-header">
+      <%= link_to new_child_recording_path(current_child), class: "side-menu-logo" do %>
+        <%= image_tag 'logo.png', alt: 'ことのは', class: 'side-menu-logo-image' %>
+        <span>ことのは</span>
+      <% end %>
+    </div>
+
+    <ul class="side-menu-list">
+        <li>
+          <%= link_to "ホーム", new_child_recording_path(current_child),
+            class: "side-menu-link #{'active' if current_page?(new_child_recording_path(current_child))}" %>
+        </li>
+        <li>
+          <%= link_to "ことば一覧", child_recordings_path(current_child),
+            class: "side-menu-link #{'active' if current_page?(child_recordings_path(current_child))}" %>
+        </li>
+        <li>
+          <%= link_to "一年前の今日", on_this_day_child_recordings_path(current_child),
+            class: "side-menu-link #{'active' if current_page?(on_this_day_child_recordings_path(current_child))}" %>
+        </li>
+        <li>
+          <%= link_to "設定", settings_path,
+            class: "side-menu-link #{'active' if current_page?(settings_path)}" %>
+        </li>
+        <li>
+          <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "side-menu-link logout-link" %>
+        </li>
+    </ul>
+  </aside>
 </header>
