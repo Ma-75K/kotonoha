@@ -173,6 +173,109 @@
 }
 
 /* ========================================
+   ハンバーガーメニュー
+======================================== */
+/* 背景オーバーレイ */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 999;
+}
+/* サイドメニュー本体 */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 75%;
+  max-width: 320px;
+  height: 100vh;
+  background-color: var(--color-primary);
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.12);
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  z-index: 1000;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* メニューを開いたとき */
+.menu-open .menu-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-open .side-menu {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* メニュー上部ロゴ */
+.side-menu-header {
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.side-menu-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--color-white);
+  font-size: 1.2rem;
+  font-family: var(--font-main);
+}
+
+.side-menu-logo-image {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/* メニュー一覧 */
+.side-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu-list li {
+  margin: 0;
+}
+
+.side-menu-link {
+  font-size: 1rem;
+  font-family: var(--font-main);
+  display: block;
+  width: 100%;
+  padding: 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  color: var(--color-white);
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+
+.side-menu-link.active {
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  margin: 2px 0;
+  padding: 14px 12px;
+}
+
+.logout-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
    レスポンシブ対応
 ======================================== */
 
