@@ -1,20 +1,15 @@
 class RecordingsController < ApplicationController
   before_action :require_login
   before_action :set_child
+  before_action :set_recording, only: %i[show edit update destroy]
 
   def new
-    @child = Child.find(params[:child_id]) # 一時的に追加しているため後で削除する
     @recording = @child.recordings.build
   end
 
   def create
     @recording = @child.recordings.build(recording_params)
-
-    @recording.user = current_user # コメントアウト外した
-
-    # 一時的に仮のユーザーを設定
-    # @recording.user = User.first  # ← 一時的な対応
-
+    @recording.user = current_user
     @recording.title = "無題" if @recording.title.blank?
 
     if @recording.save
@@ -32,29 +27,20 @@ class RecordingsController < ApplicationController
   end
 
   def show
-    child = current_user.children.find(params[:child_id])
-    @recording = @child.recordings.find(params[:id])
-
-    @child = child.decorate
+    @child = @child.decorate
   end
 
   def index
-    child = current_user.children.find(params[:child_id])
-    @child = child.decorate
+    @child = @child.decorate
     @recordings = @child.recordings
                         .order(recorded_at: :desc)
                         .page(params[:page])
                         .per(5)
   end
 
-  def edit
-    @child = current_user.children.find(params[:child_id])
-    @recording = @child.recordings.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @recording = @child.recordings.find(params[:id])
-
     if @recording.update(recording_params)
       redirect_to child_recording_path(@child, @recording), notice: "更新しました"
     else
@@ -62,16 +48,20 @@ class RecordingsController < ApplicationController
     end
   end
 
+  def destroy
+    @recording.destroy
+    redirect_to child_recordings_path(@child), alert: "削除しました"
+  end
+
   def on_this_day
-    child = current_user.children.find(params[:child_id])
-    @child = child.decorate
+    @child = @child.decorate
     @target_date = Date.current.prev_year
 
     @recordings = @child.recordings
-      .where(recorded_at: @target_date.all_day)
-      .order(recorded_at: :desc)
-      .page(params[:page])
-      .per(5)
+                        .where(recorded_at: @target_date.all_day)
+                        .order(recorded_at: :desc)
+                        .page(params[:page])
+                        .per(5)
   end
 
   private
@@ -80,6 +70,10 @@ class RecordingsController < ApplicationController
     @child = current_user.children.find(params[:child_id])
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path, alert: "アクセス権限がありません"
+  end
+
+  def set_recording
+    @recording = @child.recordings.find(params[:id])
   end
 
   def recording_params
