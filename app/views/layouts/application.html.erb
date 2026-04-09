@@ -62,13 +62,6 @@
       <%= yield %>
     </main>
 
-    <!-- ハンバーガーメニュー実装までページ下部に仮配置 -->
-    <% if logged_in? %>
-      <div style="position: fixed; bottom: 80px; right: 10px; z-index:20;">
-        <%= button_to "ログアウト（仮）", logout_path, method: :delete, class: "btn btn-danger" %>
-      </div>
-    <% end %>
-
     <!-- フッター -->
     <%= render 'shared/footer' %>
   </body>
