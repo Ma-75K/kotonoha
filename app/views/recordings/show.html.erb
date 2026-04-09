@@ -59,9 +59,9 @@
       <!-- 削除 -->
       <div class="delete-button-wrap">
         <%= button_to "削除",
-          child_recording_path(@recording.child, @recording),
+          child_recording_path(@child, @recording),
           method: :delete,
-          data: { confirm: "削除します。よろしいですか？" },
+          data: { turbo_confirm: "削除します。よろしいですか？" },
           class: "audio-action-btn delete-btn" %>
       </div>
     </div>

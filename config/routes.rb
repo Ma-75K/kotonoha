@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     end
 
     # 録音機能（お子様に紐付く）
-    resources :recordings, only: %i[index new create show edit update] do
+    resources :recordings, only: %i[index new create show edit update destroy] do
       collection do
         get :preview
         get :on_this_day
