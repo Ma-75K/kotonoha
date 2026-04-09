@@ -2,7 +2,7 @@ class Recording < ApplicationRecord
   belongs_to :user
   belongs_to :child
 
-  has_one_attached :audio
+  has_one_attached :audio, dependent: :purge_later
   before_validation :set_recorded_at, on: :create
 
   validates :title, presence: true
