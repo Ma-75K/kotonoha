@@ -1,0 +1,26 @@
+<div id="password-reset-page">
+  <div class="password-reset-card">
+    <h1 class="password-reset-title">パスワード再設定</h1>
+
+    <p class="description">
+      新しいパスワードを入力してください
+    </p>
+
+    <%= form_with model: @user, url: password_reset_path(token: @token), method: :patch, local: true do |f| %>
+
+      <div class="form-group">
+        <%= f.label :password, "新しいパスワード" %>
+        <%= f.password_field :password, class: "form-field" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, "新しいパスワード（確認）" %>
+        <%= f.password_field :password_confirmation, class: "form-field" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "更新する", class: "submit-btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>
