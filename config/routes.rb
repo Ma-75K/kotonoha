@@ -47,4 +47,8 @@ Rails.application.routes.draw do
     get :edit_email
     patch :update_email
   end
+
+  resource :password_reset, only: %i[new create edit update]
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
