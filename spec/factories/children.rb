@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :child do
-    user { nil }
-    name { "MyString" }
-    birthday { "2026-02-27" }
+    association :user
+    name { "ことちゃん" }
+    birthday { Date.new(2022, 7, 28) }
   end
 end
