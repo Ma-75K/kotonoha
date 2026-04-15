@@ -13,6 +13,12 @@ ja:
         name: お子さまのお名前（1人目）
         birthday: 生年月日
     errors:
+      messages:
+        blank: "を入力してください"
+        taken: "は既に使用されています"
+        invalid: "の形式が正しくありません"
+        too_short: "は%{count}文字以上で入力してください"
+        confirmation: "とパスワードの入力が一致していません"
       models:
         user:
           attributes:
@@ -22,7 +28,7 @@ ja:
               taken: "は既に使用されています"
               invalid: "の形式が正しくありません"
               blank: "を入力してください"
-            passsword:
+            password:
               blank: "を入力してください"
               too_short: "は%{count}文字以上で入力してください"
             password_confirmation:
