@@ -82,7 +82,7 @@ RSpec.describe Recording, type: :model do
       recording = build(:recording)
       recording.audio.detach
 
-      large_file = Tempfile.new(["large", ".mp3"])
+      large_file = Tempfile.new([ "large", ".mp3" ])
       large_file.binmode
       large_file.write("a" * (51.megabytes))
       large_file.rewind
