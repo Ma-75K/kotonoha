@@ -30,7 +30,7 @@ class Recording < ApplicationRecord
 
     max_size = 50.megabytes
     if audio.byte_size > max_size
-      errors.add(:audio, "は50MG以下である必要があります")
+      errors.add(:audio, "は50MB以下である必要があります")
     end
   end
 end

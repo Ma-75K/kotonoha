@@ -21,7 +21,7 @@ class PasswordResetsController < ApplicationController
 
     unless @user
       redirect_to new_password_reset_path, alert: "無効または期限切れのリンクです"
-      return
+      nil
     end
   end
 
