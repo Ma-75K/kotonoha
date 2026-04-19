@@ -89,14 +89,43 @@ RSpec.describe "Children", type: :request do
   end
 
   describe "他人の子どもへのアクセス" do
-    it "他人の子どもの編集画面にアクセスはできない" do
-      other_user = create(:user, email: "other@example.com", password: "password", password_confirmation: "password")
-      other_child = create(:child, user: other_user)
+    let(:other_user) do
+      create(:user, email: "other@example.com", password: "password", password_confirmation: "password")
+    end
 
+    let!(:other_child) { create(:child, user: other_user, name: "そら") }
+
+    it "他人の子どもの編集画面にはアクセスできない" do
       get edit_child_path(other_child)
 
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to eq("指定されたデータが見つかりませんでした")
+    end
+
+    it "他人の子どもは更新できない" do
+      patch child_path(other_child), params: {
+        child: {
+          name: "変更されない名前",
+          birthday: other_child.birthday
+        }
+      }
+
+      expect(response).to redirect_to(root_path)
+      expect(other_child.reload.name).to eq("そら")
+    end
+
+    it "他人の子どもは削除できない" do
+      expect {
+        delete child_path(other_child)
+      }.not_to change(Child, :count)
+
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "他人の子どもに切り替えできない" do
+      post switch_child_path(other_child)
+
+      expect(response).to redirect_to(root_path)
     end
   end
 end
