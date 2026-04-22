@@ -1,37 +1,24 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 col-lg-8 mx-auto">
-      <h1 class="mt-4 mb-4 text-center">登録内容の確認</h1>
+<div id="user-confirm-page">
+  <div class="user-confirm-card">
+    <h1 class="confirm-page-title">登録内容の確認</h1>
+    <p class="confirm-subtitle">入力内容をご確認ください</p>
 
-      <div class="mb-5">
-        <!-- ステップインジケーター -->
-        <div class="d-flex justify-content-between">
-          <div class="text-center text-muted">
-            <div class="badge bg-secondary">1</div>
-            <div>アカウント情報</div>
-          </div>
-          <div class="text-center">
-            <div class="badge bg-primary">2</div>
-            <div>確認</div>
-          </div>
+    <div class="confirm-card">
+      <div class="confirm-list">
+        <div class="confirm-row">
+          <span class="confirm-label">お名前</span>
+          <span class="confirm-value"><%= @user.name %></span>
+        </div>
+
+        <div class="confirm-row">
+          <span class="confirm-label">メールアドレス</span>
+          <span class="confirm-value"><%= @user.email %></span>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-body">
-          <dl class="row">
-            <dt class="col-sm-3">名前</dt>
-            <dd class="col-sm-9"><%= @user.name %></dd>
-
-            <dt class="col-sm-3">メールアドレス</dt>
-            <dd class="col-sm-9"><%= @user.email %></dd>
-          </dl>
-
-          <div class="d-flex justify-content-between mt-4">
-            <%= link_to "[ 戻る ]", new_user_path, class: "btn btn-secondary" %>
-            <%= link_to "[ お子様登録へ進む ]", new_child_path, class: "btn btn-primary" %>
-          </div>
-        </div>
+      <div class="confirm-actions">
+        <%= link_to "お子さま登録へ進む", new_child_path, class: "btn-primary-main" %>
+        <%= link_to "← もどる", new_user_path, class: "btn-text-link" %>
       </div>
     </div>
   </div>

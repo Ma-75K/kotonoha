@@ -7,22 +7,41 @@
     <div class="child-name">
       <%= @child.name %>
     </div>
-    <button id="start-recording" class="btn btn-primary">
-    録音をはじめる
-    </button>
+
+    <div class="record-button-wrap">
+      <button id="start-recording" class="record-start-button" type="button">
+        <span class="record-start-button-outer">
+          <span class="record-start-button-inner">
+            <i class="fa-solid fa-microphone"></i>
+          </span>
+        </span>
+      </button>
+
+      <p class="record-start-label">タップして録音開始</p>
+    </div>
   </div>
 
   <!-- 録音中画面 -->
   <div id="recording-screen" style="display:none;">
     <div class="recording-now">
-    録音中……
+      録音中……
     </div>
+
     <div class="recording-time">
       <span id="recording-duration">00:00</span>
     </div>
-    <button id="stop-recording" class="btn btn-danger" disabled>
-    停止
-    </button>
+
+    <div class="record-button-wrap">
+      <button id="stop-recording" class="record-stop-button" type="button" disabled>
+        <span class="record-stop-button-outer">
+          <span class="record-stop-button-inner">
+            <i class="fa-solid fa-stop"></i>
+          </span>
+        </span>
+      </button>
+
+      <p class="record-start-label">タップして停止</p>
+    </div>
   </div>
 
   <!-- プレビュー画面 -->
@@ -61,9 +80,11 @@
     <%= f.hidden_field :title, value: "無題", id: 'title-field' %>
     <%= f.hidden_field :duration, id: "duration-field" %>
 
-    <div class="form-actions">
-      <%= f.submit "保存", class: "btn btn-success", id: "save-button" %>
-      <button type="button", class="btn btn-secondary" onclick="history.back()">戻る</button>
+    <div class="form-actions preview-actions">
+      <%= f.submit "保存", class: "btn-primary-main preview-save-button", id: "save-button" %>
+      <button type="button" class="btn-text-link preview-back-link" id="back-to-initial">
+        ← もどる
+      </button>
     </div>
   <% end %>
 </div>

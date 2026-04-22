@@ -1,73 +1,72 @@
-<div class= "container">
-  <div class= "row">
-    <div class= "col-md-10 col-lg-8 mx-auto">
-      <h1 class="mt-4 mb-4 text-center">アカウント情報</h1>
+<div id="user-new-page">
+  <div class="user-new-card">
+    <h1 class="user-new-page-title">アカウント登録</h1>
+    <!-- ステップインジケーター -->
+    <div class="signup-stepper">
+      <p class="stepper-text">ステップ 1/2</p>
 
-      <div class="mb-5">
-        <!-- ステップインジケーター -->
-        <div class="d-flex juistify-content-between">
-          <div class="text-center">
-            <div class="badge bg-primary">1</div>
-            <div>アカウント情報</div>
-          </div>
-          <div class="text-center text-muted">
-            <div class="badge bg-secondary">2</div>
-            <div>お子様情報</div>
-          </div>
+      <div class="stepper-track">
+        <div class="step-item active">
+          <span class="step-circle"></span>
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="step-item">
+          <span class="step-circle"></span>
         </div>
       </div>
-
-      <%= form_with model: @user, url: confirm_users_path, method: :post, data: { turbo: false } do |f| %>
-
-        <div class="mb-3">
-          <%= f.label :name, class: "form-label" %>
-          <%= f.text_field :name, class: "form-control" %>
-
-          <% if @user.errors[:name].any? %>
-            <div class="error-message">
-              <%= @user.errors.full_messages_for(:name).join(", ") %>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.label :email, class: "form-label" %>
-          <%= f.email_field :email, class: "form-control" %>
-
-          <% if @user.errors[:email].any? %>
-            <div class="error-message">
-              <%= @user.errors.full_messages_for(:email).join(", ") %>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.label :password, class: "form-label" %>
-          <%= f.password_field :password, class: "form-control" %>
-
-          <% if @user.errors[:password].any? %>
-            <div class="error-message">
-              <%= @user.errors.full_messages_for(:password).join(", ") %>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.label :password_confirmation, class: "form-label" %>
-          <%= f.password_field :password_confirmation, class: "form-control" %>
-
-          <% if @user.errors[:password_confirmation].any? %>
-            <div class="error-message">
-              <%= @user.errors.full_messages_for(:password_confirmation).join(", ") %>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="button-group">
-          <%= f.submit "[ 次へ ]", class: "btn btn-primary" %>
-          <%= link_to "[ 戻る ]", root_path, class: "btn btn-secondary" %>
-        </div>
-      <% end %>
     </div>
+
+    <%= form_with model: @user, url: confirm_users_path, method: :post, data: { turbo: false } do |f| %>
+      <div class="mb-3">
+        <%= f.label :name, class: "form-label" %>
+        <%= f.text_field :name, class: "form-control" %>
+
+        <% if @user.errors[:name].any? %>
+          <div class="error-message">
+            <%= @user.errors.full_messages_for(:name).join(", ") %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, class: "form-control" %>
+
+        <% if @user.errors[:email].any? %>
+          <div class="error-message">
+            <%= @user.errors.full_messages_for(:email).join(", ") %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password, class: "form-label" %>
+        <%= f.password_field :password, class: "form-control" %>
+
+        <% if @user.errors[:password].any? %>
+          <div class="error-message">
+            <%= @user.errors.full_messages_for(:password).join(", ") %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password_confirmation, class: "form-label" %>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+
+        <% if @user.errors[:password_confirmation].any? %>
+          <div class="error-message">
+            <%= @user.errors.full_messages_for(:password_confirmation).join(", ") %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="button-group-vertical">
+        <%= f.submit "次へ", class: "btn-primary-main" %>
+        <%= link_to "← もどる", root_path, class: "btn-text-link" %>
+      </div>
+    <% end %>
   </div>
 </div>
