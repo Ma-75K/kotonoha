@@ -93,6 +93,11 @@ document.addEventListener('turbo:load', () => {
 
   showScreen('initial-screen');
 
+  function updateSeekBarProgress(seekBar) {
+    const value = seekBar.value || 0;
+    seekBar.style.setProperty('--progress', `${value}%`);
+  }
+
   function updateTimer(seconds) {
     const minutes = Math.floor(seconds / 60).toString().padStart(2, '0');
     const secs = (seconds % 60).toString().padStart(2, '0');
@@ -260,6 +265,7 @@ document.addEventListener('turbo:load', () => {
     audioPlayer.addEventListener('ended', () => {
       playIcon.classList.replace('fa-pause', 'fa-play');
       seekBar.value = 0;
+      updateSeekBarProgress(seekBar);
       currentTime.textContent = '00:00';
     });
 
@@ -268,6 +274,7 @@ document.addEventListener('turbo:load', () => {
 
       const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
       seekBar.value = progress;
+      updateSeekBarProgress(seekBar);
 
       const minutes = Math.floor(audioPlayer.currentTime / 60).toString().padStart(2, '0');
       const seconds = Math.floor(audioPlayer.currentTime % 60).toString().padStart(2, '0');
@@ -279,7 +286,11 @@ document.addEventListener('turbo:load', () => {
 
       const seekTime = audioPlayer.duration * (seekBar.value / 100);
       audioPlayer.currentTime = seekTime;
+
+      updateSeekBarProgress(seekBar);
     });
+
+    updateSeekBarProgress(seekBar);
   }
 
   setupFormSubmit();
