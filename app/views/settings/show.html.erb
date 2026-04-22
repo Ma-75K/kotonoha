@@ -48,15 +48,15 @@
           <% end %>
         </div>
       <% end %>
-    </div>
 
-    <div class="add-child-area">
-      <%= link_to "[ + お子さまを追加 ]", new_from_settings_children_path, class: "add-child-btn" %>
+      <div class="add-child-area">
+        <%= link_to "[ + お子さまを追加 ]", new_from_settings_children_path, class: "add-child-btn" %>
+      </div>
     </div>
 
     <div class="settings-actions">
-      <%= link_to "もどる", new_child_recording_path(current_child), class: "back-btn" %>
-      <%= button_to "ログアウト", logout_path, method: :delete, class: "logout-btn" %>
+      <%= link_to "← もどる", new_child_recording_path(current_child), class: "setting-back-link" %>
+      <%= button_to "ログアウト", logout_path, method: :delete, class: "setting-logout-btn" %>
     </div>
   </div>
 </div>

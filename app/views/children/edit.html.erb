@@ -14,7 +14,7 @@
       </div>
 
       <div class="form-actions form-actions-row">
-        <%= f.button "更新", type: "submit", class: "action-btn save-btn" %>
+        <%= f.button "変更", type: "submit", class: "action-btn edit-save-btn" %>
 
         <%= link_to "削除",
           child_path(@child),
@@ -24,7 +24,7 @@
     <% end %>
 
     <div class="form-actions form-actions-single">
-      <%= link_to "キャンセル", settings_path, class: "action-btn cancel-btn" %>
+      <%= link_to "キャンセル", settings_path, class: "btn-text-link" %>
     </div>
   </div>
 </div>

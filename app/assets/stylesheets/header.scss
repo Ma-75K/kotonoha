@@ -31,21 +31,19 @@
   width: 100%;
 }
 
-/* 左右の幅をそろえる */
-.header-left,
-.header-right {
+/* 左は固定 */
+.header-left {
   flex: 0 0 88px;
   display: flex;
   align-items: center;
-}
-
-/* 左は左寄せ */
-.header-left {
   justify-content: flex-start;
 }
 
-/* 右は右寄せ */
+/* 右は広めにとる（アカウント切り替え用に） */
 .header-right {
+  flex: 0 0 132px;
+  display: flex;
+  align-items: center;
   justify-content: flex-end;
 }
 
@@ -122,7 +120,8 @@
   align-items: center;
   gap: 2px;
   position: relative;
-  max-width: 88px;
+  width: 100%;
+  max-width: none;
 }
 
 .switcher-label,
@@ -131,7 +130,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 88px;
+  max-width: 100%;
 }
 
 .switcher-label {
@@ -358,13 +357,21 @@
     font-size: 1.2rem;
   }
 
+  .account-switcher {
+    max-width: 76px;
+  }
+
+  .switcher-label,
+  .selected-child-name {
+    max-width: 76px;
+  }
+
   .switcher-label {
     font-size: 9px;
   }
 
   .selected-child-name {
     font-size: 11px;
-    max-width: 76px;
   }
 
   .switcher-icon {
@@ -380,5 +387,18 @@
 @media (min-width: 768px) {
   .header-main .nav-container {
     padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .header-right {
+    flex: 0 0 160px;
+  }
+
+  .account-switcher {
+    min-width: 120px;
+  }
+
+  .switcher-label,
+  .selected-child-name {
+    max-width: 120px;
   }
 }
