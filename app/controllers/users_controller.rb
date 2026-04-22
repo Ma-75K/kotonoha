@@ -11,9 +11,25 @@ class UsersController < ApplicationController
   end
 
   def confirm
+    # ======================
+    # GETの場合（戻るボタン）
+    # ======================
+    if request.get?
+      unless session[:user_params]
+        flash[:alert] = "ユーザー情報が見つかりません"
+        redirect_to new_user_path
+        return
+      end
+
+      @user = User.new(session[:user_params])
+      return
+    end
+
+    # =========================
+    # POSTの場合（次へボタン）
+    # =========================
     @user = User.new(user_params)
 
-    # バリデーションチェック
     if @user.valid?
       # sessionに一時保存
       session[:user_params] = user_params.to_h

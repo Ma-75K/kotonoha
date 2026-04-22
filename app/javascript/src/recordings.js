@@ -48,8 +48,36 @@ document.addEventListener('turbo:load', () => {
   const recordingDuration = document.getElementById('recording-duration');
   const saveForm = document.getElementById('save-recording-form');
   const durationField = document.getElementById('duration-field');
+  const backToInitialButton = document.getElementById('back-to-initial');
 
   if (!startButton || !stopRecordingButton || !recordingDuration) return;
+
+  if (backToInitialButton) {
+    backToInitialButton.addEventListener('click', () => {
+      const audioPlayer = document.getElementById('audio-player');
+      const seekBar = document.getElementById('seek-bar');
+      const currentTime = document.getElementById('current-time');
+      const previewDuration = document.getElementById('preview-duration');
+
+      if (audioPlayer) {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        audioPlayer.src = '';
+      }
+
+      if (seekBar) seekBar.value = 0;
+      if (currentTime) currentTime.textContent = '00:00';
+      if (previewDuration) previewDuration.textContent = '00:00';
+      if (durationField) durationField.value = '';
+
+      recordedAudioBlob = null;
+      audioChunks = [];
+      recordingSeconds = 0;
+      updateTimer(0);
+
+      showScreen('initial-screen');
+    });
+  }
 
   let audioControlsInitialized = false;
   let mediaRecorder;
@@ -134,7 +162,6 @@ document.addEventListener('turbo:load', () => {
   });
 
   function showPreview(audioBlob) {
-    console.log("showPreview呼ばれた");
     recordedAudioBlob = audioBlob;
 
     const audioUrl = URL.createObjectURL(audioBlob);

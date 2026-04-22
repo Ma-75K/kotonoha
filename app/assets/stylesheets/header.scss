@@ -25,16 +25,69 @@
    _header_main 用のスタイル
 ======================================== */
 .header-main .nav-container {
-  justify-content: space-between; /* 左右に配置 */
-}
-
-/* ヘッダーの左・中央・右 */
-.header-left,
-.header-center,
-.header-right {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  justify-content: space-between; /* 左右に配置 */
+  width: 100%;
+}
+
+/* 左右の幅をそろえる */
+.header-left,
+.header-right {
+  flex: 0 0 88px;
+  display: flex;
+  align-items: center;
+}
+
+/* 左は左寄せ */
+.header-left {
+  justify-content: flex-start;
+}
+
+/* 右は右寄せ */
+.header-right {
+  justify-content: flex-end;
+}
+
+/* 中央は残りの幅の真ん中 */
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: auto;
+  position: static;
+}
+
+.logo-image {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  position: static;
+  transform: none;
+  margin: 0;
+}
+
+.app-name {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--color-white);
+  line-height: 1;
 }
 
 /* ========================================
@@ -67,8 +120,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.15rem;
+  gap: 2px;
   position: relative;
+  max-width: 88px;
+}
+
+.switcher-label,
+.selected-child-name {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 88px;
 }
 
 .switcher-label {
@@ -281,12 +344,27 @@
 
 /* スマホ（〜767px） */
 @media (max-width: 767px) {
+  .header-left,
+  .header-right {
+    flex: 0 0 76px;
+  }
+
+  .logo-image {
+    width: 36px;
+    height: 36px;
+  }
+
+  .app-name {
+    font-size: 1.2rem;
+  }
+
   .switcher-label {
     font-size: 9px;
   }
 
   .selected-child-name {
     font-size: 11px;
+    max-width: 76px;
   }
 
   .switcher-icon {

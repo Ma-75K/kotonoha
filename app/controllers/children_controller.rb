@@ -9,7 +9,8 @@ class ChildrenController < ApplicationController
     end
     # 一時的な User オブジェクトを作成（DB には保存しない）
     @user = User.new(session[:user_params])
-    @child = @user.children.build
+    @user.children.build if @user.children.empty?
+    # @child = @user.children.build
   end
 
   def create
@@ -20,12 +21,13 @@ class ChildrenController < ApplicationController
     end
 
     @user = User.new(session[:user_params])
-    @child = @user.children.build(child_params)
+    @user.assign_attributes(user_children_params)
+    # @child = @user.children.build(child_params)
 
     # トランザクションで両方を保存
     ActiveRecord::Base.transaction do
       @user.save!
-      @child.save!
+      # @child.save!
 
       # ログイン処理
       auto_login(@user)

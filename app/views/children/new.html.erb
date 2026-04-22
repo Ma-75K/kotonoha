@@ -1,62 +1,61 @@
-<div class= "container">
-  <div class= "row">
-    <div class= "col-md-10 col-lg-8 mx-auto">
-      <h1 class="mb-4 text-center">お子さまの情報登録</h1>
+<div id="child-new-page">
+  <div class="child-new-card">
+    <h1 class="children-new-page-title">お子さま情報登録</h1>
 
-      <div class="mb-5">
-        <!-- ステップインジケーター -->
-        <div class="d-flex justify-content-between">
-          <div class="text-center text-muted">
-            <div class="badge bg-success">✓</div>
-            <div>アカウント情報</div>
-          </div>
-          <div class="text-center">
-            <div class="badge bg-primary">2</div>
-            <div>お子様情報</div>
-          </div>
+    <!-- ステップインジケーター -->
+    <div class="signup-stepper">
+      <p class="stepper-text">ステップ 2/2</p>
+
+      <div class="stepper-track">
+        <div class="step-item completed">
+          <span class="step-circle"></span>
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="step-item active">
+          <span class="step-circle"></span>
         </div>
       </div>
+    </div>
 
-      <%= form_with model: @user, url: children_path, method: :post, local: true do |f| %>
-        <div id="children-fields">
-          <%= f.fields_for :children do |child_form| %>
-            <div class="child-fields mb-4">
-              <div class="mb-3">
-                <%= child_form.label :name, class: "form-label" %>
-                <%= child_form.text_field :name, class: "form-control" %>
+    <%= form_with model: @user, url: children_path, method: :post, local: true do |f| %>
+      <div id="children-fields">
+        <%= f.fields_for :children do |child_form| %>
+          <div class="child-fields mb-4">
+            <div class="mb-3">
+              <%= child_form.label :name, class: "form-label" %>
+              <%= child_form.text_field :name, class: "form-control" %>
 
-          <% if child_form.object.errors[:name].any? %>
-            <div class="errors-message">
-              <%= child_form.object.errors.full_messages_for(:name).join(", ") %>
+              <% if child_form.object.errors[:name].any? %>
+                <div class="errors-message">
+                  <%= child_form.object.errors.full_messages_for(:name).join(", ") %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
-        </div>
 
-        <div class="mb-3">
-          <%= child_form.label :birthday, class: "form-label" %>
-          <%= child_form.date_field :birthday, class: "form-control" %>
+            <div class="mb-3">
+              <%= child_form.label :birthday, class: "form-label" %>
+              <%= child_form.date_field :birthday, class: "form-control date-field" %>
 
-          <% if child_form.object.errors[:birthday].any? %>
-            <div class= "errors-message">
-              <%= child_form.object.errors.full_messages_for(:birthday).join(", ") %>
+              <% if child_form.object.errors[:birthday].any? %>
+                <div class= "errors-message">
+                  <%= child_form.object.errors.full_messages_for(:birthday).join(", ") %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mb-4 text-center">
+        <button type="button" id="add-child-button" class="btn-secondary-main">
+          + お子さまを追加
+        </button>
+
+        <%= f.submit "登録完了", class: "btn-primary-main" %>
+        <%= link_to "← もどる", confirm_users_path, class: "btn-text-link" %>
       </div>
     <% end %>
-  </div>
-
-  <div class="mb-4 text-center">
-    <button type="button" id="add-child-button" class="btn btn-outline-success">
-      [ + お子さまを追加 ]
-    </button>
-  </div>
-
-  <div class="button-group">
-          <%= f.submit "[ 登録完了 ]", class: "btn btn-primary" %>
-          <%= link_to "[ 戻る ]", new_user_path, class: "btn btn-secondary" %>
-        </div>
-      <% end %>
-    </div>
   </div>
 </div>

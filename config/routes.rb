@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # ユーザー登録
   resources :users, only: %i[new] do
     collection do
+      get :confirm
       post :confirm # 確認用アクション
     end
   end
