@@ -2,14 +2,14 @@
   <div class="on-this-day-card">
     <h1 class="page-title">一年前の今日</h1>
 
+    <p class="sub-title">
+      - あの日のことば -
+    </p>
+
     <p class="target-date-main">
-      <%= @target_date.strftime('%Y/%m/%d') %>
+      <%= @target_date.strftime('%Y年%m月%d日') %>
     </p>
-
-    <p class="target-date-sub">
-      -----  あの日のことば  -----
-    </p>
-
+    
     <% if @recordings.any? %>
       <div class="recordings-list">
         <% @recordings.each do |recording| %>
@@ -34,7 +34,8 @@
       </div>
 
     <% else %>
-      <p class="empty-message">この日のことばは、まだありません</p>
+      <p class="empty-message">ことのばのきろくが見つかりません</p>
+      <p class="sub-message">ことばは、未来のたからものに。</p>
     <% end %>
 
     <div class="back-home-area">

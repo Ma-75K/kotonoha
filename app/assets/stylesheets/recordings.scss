@@ -932,24 +932,27 @@
 .page-title {
   font-size: 1.5rem;
   text-align: center;
-  margin-bottom: var(--spacing-lg);
+  margin: var(--spacing-lg) auto 1rem;
   color: var(--color-text);
 }
 
 .target-date-main {
-  margin-bottom: 2px;
-  font-size: 1.2rem;
-  font-weight: 600;
+  margin: 12px auto 32px;
+  font-size: 1.5rem;
+  font-family: var(--font-main);
+  font-weight: 400;
   text-align: center;
-  color: var(--color-text);
+  color: #6B7C70;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
 }
 
-.target-date-sub {
-  margin-bottom: var(--spacing-xl);
-  font-size: 0.9rem;
+.sub-title {
+  font-size: 0.95rem;
   color: var(--color-text-light);
   text-align: center;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  margin: 12px 0 20px;
 }
 
 .recordings-list {
@@ -1051,21 +1054,34 @@
 
 .empty-message {
   text-align: center;
-  color: var(--color-text-light);
+  margin-top: 16px;
+  font-size: 1.05rem;
+  color: var(--color-text);
   padding: var(--spacing-xl);
-  line-height: 1.6;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.sub-message {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  opacity: 0.8;
+  text-align: center;
 }
 
 .back-home-area {
   text-align: center;
-  margin-top: var(--spacing-xl);
+  margin-top: 36px;
 }
 
 .home-btn {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  box-shadow: 0 4px 10px rgba(127, 183, 126, 0.25);
+  background: none;
+  color: var(--color-text-light);
+  box-shadow: none;
   display: inline-flex;
+  font-size: 0.95rem;
   min-width: 110px;
   height: 50px;
   border: none;

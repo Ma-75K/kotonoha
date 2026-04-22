@@ -88,12 +88,13 @@
     margin-top: var(--spacing-xxl);
     display: flex;
     justify-content: center;
-    gap: var(--spacing-lg);
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: nowrap;
   }
 
-  .back-btn,
-  .logout-btn {
+  .setting-back-link,
+  .setting-logout-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -106,36 +107,45 @@
     cursor: pointer;
   }
 
-  .back-btn {
-    background-color: var(--color-primary);
-    color: var(--color-white);
+  .setting-back-link {
+    background: none;
+    border: none;
+    color: var(--color-text-light);
+    font-size: 1rem;
+    text-decoration: none;
+    min-width: auto;
+    height: auto;
+    padding: 0;
   }
 
-  .logout-btn {
-    background-color: #7aa7d9;
-    color: var(--color-white);
+  .setting-logout-btn {
+    border-radius: 16px;
+    border: 1px solid #e6c4c4;
+    background-color: #fbefef;
+    color: #c96a6a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1rem;
   }
 
   .add-child-area {
     display: flex;
-    justify-content: center;
-    margin-top: var(--spacing-lg);
+    justify-content: flex-end;
+    margin-top: 8px;
   }
 
   .add-child-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 48px;
-    border-radius: 12px;
+    width: auto;
+    height: auto;
+    padding: 4px 8px;
+    border-radius: 8px;
     border: none;
     background: none;
     color: var(--color-primary);
     text-decoration: none;
-    font-size: 1rem;
-    font-family: var(--font-main);
-    margin-top: 8px;
+    font-size: 0.9rem;
   }
 }
 
