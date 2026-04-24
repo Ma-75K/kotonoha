@@ -19,6 +19,30 @@
 
       <p class="record-start-label">タップして録音開始</p>
     </div>
+
+    <div class="recent-recordings-section">
+      <h2 class="recent-recordings-title">最近の録音</h2>
+
+      <% if @recent_recordings.any? %>
+        <ul class="recent-recordings-list">
+          <% @recent_recordings.each do |recording| %>
+            <li>
+              <%= link_to child_recording_path(@child, recording), class: "recent-recording-item" do %>
+                <div class="recent-recording-left">
+                  <i class="fa-regular fa-file-audio recent-recording-icon"></i>
+                  <span class="recen-recording-name"><%= recording.title.presence || "無題" %></span>
+                </div>
+                <span class="recent-recording-duration">
+                  <%= format_duration(recording.duration) %>
+                </span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="recent-recordings-empty">まだきろくはありません。</p>
+      <% end %>
+    </div>
   </div>
 
   <!-- 録音中画面 -->

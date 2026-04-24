@@ -5,6 +5,10 @@ class RecordingsController < ApplicationController
 
   def new
     @recording = @child.recordings.build
+
+    @recent_recordings = @child.recordings
+                                .order(recorded_at: :desc)
+                                .limit(3)
   end
 
   def create
