@@ -49,6 +49,24 @@
     justify-content: space-between;
     color: var(--color-text);
     background-color: var(--color-white);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .setting-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-text);
+    width: 100%;
+  }
+
+  .setting-link:hover {
+    background-color: #f8f8f8;
+  }
+
+  .setting-box:active {
+    transform: scale(0.98);
   }
 
   .child-setting-box {

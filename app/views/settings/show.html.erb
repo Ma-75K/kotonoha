@@ -7,7 +7,7 @@
         <p class="setting-label">お名前</p>
         <%= link_to edit_name_user_path, class: "setting-box" do %>
           <span><%= @user.name %></span>
-          <span class="arrow">＞</span>
+          <span class="arrow">&gt;</span>
         <% end %>
       </div>
 
@@ -15,15 +15,15 @@
         <p class="setting-label">メールアドレス</p>
         <%= link_to edit_email_user_path, class: "setting-box" do %>
           <span><%= @user.email %></span>
-          <span class="arrow">＞</span>
+          <span class="arrow">&gt;</span>
         <% end %>
       </div>
 
       <div class="setting-item">
-        <div class="setting-box">
+        <%= link_to new_password_reset_path, class: "setting-box setting-link" do %>
           <span>パスワードリセット</span>
-          <span class="arrow">＞</span>
-        </div>
+          <span class="arrow">&gt;</span>
+        <% end %>
       </div>
     </div>
 
@@ -43,7 +43,7 @@
 
             <!-- 右側 -->
             <div class="arrow-wrapper">
-              <span class="arrow">＞</span>
+              <span class="arrow">&gt;</span>
             </div>
           <% end %>
         </div>

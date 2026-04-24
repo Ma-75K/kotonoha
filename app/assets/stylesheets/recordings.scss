@@ -6,8 +6,13 @@
   height: 100vh;
   padding: var(--spacing-lg) var(--spacing-md);
 
+  #initial-screen {
+    max-width: 420px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 1rem;
+  }
 
-  #initial-screen,
   #recording-screen,
   #preview-area {
     max-width: 420px;
@@ -20,8 +25,8 @@
     text-align: center;
     font-size: 1.8rem;
     color: var(--color-text);
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+    margin-bottom: 3rem;
+    margin-top: 3.5rem;
   }
 
   /* ========================================
@@ -32,9 +37,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 2.5rem;
-    background: transparent;
-    width: auto;
+    margin-top: 0;
   }
 
   #start-recording.record-start-button {
@@ -90,6 +93,67 @@
     font-size: 1rem;
     color: var(--color-text);
   }
+
+  /* 最近の録音3件 */
+  .recent-recordings-section {
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin: 3rem auto 0;
+  }
+
+  .recent-recordings-title {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .recent-recordings-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .recent-recording-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .recent-recording-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 4px;
+  }
+
+  .recent-recording-icon {
+    color: var(--color-text-light);
+    font-size: 1rem;
+  }
+
+  .recent-recording-name {
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+
+  .recent-recording-duration {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    padding-right: 4px;
+  }
+
+  .recent-recordings-empty {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    text-align: left;
+  }
+
 
   /* 録音中 */
   .recording-now {
@@ -348,8 +412,16 @@
   @media (max-width: 767px) {
     padding: var(--spacing-md);
 
+    #initial-screen {
+      padding-top: 3rem;
+    }
+
     .child-name {
-      font-size: 1.25rem
+      font-size: 2rem
+    }
+
+    .recent-recordings-section {
+      margin-top: 5rem;
     }
 
     .recording-time,
@@ -448,10 +520,14 @@
   }
 
   .detail-comment.is-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--color-text-light);
     text-align: center;
     opacity: 0.7;
     font-size: 0.9rem;
+    white-space: normal;
   }
 
   .edit-area {
