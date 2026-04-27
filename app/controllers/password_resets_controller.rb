@@ -12,7 +12,7 @@ class PasswordResetsController < ApplicationController
       user.deliver_reset_password_instructions!
     end
 
-    redirect_to new_password_reset_path, notice: "パスワード再設定メールを送信しました"
+    redirect_to new_password_reset_path, flash: { success: "パスワード再設定メールを送信しました" }
   end
 
   def edit
