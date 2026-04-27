@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     # ======================
     # GETの場合（戻るボタン）
     # ======================
-    if request.get?
+    if request.get? || request.head?
       unless session[:user_params]
         flash[:alert] = "ユーザー情報が見つかりません"
         redirect_to new_user_path
