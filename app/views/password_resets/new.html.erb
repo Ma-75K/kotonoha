@@ -1,12 +1,24 @@
-<h1>パスワード再設定</h1>
+<div id="password-reset-request-page">
+  <div class="password-reset-request-card">
+    <h1 class="password-reset-title">パスワード再設定</h1>
 
-<%= form_with url: password_reset_path, method: :post, local: true do %>
-  <div>
-    <%= label_tag :email, "メールアドレス" %>
-    <%= email_field_tag :email, @email, placeholder: "kotonoha@example.com" %>
-  </div>
+    <p class="password-reset-description">
+      登録しているメールアドレスを入力してください
+    </p>
 
-  <div>
-    <%= submit_tag "送信する" %>
+    <%= form_with url: password_reset_path, method: :post, local: true, data: { turbo: false } do %>
+      <div class="form-group">
+        <%= label_tag :email, "メールアドレス", class: "form-label" %>
+        <%= email_field_tag :email, @email,
+          placeholder: "kotonoha@example.com",
+          class: "form-field" %>
+      </div>
+
+      <div class="form-actions">
+        <%= submit_tag "送信する", class: "btn-primary-main" %>
+        <%= link_to "← もどる", settings_path, class: "btn-text-link" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
+
