@@ -9,7 +9,7 @@
     <p class="target-date-main">
       <%= @target_date.strftime('%Y年%m月%d日') %>
     </p>
-    
+
     <% if @recordings.any? %>
       <div class="recordings-list">
         <% @recordings.each do |recording| %>
@@ -34,7 +34,7 @@
       </div>
 
     <% else %>
-      <p class="empty-message">ことのばのきろくが見つかりません</p>
+      <p class="empty-message">ことのばの記録が見つかりません</p>
       <p class="sub-message">ことばは、未来のたからものに。</p>
     <% end %>
 

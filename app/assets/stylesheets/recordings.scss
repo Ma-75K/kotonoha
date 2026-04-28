@@ -354,11 +354,6 @@
     height: 56px;
     padding: 0;
     border-radius: 20px;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    font-size: 1.05rem;
-    font-family: var(--font-main);
-    box-shadow: 0 6px 14px rgba(143, 175, 154, 0.18);
   }
 
   .preview-back-link {
@@ -498,9 +493,8 @@
   .detail-value {
     font-size: 1rem;
     color: var(--color-text);
-    line-height: 1.6;
-    white-space: pre-wrap;
-    font-weight: bold;
+    line-height: 1.8;
+    white-space: normal;
   }
 
   .detail-title {
@@ -509,14 +503,25 @@
     padding: var(--spacing-md);
     background-color: #faf9f6;
     min-height: 30px;
+    letter-spacing: 0.03rem;
+    line-height: 1.6;
+    font-weight: 500;
+    color: #444;
   }
 
-  .detail-comment {
+  .detail-value.detail-comment {
     border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: var(--spacing-md);
     background-color: #faf9f6;
     min-height: 80px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: pre-line;
+    letter-spacing: 0.02rem;
+    font-weight: 500;
+    color: #2f2f2f;
+    padding: 14px 16px;
   }
 
   .detail-comment.is-empty {
@@ -526,7 +531,7 @@
     color: var(--color-text-light);
     text-align: center;
     opacity: 0.7;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     white-space: normal;
   }
 
@@ -644,23 +649,29 @@
   }
 
   .audio-buttons {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-md);
-    align-items: stretch;
-    margin-top: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+    align-items: center;
+    margin-top: 24px;
   }
 
   .audio-buttons > * {
-    flex: 1;
+    min-width: 0;
+  }
+
+  .delete-button-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .delete-button-wrap form {
-    width: 100%;
+    width: auto;
+    margin: 0;
   }
 
   .audio-action-btn,
-  .delete-btn,
   #play-toggle-button {
     width: 100%;
     min-height: 56px;
@@ -694,9 +705,19 @@
   }
 
   .delete-btn {
-    background-color: var(--color-secondary);
-    color: var(--color-text);
-    padding: 0;
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    color: #c66;
+    padding:12px 20px;
+    border-radius: 16px;
+    cursor: pointer;
+    width: auto;
+    display: inline-block;
+  }
+
+  .delete-btn:hover {
+    background-color: #f9eaea;
   }
 
   #audio-player {
@@ -725,6 +746,14 @@
 
     .detail-value {
       font-size: 1.2rem;
+    }
+
+    .detail-value.detail-comment {
+      line-height: 1.8;
+    }
+
+    .detail-value.detail-title {
+      font-size: 1rem;
     }
   }
 }

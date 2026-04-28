@@ -54,6 +54,12 @@ document.addEventListener('turbo:load', () => {
 
   if (backToInitialButton) {
     backToInitialButton.addEventListener('click', () => {
+      const confirmed = confirm(
+        'この録音はまだ保存されていません。\nもどると消えてしまいますが､よろしいですか？'
+      );
+
+      if (!confirmed) return;
+
       const audioPlayer = document.getElementById('audio-player');
       const seekBar = document.getElementById('seek-bar');
       const currentTime = document.getElementById('current-time');

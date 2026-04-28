@@ -1,4 +1,4 @@
-FROM ruby:3.2.3
+FROM ruby:3.3.11
 
 # 必要なパッケージのインストール
 RUN apt-get update -qq && \
@@ -26,7 +26,7 @@ RUN bundle install
 COPY . /kotonoha
 
 # アセット（CSS/JS）を本番用に最適化
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+RUN RAILS_ENV=production SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
 # entrypoint.sh をコピーして実行権限を付与
 COPY entrypoint.sh /usr/bin/
@@ -36,4 +36,5 @@ RUN chmod +x /usr/bin/entrypoint.sh
 EXPOSE 3000
 
 # entrypoint.sh を起動時に実行してから Rails サーバーを起動
-CMD ["/usr/bin/entrypoint.sh", "bundle", "exec", "puma", "-C", "config/puma.rb"]
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
