@@ -25,8 +25,14 @@ RUN bundle install
 # アプリケーションのコードをコピー
 COPY . /kotonoha
 
+# Tailwind CSS のビルド
+RUN bundle exec rails tailwindcss:build
+
+# Dartsass のビルド
+RUN bundle exec rails dartsass:build
+
 # アセット（CSS/JS）を本番用に最適化
-RUN RAILS_ENV=production SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE=$(bundle exec rails secret) RAILS_ENV=production bundle exec rails assets:precompile
 
 # entrypoint.sh をコピーして実行権限を付与
 COPY entrypoint.sh /usr/bin/
