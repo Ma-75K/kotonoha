@@ -13,9 +13,7 @@
     <!-- ひとこと -->
     <div class="detail-section">
       <p class="detail-label">ひとこと</p>
-      <p class="detail-value detail-comment <%= 'is-empty' if @recording.comment.blank? %>">
-        <%= @recording.comment.presence || "まだ入力されていません" %>
-      </p>
+      <p class="detail-value detail-comment <%= 'is-empty' if @recording.comment.blank? %>"><%= @recording.comment.to_s.strip.presence || "まだ入力されていません" %></p>
     </div>
 
     <!-- 編集ボタン -->
@@ -25,14 +23,14 @@
 
     <!-- 録音日時と月齢表示 -->
     <div class="detail-section recording-date-section">
-      <p class="detail-label">録音日時</p>
+      <p class="detail-label">記録した日</p>
 
       <div class="recording-meta">
         <p class="recording-date-value">
           <%= @recording.recorded_at.strftime("%Y/%m/%d") %>
         </p>
         <p class="recording-age-text">
-          録音時 <%= @child.age_at(@recording.recorded_at) %>
+          記録したとき <%= @child.age_at(@recording.recorded_at) %>
         </p>
       </div>
     </div>
@@ -75,7 +73,7 @@
 
     <!-- 戻る -->
     <div class="back-section">
-      <%= link_to "[ 一覧に戻る] ", child_recordings_path(@recording.child), class: "back-btn" %>
+      <%= link_to "[ ことば一覧にもどる] ", child_recordings_path(@recording.child), class: "back-btn" %>
     </div>
   </div>
 </div>
