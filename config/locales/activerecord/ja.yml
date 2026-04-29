@@ -3,6 +3,7 @@ ja:
     models:
       user: ユーザー
       child: お子さま
+      recording: 記録
     attributes:
       user:
         name: お名前
@@ -10,8 +11,15 @@ ja:
         password: パスワード
         password_confirmation: パスワード（確認）
       child:
-        name: お子さまのお名前（1人目）
+        name: お子さまのお名前
         birthday: 生年月日
+      user/children:
+        name: お子さまのお名前
+        birthday: 生年月日
+      recording:
+        title: タイトル
+        comment: ひとこと
+        duration: 記録時間
     errors:
       messages:
         blank: "を入力してください"
