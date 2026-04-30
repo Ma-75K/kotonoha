@@ -882,10 +882,18 @@
 
   .home-btn {
     display: inline-block;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    padding: 12px;
+    background: none;
+    color: var(--color-text-light);
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 0.95rem;
+    min-width: 110px;
+    height: 50px;
+    border: none;
     border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
   }
 }
 

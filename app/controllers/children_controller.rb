@@ -22,26 +22,17 @@ class ChildrenController < ApplicationController
 
     @user = User.new(session[:user_params])
     @user.assign_attributes(user_children_params)
-    # @child = @user.children.build(child_params)
 
-    # トランザクションで両方を保存
-    ActiveRecord::Base.transaction do
-      @user.save!
-      # @child.save!
-
-      # ログイン処理
+    if @user.save
       auto_login(@user)
-      # session をクリア
       session.delete(:user_params)
       session[:current_child_id] = @user.children.first.id
 
       flash[:success] = "登録が完了しました"
       redirect_to new_child_recording_path(session[:current_child_id])
+    else
+      render :new, status: :unprocessable_entity
     end
-
-  rescue ActiveRecord::RecordInvalid => e
-    flash.now[:alert] = "登録に失敗しました: #{e.message}"
-    render :new, status: :unprocessable_entity
   end
 
   def edit

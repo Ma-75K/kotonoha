@@ -23,9 +23,15 @@ class RecordingsController < ApplicationController
         recording_id: @recording.id
       }, status: :created
     else
+      error_message = if @recording.errors[:duration].present?
+        "録音が正しく保存されませんでした。もう一度録音してください。"
+      else
+        "保存に失敗しました。入力内容をご確認ください。"
+      end
+
       render json: {
         success: false,
-        errors: @recording.errors.full_messages
+        message: error_message
       }, status: :unprocessable_entity
     end
   end

@@ -39,7 +39,7 @@
               <%= child_form.date_field :birthday, class: "form-control date-field" %>
 
               <% if child_form.object.errors[:birthday].any? %>
-                <div class= "errors-message">
+                <div class="errors-message">
                   <%= child_form.object.errors.full_messages_for(:birthday).join(", ") %>
                 </div>
               <% end %>
