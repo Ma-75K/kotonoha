@@ -232,7 +232,7 @@ document.addEventListener('turbo:load', () => {
             window.location.href = `/children/${childId}/recordings/${data.recording_id}`;
           }, 800);
         } else {
-          showError('保存に失敗しました: ' + (data.errors || '不明なエラー'));
+          showError(data.message || '保存に失敗しました。もう一度お試しください。');
         }
       } catch (error) {
         console.error('保存エラー:', error);
