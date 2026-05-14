@@ -14,8 +14,8 @@
       </div>
 
       <div class="btn-area">
-        <%= f.submit "[ 保存 ]", class: "save-btn" %>
-        <%= link_to "[ 戻る ]", child_recording_path(@child, @recording), class: "back-btn" %>
+        <%= f.submit "保存", class: "save-btn" %>
+        <%= link_to "キャンセル", child_recording_path(@child, @recording), class: "back-btn" %>
       </div>
     <% end %>
   </div>

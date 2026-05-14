@@ -13,7 +13,7 @@
     <!-- ひとこと -->
     <div class="detail-section">
       <p class="detail-label">ひとこと</p>
-      <p class="detail-value detail-comment <%= 'is-empty' if @recording.comment.blank? %>"><%= @recording.comment.to_s.strip.presence || "まだ入力されていません" %></p>
+      <p class="detail-value detail-comment <%= 'is-empty' if @recording.comment.blank? %>"><%= @recording.comment.to_s.strip.presence || "まだひとことはありません" %></p>
     </div>
 
     <!-- 編集ボタン -->
@@ -73,7 +73,7 @@
 
     <!-- 戻る -->
     <div class="back-section">
-      <%= link_to "ことば一覧にもどる", child_recordings_path(@recording.child), class: "back-btn" %>
+      <%= link_to "← ことば一覧にもどる", child_recordings_path(@recording.child), class: "back-btn" %>
     </div>
   </div>
 </div>
