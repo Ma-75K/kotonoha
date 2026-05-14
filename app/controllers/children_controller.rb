@@ -20,17 +20,20 @@ class ChildrenController < ApplicationController
       return
     end
 
-    @user = User.new(session[:user_params])
-    @user.assign_attributes(user_children_params)
+    @form = UserRegistrationForm.new(
+      user_params: session[:user_params],
+      children_params: user_children_params[:children_attributes]
+    )
 
-    if @user.save
-      auto_login(@user)
+    if @form.save
+      auto_login(@form.user)
       session.delete(:user_params)
-      session[:current_child_id] = @user.children.first.id
+      session[:current_child_id] = @form.user.children.first.id
 
       flash[:success] = "登録が完了しました"
       redirect_to new_child_recording_path(session[:current_child_id])
     else
+      @user = @form.user
       render :new, status: :unprocessable_entity
     end
   end
