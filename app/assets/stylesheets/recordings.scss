@@ -541,12 +541,19 @@
   }
 
   .edit-btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--color-primary);
     color: var(--color-white);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: 10px;
+    min-width: 96px;
+    height: 48px;
+    padding: 0 24px;
+    line-height: 1;
+    box-sizing: border-box;
+    border-radius: 12px;
     font-size: 0.95rem;
+    text-decoration: none;
   }
 
   .recording-date-section .recording-meta {
@@ -705,15 +712,20 @@
   }
 
   .delete-btn {
-    background: none;
-    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    height: 48px;
+    padding: 0 24px;
+    border: 1px solid #d9aaaa;
     font-size: 0.95rem;
     color: #c66;
-    padding:12px 20px;
-    border-radius: 16px;
+    background-color: #fffafa;
+    border-radius: 12px;
+    text-decoration: none;
+    box-sizing: border-box;
     cursor: pointer;
-    width: auto;
-    display: inline-block;
   }
 
   .delete-btn:hover {
@@ -1005,7 +1017,7 @@
 
   .back-btn {
     background-color: var(--color-secondary);
-    color: var(--color-text);
+    color: #707070;
   }
 
   @media (max-width: 767px){
