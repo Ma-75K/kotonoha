@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       session[:user_params] = user_params.to_h
       render :confirm
     else
-      flash.now[:danger] = "入力内容に誤りがあります"
+      flash.now[:alert] = "入力内容をご確認ください"
       render :new, status: :unprocessable_entity
     end
   end
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
       flash[:success] = "お名前を変更しました"
       redirect_to settings_path
     else
-      flash.now[:alert] = "お名前を変更できませんでした"
+      flash.now[:alert] = "入力内容をご確認ください"
       render :edit_name, status: :unprocessable_entity
     end
   end
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
       flash[:success] = "メールアドレスを変更しました"
       redirect_to settings_path
     else
-      flash.now[:alert] = "メールアドレスを変更できませんでした"
+      flash.now[:alert] = "入力内容をご確認ください"
       render :edit_email, status: :unprocessable_entity
     end
   end

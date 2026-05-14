@@ -919,7 +919,13 @@
   }
 
   .form-group {
+    display: flex;
+    flex-direction: column;
     margin: 3rem auto 4rem;
+  }
+
+  .form-group:has(.errors-message) {
+    margin-bottom: 28px;
   }
 
   .form-label {
@@ -942,6 +948,15 @@
     background-color: #faf9f6;
     font-size: 1rem;
     font-family: var(--font-main);
+  }
+
+  .errors-message {
+    width: 88%;
+    margin: 6px auto 0;
+    color: #b97a7a;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: left;
   }
 
   .form-input {

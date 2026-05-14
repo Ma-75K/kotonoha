@@ -55,7 +55,7 @@ document.addEventListener('turbo:load', () => {
   if (backToInitialButton) {
     backToInitialButton.addEventListener('click', () => {
       const confirmed = confirm(
-        'この録音はまだ保存されていません。\nもどると消えてしまいますが､よろしいですか？'
+        'この録音はまだ保存されていません。\n戻ると録音が消えてしまいますが､よろしいですか？'
       );
 
       if (!confirmed) return;

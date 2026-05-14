@@ -6,10 +6,23 @@
         <div class="form-group">
           <%= f.label :title, "タイトル", class: "form-label" %>
           <%= f.text_field :title, class: "form-field form-input" %>
+
+          <% if @recording.errors[:title].any? %>
+            <p class="errors-message">
+              <%= @recording.errors.full_messages_for(:title).join(", ") %>
+            </p>
+          <% end %>
         </div>
+
         <div class="form-group">
           <%= f.label :comment, "ひとこと", class: "form-label" %>
           <%= f.text_area :comment, class: "form-field form-textarea" %>
+
+          <% if @recording.errors[:comment].any? %>
+            <p class="errors-message">
+              <%= @recording.errors.full_messages_for(:comment).join(", ") %>
+            </p>
+          <% end %>
         </div>
       </div>
 

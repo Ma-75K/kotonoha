@@ -19,7 +19,7 @@ ja:
       recording:
         title: タイトル
         comment: ひとこと
-        duration: 記録時間
+        duration: ""
     errors:
       messages:
         blank: "を入力してください"

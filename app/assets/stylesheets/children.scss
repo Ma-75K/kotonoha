@@ -122,6 +122,13 @@
     color: var(--color-text);
   }
 
+  .errors-message {
+    margin: 6px auto 0;
+    color: #b97a7a;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
   .child-form-actions {
     display: flex;
     flex-direction: column;
@@ -193,6 +200,13 @@
     font-family: var(--font-main);
     font-size: 1rem;
     box-sizing: border-box;
+  }
+
+  .error-message {
+    margin-top: 6px;
+    color: #b97a7a;
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
 
   .form-actions {
