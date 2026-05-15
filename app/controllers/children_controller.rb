@@ -49,7 +49,7 @@ class ChildrenController < ApplicationController
       flash[:success] = "お子さま情報を更新しました"
       redirect_to settings_path
     else
-      flash.now[:alert] = "お子さま情報を更新できませんでした"
+      flash.now[:alert] = "入力内容をご確認ください"
       render :edit, status: :unprocessable_entity
     end
   end

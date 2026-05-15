@@ -23,15 +23,16 @@ class RecordingsController < ApplicationController
         recording_id: @recording.id
       }, status: :created
     else
-      error_message = if @recording.errors[:duration].present?
-        "録音が正しく保存されませんでした。もう一度録音してください。"
-      else
-        "保存に失敗しました。入力内容をご確認ください。"
-      end
+      message =
+        if @recording.errors[:duration].present?
+          "1秒以上録音してください"
+        else
+          @recording.errors.full_messages.first || "保存に失敗しました。もう一度お試しください。"
+        end
 
       render json: {
         success: false,
-        message: error_message
+        message: message
       }, status: :unprocessable_entity
     end
   end
@@ -52,8 +53,10 @@ class RecordingsController < ApplicationController
 
   def update
     if @recording.update(recording_params)
-      redirect_to child_recording_path(@child, @recording), notice: "更新しました"
+      flash[:success] = "保存しました"
+      redirect_to child_recording_path(@child, @recording)
     else
+      flash.now[:alert] = "入力内容をご確認ください"
       render :edit, status: :unprocessable_entity
     end
   end

@@ -12,11 +12,17 @@
         <%= email_field_tag :email, @email,
           placeholder: "kotonoha@example.com",
           class: "form-field" %>
+
+        <% if flash.now[:alert].present? && @email.blank? %>
+          <p class="error-message">
+            メールアドレスを入力してください
+          </p>
+        <% end %>
       </div>
 
       <div class="form-actions">
         <%= submit_tag "送信する", class: "btn-primary-main" %>
-        <%= link_to "キャンセル", settings_path, class: "btn-text-link" %>
+        <%= link_to "← 設定画面にもどる", settings_path, class: "btn-text-link" %>
       </div>
     <% end %>
   </div>

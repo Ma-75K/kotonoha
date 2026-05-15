@@ -7,7 +7,11 @@ class Recording < ApplicationRecord
 
   validates :title, presence: true
   validates :recorded_at, presence: true
-  validates :duration, presence: true, numericality: { greater_than: 0 }
+  validates :duration,
+    presence: true,
+    numericality: {
+      greater_than: 0
+    }
 
   validate :audio_file_format
 
