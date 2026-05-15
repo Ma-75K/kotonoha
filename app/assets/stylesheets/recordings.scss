@@ -766,6 +766,8 @@
   }
 
   .back-section {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     margin-top: var(--spacing-xl);
   }
