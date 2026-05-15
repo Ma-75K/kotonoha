@@ -13,7 +13,6 @@
     padding-top: 1rem;
   }
 
-  #recording-screen,
   #preview-area {
     max-width: 420px;
     margin: 0 auto;
@@ -155,11 +154,22 @@
   }
 
 
-  /* 録音中 */
-  .recording-now {
+/* ========================================
+      録音中画面
+=========================================*/
+  #recording-screen {
+    max-width: 420px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 1rem;
+  }
+
+  .recording-status-text {
     font-size: 1.5rem;
+    text-align: center;
     color: var(--color-text);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 3rem;
+    margin-top: 6.5rem;
     animation: blink 1s infinite;
   }
 
@@ -167,7 +177,19 @@
     font-size: 2.25rem;
     font-weight: bold;
     color: var(--color-text);
-    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  #recording-duration {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .record-start-label {
+    margin-top: 12px;
+    text-align: center;
   }
 
   /* =============================================
@@ -401,6 +423,13 @@
   .alert-danger {
     background-color: #fdeaea;
     color: #a94442;
+  }
+
+  /* PC微調整 */
+  @media (min-width: 768px) {
+    .recording-status-text {
+      margin-top: 4.5rem;
+    }
   }
 
   /* スマホ微調整 */
