@@ -12,6 +12,12 @@
         <%= email_field_tag :email, @email,
           placeholder: "kotonoha@example.com",
           class: "form-field" %>
+
+        <% if flash.now[:alert].present? && @email.blank? %>
+          <p class="error-message">
+            メールアドレスを入力してください
+          </p>
+        <% end %>
       </div>
 
       <div class="form-actions">
