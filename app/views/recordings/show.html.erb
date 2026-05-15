@@ -73,6 +73,7 @@
 
     <!-- 戻る -->
     <div class="back-section">
+      <%= link_to "[ ことばをのこす ]", new_child_recording_path(@child.id), class: "home-btn" %>
       <%= link_to "← ことば一覧にもどる", child_recordings_path(@recording.child), class: "back-btn" %>
     </div>
   </div>

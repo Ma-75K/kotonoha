@@ -60,6 +60,8 @@ document.addEventListener('turbo:load', () => {
 
       if (!confirmed) return;
 
+      clearMessages();
+
       const audioPlayer = document.getElementById('audio-player');
       const seekBar = document.getElementById('seek-bar');
       const currentTime = document.getElementById('current-time');
@@ -111,6 +113,7 @@ document.addEventListener('turbo:load', () => {
   }
 
   startButton.addEventListener('click', async () => {
+    clearMessages();
     showScreen('recording-screen');
 
     try {
@@ -193,11 +196,26 @@ document.addEventListener('turbo:load', () => {
     setupAudioControls();
   }
 
+  function clearMessages() {
+    const errorMessages = document.getElementById('error-messages');
+    const successMessages = document.getElementById('success-messages');
+
+    if (errorMessages) errorMessages.innerHTML = '';
+    if (successMessages) successMessages.innerHTML = '';
+  }
+
   function setupFormSubmit() {
     if (!saveForm) return;
 
+    const saveButton = document.getElementById('save-button');
+
     saveForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      clearMessages();
+
+      // 二重送信防止
+      if (saveButton && saveButton.disabled) return;
 
       if (!recordedAudioBlob) {
         showError('保存する音声がありません。先に録音してください。');
@@ -210,6 +228,12 @@ document.addEventListener('turbo:load', () => {
         recordedAudioBlob,
         `recording.${selectedFileExtension}`
       );
+
+      // 保存中の表示
+      if (saveButton) {
+        saveButton.disabled = true;
+        saveButton.value = '保存中…';
+      }
 
       try {
         const token = document.querySelector('[name="csrf-token"]').content;
@@ -226,17 +250,32 @@ document.addEventListener('turbo:load', () => {
         const data = await response.json();
 
         if (response.ok) {
+          clearMessages();
           showSuccess('録音を保存しました！');
+
+          if (saveButton) {
+            saveButton.value = '保存しました';
+          }
 
           setTimeout(() => {
             window.location.href = `/children/${childId}/recordings/${data.recording_id}`;
           }, 800);
         } else {
           showError(data.message || '保存に失敗しました。もう一度お試しください。');
+
+          if (saveButton) {
+            saveButton.disabled = false;
+            saveButton.value = '保存';
+          }
         }
       } catch (error) {
         console.error('保存エラー:', error);
         showError('保存中にエラーが発生しました。');
+
+        if (saveButton) {
+          saveButton.disabled = false;
+          saveButton.value = '保存';
+        }
       }
     });
   }
