@@ -1,0 +1,47 @@
+<div id="favorite-recordings-index-page">
+  <div class="favorite-recordings-index-card">
+
+    <h1 class="page-title">大切なことば</h1>
+
+    <% if @favorites.any? %>
+      <div class="recordings-list">
+        <% @favorites.each do |favorite| %>
+          <% recording = favorite.recording %>
+
+          <div class="recording-item-wrapper">
+
+            <%= link_to child_recording_path(@child, recording), class: "recording-item" do %>
+              <div class="recording-item-left">
+                <p class="recording-title"><%= recording.title %></p>
+                <p class="recording-duration">
+                  <%= format_duration(recording.duration) %>
+                </p>
+              </div>
+
+              <div class="recording-item-right">
+                <p class="recording-date"><%= recording.recorded_at.strftime("%Y/%m/%d") %></p>
+                <p class="recording-age"><%= @child.age_at(recording.recorded_at) %></p>
+              </div>
+            <% end %>
+
+            <div class="favorite-area">
+              <%= render "favorites/favorite_button",
+                    recording: recording,
+                    child: @child %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="pagination-area">
+        <%= paginate @favorites %>
+      </div>
+    <% else %>
+      <p class="empty-message">まだ大切なことばはありません</p>
+    <% end %>
+
+    <div class="back-home-area">
+      <%= link_to "← ホームにもどる", new_child_recording_path(@child), class: "home-btn" %>
+    </div>
+  </div>
+</div>

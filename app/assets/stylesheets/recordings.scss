@@ -817,31 +817,6 @@
 }
 
 /* ========================================
-  　 お気に入りボタン
-======================================== */
-.favorite-button {
-  border: none;
-  background: transparent;
-  padding: 0;
-  color: #8f8f8f;
-  font-size: 1.3rem;
-  font-family: var(--font-main);
-  cursor: pointer;
-}
-
-.favorite-button i {
-  margin-right: 4px;
-}
-
-.favorite-button:hover {
-  opacity: 0.8;
-}
-
-.favorite-button.favorited {
-  color: #d98b8b;
-}
-
-/* ========================================
    recordings#index - 録音一覧画面専用
 ======================================== */
 #recordings-index-page {

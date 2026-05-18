@@ -27,6 +27,8 @@ Rails.application.routes.draw do
       post :switch
     end
 
+    resources :favorites, only: %i[index]
+
     # 録音機能（お子様に紐付く）
     resources :recordings, only: %i[index new create show edit update destroy] do
       collection do
