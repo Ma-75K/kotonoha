@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "favorite_button_#{recording.id}" do %>
+  <% favorite = current_user.favorites.find_by(recording_id: recording.id) %>
+
+  <% if favorite.present? %>
+    <%= button_to child_recording_favorite_path(child, recording),
+          method: :delete,
+          class: "favorite-button favorited" do %>
+      <i class="fa-solid fa-heart"></i>
+    <% end %>
+  <% else %>
+    <%= button_to child_recording_favorite_path(child, recording),
+          method: :post,
+          class: "favorite-button" do %>
+      <i class="fa-regular fa-heart"></i>
+    <% end %>
+  <% end %>
+<% end %>

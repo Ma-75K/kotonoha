@@ -5,9 +5,15 @@
     <p class="child-name"><%= @recording.child.name %></p>
 
     <!-- タイトル -->
-    <div class="detail-section">
+    <div class="detail-section title-section">
       <p class="detail-label">タイトル</p>
       <p class="detail-value detail-title"><%= @recording.title %></p>
+    </div>
+
+    <div class="favorite-area">
+      <%= render "favorites/favorite_button",
+            recording: @recording,
+            child: @child %>
     </div>
 
     <!-- ひとこと -->

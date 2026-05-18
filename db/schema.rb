@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_09_063029) do
+ActiveRecord::Schema[8.0].define(version: 2026_05_16_105201) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,6 +51,16 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_09_063029) do
     t.index ["user_id"], name: "index_children_on_user_id"
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "recording_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recording_id"], name: "index_favorites_on_recording_id"
+    t.index ["user_id", "recording_id"], name: "index_favorites_on_user_id_and_recording_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "recordings", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "child_id", null: false
@@ -83,6 +93,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_09_063029) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "children", "users"
+  add_foreign_key "favorites", "recordings"
+  add_foreign_key "favorites", "users"
   add_foreign_key "recordings", "children"
   add_foreign_key "recordings", "users"
 end

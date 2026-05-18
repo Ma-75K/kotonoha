@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "favorites/create"
+  get "favorites/destroy"
   get "settings/show"
   root "top#index"
 
@@ -31,6 +33,8 @@ Rails.application.routes.draw do
         get :preview
         get :on_this_day
       end
+
+      resource :favorite, only: %i[create destroy]
     end
   end
 

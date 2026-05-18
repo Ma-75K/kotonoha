@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "favorite_button_#{@recording.id}" do %>
+  <%= render "favorites/favorite_button",
+        recording: @recording,
+        child: @child %>
+<% end %>
