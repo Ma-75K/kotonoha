@@ -2,6 +2,7 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
 
   has_many :children, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   accepts_nested_attributes_for :children, allow_destroy: true
 
   validates :name, presence: true

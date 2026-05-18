@@ -5,6 +5,8 @@ class Recording < ApplicationRecord
   has_one_attached :audio, dependent: :purge_later
   before_validation :set_recorded_at, on: :create
 
+  has_many :favorites, dependent: :destroy
+
   validates :title, presence: true
   validates :recorded_at, presence: true
   validates :duration,
