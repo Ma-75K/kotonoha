@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
-  before_action :set_child
-  before_action :set_recording
+  before_action :set_child, only: %i[create destroy]
+  before_action :set_recording, only: %i[create destroy]
 
   def create
     current_user.favorites.find_or_create_by!(recording: @recording)
@@ -19,6 +19,17 @@ class FavoritesController < ApplicationController
       format.turbo_stream
       format.html { redirect_back fallback_location: child_recording_path(@child, @recording) }
     end
+  end
+
+  def index
+    @child = current_user.children.find(params[:child_id]).decorate
+    @favorites = current_user.favorites
+                             .joins(:recording)
+                             .where(recordings: { child_id: @child.id })
+                             .includes(recording: :child)
+                             .order("recordings.recorded_at DESC")
+                             .page(params[:page])
+                             .per(5)
   end
 
   private

@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :children, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :recordings, through: :favorites, source: :recording
   accepts_nested_attributes_for :children, allow_destroy: true
 
   validates :name, presence: true
