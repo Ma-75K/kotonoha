@@ -77,10 +77,26 @@
       <% end %>
     </audio>
 
-    <!-- 戻る -->
     <div class="back-section">
-      <%= link_to "[ ことばをのこす ]", new_child_recording_path(@child.id), class: "home-btn" %>
-      <%= link_to "← ことば一覧にもどる", child_recordings_path(@recording.child), class: "back-btn" %>
+      <% case params[:from] %>
+      <% when "recording" %>
+        <%= link_to "← ホームにもどる", new_child_recording_path(@child.id), class: "home-btn" %>
+
+      <% when "favorites" %>
+        <%= link_to "← 大切なことばにもどる", child_favorites_path(@child), class: "back-btn" %>
+
+        <%= link_to "[ことばをのこす]", new_child_recording_path(@child), class: "home-btn" %>
+
+      <% when "on_this_day" %>
+        <%= link_to "← 一年前の今日にもどる", on_this_day_child_recordings_path(@child), class: "back-btn" %>
+
+        <%= link_to "[ことばをのこす]", new_child_recording_path(@child), class: "home-btn" %>
+
+      <% else %>
+        <%= link_to "← ことば一覧にもどる", child_recordings_path(@child), class: "back-btn" %>
+
+        <%= link_to "[ことばをのこす]", new_child_recording_path(@child), class: "home-btn" %>
+      <% end %>
     </div>
   </div>
 </div>
