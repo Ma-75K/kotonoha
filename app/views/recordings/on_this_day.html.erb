@@ -13,7 +13,7 @@
     <% if @recordings.any? %>
       <div class="recordings-list">
         <% @recordings.each do |recording| %>
-          <%= link_to child_recording_path(@child, recording), class: "recording-item" do %>
+          <%= link_to child_recording_path(@child, recording, from: "on_this_day"), class: "recording-item" do %>
             <div class="recording-item-left">
               <p class="recording-title"><%= recording.title %></p>
               <p class="recording-duration">
@@ -39,7 +39,7 @@
     <% end %>
 
     <div class="back-home-area">
-      <%= link_to "← ホームにもどる", new_child_recording_path(@child.id), class: "home-btn" %>
+      <%= link_to "[ ことばをのこす]", new_child_recording_path(@child), class: "home-btn" %>
     </div>
   </div>
 </div>

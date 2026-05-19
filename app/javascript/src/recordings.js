@@ -258,7 +258,7 @@ document.addEventListener('turbo:load', () => {
           }
 
           setTimeout(() => {
-            window.location.href = `/children/${childId}/recordings/${data.recording_id}`;
+            window.location.href = `/children/${childId}/recordings/${data.recording_id}?from=recording`;
           }, 800);
         } else {
           showError(data.message || '保存に失敗しました。もう一度お試しください。');
