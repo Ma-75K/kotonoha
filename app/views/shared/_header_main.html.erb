@@ -77,6 +77,10 @@
             class: "side-menu-link #{'active' if current_page?(on_this_day_child_recordings_path(current_child))}" %>
         </li>
         <li>
+          <%= link_to "カレンダー", calendar_child_recordings_path(current_child),
+            class: "side-menu-link #{'active' if current_page?(calendar_child_recordings_path(current_child))}" %>
+        </li>
+        <li>
           <%= link_to "設定", settings_path,
             class: "side-menu-link #{'active' if current_page?(settings_path)}" %>
         </li>

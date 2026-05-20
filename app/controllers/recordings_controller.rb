@@ -77,6 +77,26 @@ class RecordingsController < ApplicationController
                         .per(5)
   end
 
+  def calendar
+    @child = current_user.children.find(params[:child_id])
+  end
+
+  def calendar_events
+    child = current_user.children.find(params[:child_id])
+
+    recordings = child.recordings.where.not(recorded_at: nil)
+
+    events = recordings.map do |recording|
+      {
+        title: recording.title,
+        start: recording.recorded_at.to_date,
+        url: child_recording_path(child, recording, from: "calendar")
+      }
+    end
+
+    render json: events
+  end
+
   private
 
   def set_child

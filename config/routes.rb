@@ -34,6 +34,8 @@ Rails.application.routes.draw do
       collection do
         get :preview
         get :on_this_day
+        get :calendar
+        get :calendar_events
       end
 
       resource :favorite, only: %i[create destroy]

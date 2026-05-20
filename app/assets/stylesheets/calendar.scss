@@ -1,0 +1,159 @@
+#recordings-calendar-page {
+  background-color: var(--color-primary-light);
+  min-height: 100vh;
+  padding: var(--spacing-lg) var(--spacing-md);
+
+  .recordings-calendar-card {
+    max-width: 420px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    border-radius: 20px;
+    padding: var(--spacing-lg);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .page-title {
+    font-size: 1.4rem;
+    text-align: center;
+    margin: var(--spacing-lg) auto 1rem;
+    color: var(--color-text);
+  }
+
+  .sub-title {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin: 12px 0 20px;
+  }
+
+  #recordings-calendar {
+    margin-top: 24px;
+    font-size: 0.85rem;
+    font-family: var(--font-main);
+  }
+
+  /* 上部タイトル */
+  #recordings-calendar .fc-toolbar-title {
+    font-size: 1.5rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  /* today / 矢印ボタン */
+  #recordings-calendar .fc-button {
+    background-color: var(--color-primary);
+    border: none;
+    color: var(--color-white);
+    border-radius: 10px;
+    box-sizing: none;
+  }
+
+  #recordings-calendar .fc-button:hover,
+  #recordings-calendar .fc-button:focus {
+    background-color: var(--color-accent);
+    box-shadow: none;
+  }
+
+  /* 今日の日付 */
+  #recordings-calendar .fc-col-header-cell,
+  #recordings-calendar .fc-daygrid-day-number {
+    color: var(--color-text);
+    font-weight: 400;
+  }
+
+  /* イベント */
+  #recordings-calendar .fc-event {
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 4px;
+    padding: 1px 4px;
+    font-size: 0.7rem;
+    line-height: 1.2;
+  }
+
+  #recordings-calendar .fc-event-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* 曜日・日付 */
+  #recordings-calendar .fc-col-header-cell,
+  #recordings-calendar .fc-daygrid-day-number {
+    color: var(--color-text);
+    font-weight: 400;
+  }
+
+  /* 前後月の日付 */
+  #recordings-calendar .fc-day-other .fc-daygrid-day-number {
+    color: #c8c8c8;
+  }
+
+  .back-home-area {
+    text-align: center;
+    margin-top: 36px;
+  }
+
+  .home-btn {
+    background: none;
+    color: var(--color-text-light);
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 0.95rem;
+    min-width: 110px;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  @media (max-width: 767px) {
+    #recordings-calendar {
+      font-size: 0.75rem;
+    }
+
+    #recordings-calendar .fc-daygrid-day-frame {
+      min-height: 68px;
+    }
+
+    #recordings-calendar .fc-daygrid-event-harness {
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    #recordings-calendar .fc-event {
+      font-size: 0.7rem;
+      padding: 1px 2px;
+    }
+
+    #recordings-calendar .fc-daygrid-event {
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    #recordings-calendar .fc-event-main {
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #recordings-calendar .fc-event-title {
+      display: block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #recordings-calendar .fc-toolbar-title {
+      font-size: 1.3rem;
+    }
+
+    #recordings-calendar .fc-button {
+      padding: 4px 8px;
+      font-size: 0.8rem;
+    }
+  }
+}

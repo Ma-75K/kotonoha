@@ -1,0 +1,14 @@
+<div id="recordings-calendar-page">
+  <div class="recordings-calendar-card">
+    <h1 class="page-title">カレンダー</h1>
+    <p class="sub-title">記録した日をふりかえりましょう</p>
+
+    <div id="recordings-calendar"
+         data-events-url="<%= calendar_events_child_recordings_path(@child) %>">
+    </div>
+
+    <div class="back-home-area">
+      <%= link_to "← ホームにもどる", new_child_recording_path(@child), class: "home-btn" %>
+    </div>
+  </div>
+</div>
