@@ -92,6 +92,11 @@
 
         <%= link_to "[ことばをのこす]", new_child_recording_path(@child), class: "home-btn" %>
 
+      <% when "calendar" %>
+        <%= link_to "← カレンダーにもどる", calendar_child_recordings_path(@child), class: "back-btn" %>
+
+        <%= link_to "[ことばをのこす]", new_child_recording_path(@child), class: "home-btn" %>
+
       <% else %>
         <%= link_to "← ことば一覧にもどる", child_recordings_path(@child), class: "back-btn" %>
 
