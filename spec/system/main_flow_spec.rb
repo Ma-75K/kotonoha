@@ -16,7 +16,7 @@ RSpec.describe "Main Flow", type: :sysytem do
     click_button "ログイン"
 
     expect(page).to have_current_path(new_child_recording_path(child))
-    expect(page).to have_content("録音をはじめる")
+    expect(page).to have_content("ことばをのこす")
   end
 
   it "設定画面に移動できる" do
@@ -68,7 +68,7 @@ RSpec.describe "Main Flow", type: :sysytem do
     visit edit_child_path(child)
 
     fill_in "名前", with: "さきちゃん"
-    click_button "更新"
+    click_button "変更"
 
     expect(page).to have_content("さきちゃん")
   end

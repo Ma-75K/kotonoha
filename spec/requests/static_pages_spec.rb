@@ -2,22 +2,22 @@ require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :request do
   describe "GET /terms" do
-    it "returns http success" do
-      get "/static_pages/terms"
+    it "利用規約ページが表示される" do
+      get terms_path
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /privacy" do
-    it "returns http success" do
-      get "/static_pages/privacy"
+    it "プライバシーポリシーが表示される" do
+      get privacy_path
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /contact" do
-    it "returns http success" do
-      get "/static_pages/contact"
+    it "お問い合わせページが表示される" do
+      get contact_path
       expect(response).to have_http_status(:success)
     end
   end
