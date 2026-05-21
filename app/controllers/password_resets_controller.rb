@@ -17,7 +17,7 @@ class PasswordResetsController < ApplicationController
     user = User.find_by(email: @email)
 
     if user
-      user.deliver_reset_password_instructions!
+      SendResetPasswordInstructionsJob.perform_later(user.id)
     end
 
     flash[:success] = "パスワード再設定メールを送信しました"
