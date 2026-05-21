@@ -30,9 +30,13 @@ RSpec.describe "Children registration flow", type: :request do
       }
 
       child_params = {
-        child: {
-          name: "ことちゃん",
-          birthday: "2022-07-28"
+        user: {
+          children_attributes: {
+            "0" => {
+              name: "ことちゃん",
+              birthday: "2022-07-28"
+            }
+          }
         }
       }
 
@@ -55,9 +59,13 @@ RSpec.describe "Children registration flow", type: :request do
       }
 
       invalid_child_params = {
-        child: {
-          name: nil,
-          birthday: nil
+        user: {
+          children_attributes: {
+            "0" => {
+              name: nil,
+              birthday: nil
+            }
+          }
         }
       }
 
@@ -76,9 +84,11 @@ RSpec.describe "Children registration flow", type: :request do
       }
 
       invalid_child_params = {
-        child: {
-          name: nil,
-          birthday: nil
+        user: {
+          children_attributes: {
+            name: nil,
+            birthday: nil
+          }
         }
       }
 
