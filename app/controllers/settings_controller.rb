@@ -4,5 +4,7 @@ class SettingsController < ApplicationController
   def show
     @user = current_user
     @children = current_user.children.order(:created_at)
+
+    session.delete(:from_line_login)
   end
 end

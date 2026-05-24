@@ -61,6 +61,88 @@
     margin-top: var(--spacing-lg);
   }
 
+  .login-actions .button_to {
+    width: 100%;
+  }
+
+  .login-actions .button_to button {
+    width: 100%;
+    border: none;
+  }
+
+  .login-divider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+    margin: 8px 0;
+    color: #999;
+    font-size: 0.95rem;
+  }
+
+  .login-divider::before,
+  .login-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #ddd;
+  }
+
+  .login-divider span {
+    white-space: nowrap;
+  }
+
+  .button_to {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .button_to .line-login-button {
+    border: none;
+    cursor: pointer;
+  }
+
+  .line-login-form {
+    width: 100%;
+  }
+
+  .line-login-form .line-login-button {
+    border: none;
+    cursor: pointer;
+  }
+
+  .line-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 228px;
+    height: 56px;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0 16px;
+    border-radius: 20px;
+    background-color: #06C755;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.06rem;
+    font-size: 1.05rem;
+    font-family: inherit;
+    transition: opacity 0.2s ease;
+  }
+
+  .line-login-button:hover {
+    opacity: 0.9;
+  }
+
+  .line-icon-img {
+    width: 26px;
+    height: 26px;
+  }
+
   .login-button {
     width: 228px;
     max-width: 100%;

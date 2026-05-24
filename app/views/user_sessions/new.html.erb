@@ -15,8 +15,27 @@
 
       <div class="login-actions">
         <%= f.submit "ログイン", class: "btn-primary-main login-button" %>
-        <%= link_to "← もどる", root_path, class: "btn-text-link login-back" %>
       </div>
     <% end %>
+
+    <div class="login-actions">
+      <div class="login-divider">
+        <span>または</span>
+      </div>
+
+      <%= form_with url: "/auth/line",
+                    method: :post,
+                    data: { turbo: false },
+                    html: { class: "line-login-form" } do %>
+        <button type=submit" class="line-login-button">
+          <span class="line-icon">
+            <%= image_tag "line_icon.png", alt: "LINE", class: "line-icon-img" %>
+          </span>
+          <span class="line-text">LINEでログイン</span>
+        </button>
+      <% end %>
+
+      <%= link_to "← もどる", root_path, class: "btn-text-link login-back" %>
+    </div>
   </div>
 </div>

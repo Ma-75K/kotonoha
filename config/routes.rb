@@ -55,6 +55,11 @@ Rails.application.routes.draw do
   get "privacy", to: "static_pages#privacy", as: "privacy"
   get "contact", to: "static_pages#contact", as: "contact"
 
+  post "/auth/:provider/callback", to: "oauths#callback"
+  get "/auth/:provider/callback", to: "oauths#callback"
+  get "/auth/failure", to: "oauths#failure"
+
+
   resource :user, only: [] do
     get :edit_name
     patch :update_name

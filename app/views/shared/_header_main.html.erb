@@ -53,40 +53,42 @@
   <!-- サイドメニュー -->
   <aside id="side-menu" class="side-menu">
     <div class="side-menu-header">
-      <%= link_to new_child_recording_path(current_child), class: "side-menu-logo" do %>
+      <% logo_path = current_child.persisted? ? new_child_recording_path(current_child) : root_path %>
+      <%= link_to logo_path, class: "side-menu-logo" do %>
         <%= image_tag 'logo.png', alt: 'ことのは', class: 'side-menu-logo-image' %>
         <span>ことのは</span>
       <% end %>
     </div>
 
     <ul class="side-menu-list">
+      <% if current_child&.persisted? %>
         <li>
-          <%= link_to "ホーム", new_child_recording_path(current_child),
-            class: "side-menu-link #{'active' if current_page?(new_child_recording_path(current_child))}" %>
+          <%= link_to "ホーム", new_child_recording_path(current_child), class: "side-menu-link" %>
         </li>
         <li>
-          <%= link_to "ことば一覧", child_recordings_path(current_child),
-            class: "side-menu-link #{'active' if current_page?(child_recordings_path(current_child))}" %>
+          <%= link_to "ことば一覧", child_recordings_path(current_child), class: "side-menu-link" %>
         </li>
         <li>
-          <%= link_to "大切なことば", child_favorites_path(current_child),
-            class: "side-menu-link #{'active' if current_page?(child_favorites_path(current_child))}" %>
+          <%= link_to "大切なことば", child_favorites_path(current_child), class: "side-menu-link" %>
         </li>
         <li>
-          <%= link_to "一年前の今日", on_this_day_child_recordings_path(current_child),
-            class: "side-menu-link #{'active' if current_page?(on_this_day_child_recordings_path(current_child))}" %>
+          <%= link_to "一年前の今日", on_this_day_child_recordings_path(current_child), class: "side-menu-link" %>
         </li>
         <li>
-          <%= link_to "カレンダー", calendar_child_recordings_path(current_child),
-            class: "side-menu-link #{'active' if current_page?(calendar_child_recordings_path(current_child))}" %>
+          <%= link_to "カレンダー", calendar_child_recordings_path(current_child), class: "side-menu-link" %>
         </li>
+      <% else %>
         <li>
-          <%= link_to "設定", settings_path,
-            class: "side-menu-link #{'active' if current_page?(settings_path)}" %>
+          <%= link_to "お子さまを登録する", new_child_path, class: "side-menu-link" %>
         </li>
-        <li>
-          <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "side-menu-link logout-link" %>
-        </li>
+      <% end %>
+
+      <li>
+        <%= link_to "設定", settings_path, class: "side-menu-link" %>
+      </li>
+      <li>
+        <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "side-menu-link logout-link" %>
+      </li>
     </ul>
   </aside>
 </header>
