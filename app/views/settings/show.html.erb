@@ -13,9 +13,16 @@
 
       <div class="setting-item">
         <p class="setting-label">メールアドレス</p>
-        <%= link_to edit_email_user_path, class: "setting-box" do %>
-          <span><%= @user.email %></span>
-          <span class="arrow">&gt;</span>
+
+        <% if @user.provider == "line" && @user.email.start_with?("line_") %>
+          <div class="setting-box">
+            <span>LINEログインで登録済み</span>
+          </div>
+        <% else %>
+          <%= link_to edit_email_user_path, class: "setting-box" do %>
+            <span><%= @user.email %></span>
+            <span class="arrow">&gt;</span>
+          <% end %>
         <% end %>
       </div>
 
@@ -55,7 +62,12 @@
     </div>
 
     <div class="settings-actions">
-      <%= link_to "← ホームにもどる", new_child_recording_path(current_child), class: "setting-back-link" %>
+      <% if session[:from_line_login] %>
+        <%= link_to "ホームへ", new_child_recording_path(current_child), class: "setting-back-link" %>
+      <% else %>
+        <%= link_to "← ホームにもどる", new_child_recording_path(current_child), class: "setting-back-link" %>
+      <% end %>
+
       <%= button_to "ログアウト", logout_path, method: :delete, class: "setting-logout-btn" %>
     </div>
   </div>
