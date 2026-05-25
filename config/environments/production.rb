@@ -63,6 +63,17 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "example.com" }
 
+  app_host = ENV.fetch("APP_HOST", "kotonoha-48o0.onrender.com")
+  config.action_mailer.default_url_options = {
+    host: "app_host",
+    protocol: "https"
+  }
+
+  config.action_controller.default_url_options = {
+    host: "app_host",
+    protocol: "https"
+  }
+
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {
   #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
