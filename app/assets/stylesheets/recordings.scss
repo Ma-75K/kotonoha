@@ -93,6 +93,19 @@
     color: var(--color-text);
   }
 
+  .record-guide {
+  margin-top: 1.4rem;
+  font-size: 0.95rem;
+  color: var(--color--text-light);
+  line-height: 1.8;
+  text-align: center;
+  }
+
+  .record-guide i {
+    color: #7FB77E;
+    margin-bottom: 0.5rem;
+  }
+
   /* 最近の録音3件 */
   .recent-recordings-section {
     width: 100%;

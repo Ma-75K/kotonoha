@@ -18,6 +18,17 @@
       </button>
 
       <p class="record-start-label">ことばをのこす</p>
+
+      <% unless @child.recordings.exists? %>
+        <div class="record-guide">
+          <i class="fa-regular fa-lightbulb"></i>
+
+          <p>
+            今しか聞けないことばを、<br>
+            残してみませんか？
+          </p>
+        </div>
+      <% end %>
     </div>
 
     <div class="recent-recordings-section">

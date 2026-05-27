@@ -2,10 +2,12 @@
   <div class= "container mt-5">
     <div class= "row">
       <div class= "col-md-10 col-lg-8 mx-auto">
-        <h2 class="top-title text-center">この言葉、忘れたくない。</h2>
-      <div class="mb-5">
 
-        <div class="button-group">
+        <h2 class="top-title text-center">
+          この言葉、忘れたくない。
+        </h2>
+
+        <div class="button-group mb-5">
           <%= link_to "新規登録", new_user_path, class: "btn-primary-main" %>
           <%= link_to "ログイン", login_path, class: "btn-secondary-main" %>
         </div>
@@ -16,6 +18,42 @@
           今しか残せない瞬間を<br>
           未来の宝物に。
         </div>
+
+        <section class="usage-section">
+          <h2>ことのはの使い方</h2>
+
+          <div class="usage-cards">
+
+            <div class="usage-card">
+              <i class="fa-solid fa-microphone"></i>
+              <h3>ことばを残す</h3>
+              <p>
+                今しか聞けないことばを<br>
+                ワンタップで記録
+              </p>
+            </div>
+
+            <div class="usage-card">
+              <i class="fa-solid fa-headphones"></i>
+              <h3>ことばを振り返る</h3>
+              <p>
+                成長と一緒に<br>
+                あの日の声をもう一度
+              </p>
+            </div>
+
+            <div class="usage-card">
+              <i class="fa-regular fa-heart"></i>
+              <h3>ひとことを添える</h3>
+              <p>
+                その時の気持ちも<br>
+                一緒に残せる
+              </p>
+            </div>
+
+          </div>
+        </section>
+
       </div>
     </div>
   </div>
