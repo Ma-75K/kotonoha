@@ -63,14 +63,14 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "example.com" }
 
-  app_host = ENV.fetch("APP_HOST", "kotonoha-48o0.onrender.com")
+  app_host = ENV.fetch("APP_HOST", "kotonoha-app.com")
   config.action_mailer.default_url_options = {
-    host: "app_host",
+    host: app_host,
     protocol: "https"
   }
 
   config.action_controller.default_url_options = {
-    host: "app_host",
+    host: app_host,
     protocol: "https"
   }
 
@@ -94,12 +94,10 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  #
-  # Skip DNS rebinding protection for the default health check endpoint.
+
+  config.hosts << "kotonoha-app.com"
+  config.hosts << "www.kotonoha-app.com"
+
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # Active Storageの設定
