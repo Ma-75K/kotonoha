@@ -111,6 +111,51 @@
   margin: 0.3rem 0;
 }
 
+.usage-section {
+  margin-top: 110px;
+  text-align: center;
+}
+
+.usage-section h2 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.usage-cards {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.usage-card {
+  flex: 1;
+  background: #fffef9;
+  border-radius: 20px;
+  padding: 20px 12px;
+  text-align: center;
+}
+
+.usage-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+.usage-card i {
+  font-size: 1.5rem;
+  color: #7FB77E;
+  margin-bottom: 10px;
+}
+
+.usage-card p {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
 /* ========================================
    レスポンシブ対応
 ======================================== */
@@ -142,6 +187,39 @@
     font-size: 0.9rem;
     line-height: 2;
     max-width: 300px;
+  }
+
+  .usage-section {
+    margin-top: 80px;
+  }
+
+  .usage-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  .usage-cards {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .usage-card {
+    padding: 18px 16px;
+  }
+
+  .usage-card i {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+
+  .usage-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .usage-card p {
+    font-size: 0.8rem;
+    line-height: 1.6;
   }
 }
 
