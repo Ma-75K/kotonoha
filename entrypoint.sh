@@ -7,9 +7,8 @@ echo "=== Starting entrypoint.sh ==="
 echo "Removing server.pid..."
 rm -f /kotonoha/tmp/pids/server.pid
 
-# マイグレーションを実行
-echo "Running database migrations..."
-bundle exec rails db:migrate
+echo "Preparing databases..."
+bundle exec rails db:prepare
 
 echo "=== entrypoint.sh completed ==="
 
