@@ -58,9 +58,15 @@
     <% if flash[:success] || flash[:alert] %>
       <div class="container mt-3">
         <% if flash[:success] %>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <div class="alert alert-success alert-dismissible fade show auto-close-flash" role="alert">
             <%= flash[:success] %>
-            <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button>
+
+            <button
+              type="button"
+              class="btn-close"
+              aria-label="Close"
+              onclick="this.parentElement.remove()">
+            </button>
           </div>
         <% end %>
 
