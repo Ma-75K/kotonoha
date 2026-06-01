@@ -141,7 +141,7 @@ body {
   font-family: var(--font-main);
   line-height: 1.6;
   color: var(--color-text);
-  background-color: var(--color-white);
+  background-color: var(--color-primary-light);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -159,6 +159,7 @@ select {
 ======================================== */
 main {
   flex: 1; /* フッターを下部に固定するため */
+  background-color: var(--color-primary-light);
 }
 
 /* ========================================

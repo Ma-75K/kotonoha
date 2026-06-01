@@ -6,19 +6,27 @@
     <% if @recordings.any? %>
       <div class="recordings-list">
         <% @recordings.each do |recording| %>
-          <%= link_to child_recording_path(@child, recording, from: "recordings"), class: "recording-item" do %>
-            <div class="recording-item-left">
-              <p class="recording-title"><%= recording.title %></p>
-              <p class="recording-duration">
-                <%= format_duration(recording.duration) %>
-              </p>
-            </div>
+          <div class="recording-item-wrapper">
+            <%= link_to child_recording_path(@child, recording, from: "recordings"), class: "recording-item" do %>
+              <div class="recording-item-left">
+                <p class="recording-title"><%= recording.title %></p>
+                <p class="recording-duration">
+                  <%= format_duration(recording.duration) %>
+                </p>
+              </div>
 
-            <div class="recording-item-right">
-              <p class="recording-date"><%= recording.recorded_at.strftime("%Y/%m/%d") %></p>
-              <p class="recording-age"><%= @child.age_at(recording.recorded_at) %></p>
+              <div class="recording-item-right">
+                <p class="recording-date"><%= recording.recorded_at.strftime("%Y/%m/%d") %></p>
+                <p class="recording-age"><%= @child.age_at(recording.recorded_at) %></p>
+              </div>
+            <% end %>
+
+            <div class="favorite-area">
+              <%= render "favorites/favorite_button",
+                recording: recording,
+                child: @child %>
             </div>
-          <% end %>
+          </div>
         <% end %>
       </div>
 

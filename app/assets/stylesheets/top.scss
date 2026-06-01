@@ -6,10 +6,14 @@
   background-color: var(--color-primary-light);
   padding: var(--spacing-xl);
   font-family: var(--font-main);
+  width: 100%;
+  overflow-x: hidden;
 }
 
-.top-container .container {
+.top-inner {
+  width: 100%;
   max-width: 900px;
+  margin: 0 auto;
 }
 
 /* ========================================
