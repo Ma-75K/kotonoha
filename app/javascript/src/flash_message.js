@@ -2,6 +2,7 @@ console.log("flash_message.js loaded")
 
 const setupFlashMessages = () => {
   console.log("setupFlashMessages fired")
+
   const flashMessages = document.querySelectorAll(".auto-close-flash")
   console.log(flashMessages)
 
@@ -10,8 +11,15 @@ const setupFlashMessages = () => {
       message.style.opacity = "0"
 
       setTimeout(() => {
-        message.remove()
+        const wrapper = message.closest(".flash-wrapper")
+
+        if (wrapper) {
+          wrapper.remove()
+        } else {
+          message.remove()
+        }
       }, 500)
+
     }, 3000)
   })
 }

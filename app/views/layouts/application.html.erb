@@ -56,7 +56,7 @@
 
     <!-- フラッシュメッセージは全ページで共通表示 -->
     <% if flash[:success] || flash[:alert] %>
-      <div class="container mt-3">
+      <div class="flash-wrapper">
         <% if flash[:success] %>
           <div class="alert alert-success alert-dismissible fade show auto-close-flash" role="alert">
             <%= flash[:success] %>
@@ -65,7 +65,7 @@
               type="button"
               class="btn-close"
               aria-label="Close"
-              onclick="this.parentElement.remove()">
+              onclick="this.closest('.flash-wrapper').remove()">
             </button>
           </div>
         <% end %>
@@ -73,7 +73,13 @@
         <% if flash[:alert] %>
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <%= flash[:alert] %>
-            <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.remove()"></button>
+
+            <button
+              type="button"
+              class="btn-close"
+                aria-label="Close"
+                onclick="this.closest('.flash-wrapper').remove()">
+            </button>
           </div>
         <% end %>
       </div>

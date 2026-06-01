@@ -12,3 +12,8 @@
 @use 'static_pages';
 @use 'favorites';
 @use 'calendar';
+
+.flash-wrapper {
+  padding: 1rem;
+  background-color: var(--color-primary-light);
+}
