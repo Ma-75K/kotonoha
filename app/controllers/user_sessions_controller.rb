@@ -4,6 +4,15 @@ class UserSessionsController < ApplicationController
   def new; end
 
   def create
+    @email = params[:email]
+    @email_error = "メールアドレスを入力してください" if params[:email].blank?
+    @password_error = "パスワードを入力してください" if params[:password].blank?
+
+    if @email_error.present? || @password_error.present?
+      render :new, status: :unprocessable_entity
+      return
+    end
+
     @user = login(params[:email], params[:password])
 
     if @user

@@ -3,8 +3,10 @@
 ======================================== */
 #recording-page {
   background-color: var(--color-primary-light);
-  height: 100vh;
+  min-height: 100vh;
   padding: var(--spacing-lg) var(--spacing-md);
+  width: 100%;
+  overflow-x: hidden;
 
   #initial-screen {
     max-width: 420px;
@@ -96,7 +98,7 @@
   .record-guide {
   margin-top: 1.4rem;
   font-size: 0.95rem;
-  color: var(--color--text-light);
+  color: var(--color-text-light);
   line-height: 1.8;
   text-align: center;
   }
@@ -448,6 +450,23 @@
   /* スマホ微調整 */
   @media (max-width: 767px) {
     padding: var(--spacing-md);
+
+    #preview-area {
+      padding: 1.8rem 1rem;
+    }
+
+    #preview-area h2 {
+      font-size: 1.4rem;
+    }
+
+    .duration {
+      font-size: 2.2rem;
+    }
+
+    .preview-save-button {
+      width: 100%;
+      max-width: 280px;
+    }
 
     #initial-screen {
       padding-top: 3rem;
@@ -869,14 +888,15 @@
     text-decoration: none;
   }
 
-  .recording-left {
+  .recording-item-left {
     flex: 1;
     min-width: 0;
   }
 
-  .recording-right {
+  .recording-item-right {
     margin-left: var(--spacing-md);
     flex-shrink: 0;
+    text-align: right;
   }
 
   .recording-title {
