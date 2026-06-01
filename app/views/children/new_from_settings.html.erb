@@ -8,7 +8,7 @@
         <%= f.text_field :name, class: "form-field" %>
 
         <% if @child.errors[:name].any? %>
-          <div class="errors-message">
+          <div class="error-message">
             <%= @child.errors.full_messages_for(:name).join(", ") %>
           </div>
         <% end %>
@@ -19,7 +19,7 @@
         <%= f.date_field :birthday, class: "form-field date-field" %>
 
         <% if @child.errors[:birthday].any? %>
-          <div class="errors-message">
+          <div class="error-message">
             <%= @child.errors.full_messages_for(:birthday).join(", ") %>
           </div>
         <% end %>

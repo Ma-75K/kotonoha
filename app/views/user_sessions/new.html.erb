@@ -2,15 +2,27 @@
   <div class="login-card">
     <h1 class="login-title">ログイン</h1>
 
-    <%= form_with url: login_path, local: true do |f| %>
+    <%= form_with url: login_path, local: true, html: { novalidate: true } do |f| %>
       <div class="form-group">
         <%= f.label :email, class: "form-label" %>
-        <%= f.email_field :email, class: "form-control", required: true %>
+        <%= f.email_field :email, value: @email, class: "form-control" %>
+
+        <% if @email_error.present? %>
+          <div class="error-message">
+            <%= @email_error %>
+          </div>
+        <% end %>
       </div>
 
       <div class="form-group">
         <%= f.label :password, class: "form-label" %>
-        <%= f.password_field :password, class: "form-control", required: true %>
+        <%= f.password_field :password, class: "form-control" %>
+
+        <% if @password_error.present? %>
+          <div class="error-message">
+            <%= @password_error %>
+          </div>
+        <% end %>
       </div>
 
       <div class="login-actions">
@@ -27,7 +39,7 @@
                     method: :post,
                     data: { turbo: false },
                     html: { class: "line-login-form" } do %>
-        <button type=submit" class="line-login-button">
+        <button type="submit" class="line-login-button">
           <span class="line-icon">
             <%= image_tag "line_icon.png", alt: "LINE", class: "line-icon-img" %>
           </span>

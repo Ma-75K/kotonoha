@@ -1,16 +1,15 @@
-// app/assets/stylesheets/top.scss
-
 /* ========================================
    トップページ全体のコンテナ
 ======================================== */
 .top-container {
   min-height: 100vh;
   background-color: var(--color-primary-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: var(--spacing-xl);
   font-family: var(--font-main);
+}
+
+.top-container .container {
+  max-width: 900px;
 }
 
 /* ========================================
@@ -168,13 +167,13 @@
 
   .top-title {
     font-size: 1.5rem;
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
   }
 
   .button-group {
     flex-direction: column; /* 縦並び */
     gap: var(--spacing-md);
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
   }
 
   .button-group .btn {
@@ -190,7 +189,7 @@
   }
 
   .usage-section {
-    margin-top: 80px;
+    margin-top: 64px;
   }
 
   .usage-section h2 {

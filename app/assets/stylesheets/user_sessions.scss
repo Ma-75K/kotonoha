@@ -26,6 +26,16 @@
     margin-bottom: var(--spacing-md);
   }
 
+  .error-message {
+    display: block;
+    width: 100%;
+    margin: 6px 0 0;
+    color: #b97a7a;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: left;
+  }
+
   .form-label {
     display: block;
     margin-bottom: 8px;

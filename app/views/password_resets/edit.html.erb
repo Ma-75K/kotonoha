@@ -6,7 +6,11 @@
       新しいパスワードを入力してください
     </p>
 
-    <%= form_with model: @user, url: password_reset_path(token: @token), method: :patch, local: true do |f| %>
+    <%= form_with model: @user,
+                  url: password_reset_path(token: @token),
+                  method: :patch,
+                  local: true,
+                  html: { novalidate: true } do |f| %>
 
       <div class="form-group">
         <%= f.label :password, "新しいパスワード", class: "form-label" %>
