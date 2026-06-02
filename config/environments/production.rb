@@ -75,14 +75,14 @@ config.action_mailer.delivery_method = :resend
 config.action_mailer.perform_deliveries = true
 config.action_mailer.raise_delivery_errors = true
 
-# config.action_mailer.smtp_settings = {
+  # config.action_mailer.smtp_settings = {
   # address: "smtp.resend.com",
   # port: 465,
   # user_name: "resend",
   # password: ENV["RESEND_API_KEY"],
   # authentication: :plain,
   # tls: true
-# }
+  # }
 
   config.i18n.fallbacks = true
 
