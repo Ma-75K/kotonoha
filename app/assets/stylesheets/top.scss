@@ -77,37 +77,20 @@
    説明文
 ======================================== */
 .description {
-  position: relative;  /* 疑似要素の基準位置 */
   text-align: center;
-  padding: var(--spacing-xxl) 3rem;
-  background: rgba(200, 230, 201, 0.8);
-  border-radius: 50%;
-  line-height: 2.2;
-  font-size: 1rem;
+  margin: 4.5rem auto 5.5rem;
+  line-height: 2.4;
+  font-size: 1.05rem;
   color: var(--color-text-light);
-  max-width: 400px;
-  margin: 0 auto;
-  margin-top: -1rem;
   font-family: var(--font-main);
-   z-index: 1;  /* テキストを前面に */
+  max-width: 320px;
+  padding: 0;
+  background: none;
+  border-radius: 0;
 }
 
-/* ぼかした枠線を疑似要素で作成 */
 .description::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 250, 240, 0.9),
-    rgba(248, 248, 255, 0.6)
-  );
-  border-radius: 50%;
-  filter: blur(9px);  /* ぼかしを適用 */
-  z-index: -1;  /* 背景の後ろに配置 */
+  content: none;
 }
 
 .description br {
@@ -173,12 +156,13 @@
   .top-title {
     font-size: 1.5rem;
     margin-bottom: 4rem;
+    margin-top: 5rem;
   }
 
   .button-group {
     flex-direction: column; /* 縦並び */
-    gap: var(--spacing-md);
-    margin-bottom: 4rem;
+    gap: 1.4rem;
+    margin-bottom: 3rem;
   }
 
   .button-group .btn {
@@ -187,14 +171,15 @@
   }
 
   .description {
-    padding: var(--spacing-xl) var(--spacing-xl);
-    font-size: 0.9rem;
-    line-height: 2;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 2.3;
     max-width: 300px;
+    margin: 0 auto 4rem;
   }
 
   .usage-section {
-    margin-top: 64px;
+    margin-top: 56px;
   }
 
   .usage-section h2 {
@@ -234,7 +219,14 @@
   }
 
   .description {
-    max-width: 380px;
+    max-width: 360px;
+    font-size: 1.05rem;
+    padding: 0;
+    margin: 0 auto 3rem;
+  }
+
+  .button-group {
+    margin-bottom: 3rem;
   }
 }
 
@@ -242,6 +234,8 @@
 @media (min-width: 992px) {
   .top-title {
     font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 2.5rem;
   }
 
   .button-group {
@@ -254,8 +248,14 @@
   }
 
   .description {
-    padding: var(--spacing-xxl) 5rem;
-    font-size: 1rem;
+    padding: 0;
+    font-size: 1.1rem;
+    line-height: 2.4;
     max-width: 420px;
+    margin: 0 auto 2rem;
+  }
+
+  .usage-section {
+    margin-top: 40px;
   }
 }
