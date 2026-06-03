@@ -14,7 +14,7 @@
       <div class="setting-item">
         <p class="setting-label">メールアドレス</p>
 
-        <% if @user.provider == "line" && @user.email.start_with?("line_") %>
+        <% if @user.provider == "line" && @user.email.to_s.start_with?("line_") %>
           <div class="setting-box">
             <span>LINEログインで登録済み</span>
           </div>
@@ -26,12 +26,14 @@
         <% end %>
       </div>
 
-      <div class="setting-item">
-        <%= link_to new_password_reset_path, class: "setting-box setting-link" do %>
-          <span>パスワードリセット</span>
-          <span class="arrow">&gt;</span>
-        <% end %>
-      </div>
+      <% unless @user.provider == "line" %>
+        <div class="setting-item">
+          <%= link_to new_password_reset_path, class: "setting-box setting-link" do %>
+            <span>パスワードリセット</span>
+            <span class="arrow">&gt;</span>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <h2 class="settings-subtitle">お子さま情報設定</h2>
