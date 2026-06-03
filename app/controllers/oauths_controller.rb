@@ -11,9 +11,10 @@ class OauthsController < ApplicationController
 
     if user.new_record?
       password = SecureRandom.hex(16)
+      uid = auth.uid.to_s
 
       user.name = auth.info.name.presence || "LINEユーザー"
-      user.email = auth.info.email.presence || "line_#{auth.uid}@example.com"
+      user.email = auth.info.email.presence || "line_#{uid}@line.local"
       user.password = password
       user.password_confirmation = password
       user.save!
