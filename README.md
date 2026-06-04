@@ -11,7 +11,7 @@
 
 
 ## サービスURL
-https://kotonoha-48o0.onrender.com/
+https://kotonoha-app.com
 
 
 ## ターゲットユーザー
@@ -51,7 +51,8 @@ https://kotonoha-48o0.onrender.com/
 - 録音の削除
 ### 体験機能
 - 最近の記録表示
-「一年前の今日」の表示
+- 「一年前の今日」の表示
+-お気に入り登録機能
 
 
 ## 工夫した点
@@ -102,6 +103,17 @@ https://kotonoha-48o0.onrender.com/
 「ことのは」は、多機能な育児アプリではなく、
 「今しか聞けない言葉を、その瞬間に迷わず残す」ための記録アプリです。
 
+## 技術的に工夫した点
+
+### 音声録音・保存機能
+JavaScriptのMediaRecorder APIで録音し、fetch APIでRailsへ非同期処理しています。保存した音声ファイルはActive Storageを通してAmazon S3に保存し、本番環境でも再生できるようにしました。
+
+### 振り返り機能
+録音一覧、一年前の記録、お気に入り、カレンダーから記録を振り返れるようにし、単に保存するだけでなく、子どもの成長を見返せる体験を意識しました。
+
+### 本番環境対応
+Renderへのデプロイ、独自ドメイン、HTTPS、S3、Resendによるメール送信、LINEログインの公開設定まで対応しました。
+
 
 ## 技術スタック
 
@@ -110,12 +122,17 @@ https://kotonoha-48o0.onrender.com/
 - ActiveStorage
 - JavaScript（MediaRecorder API）
 - Hotwire（Turbo）
+- AWS S3
+- Render
+- LINE Login
+- Sorcery
+- RSpec
 
 
 ## 今後の展望
+- 録音トリミング機能
 - 音声の自動文字起こし
 - 家族共有機能
-- お気に入り機能
 - タグ付け・検索機能
 - 思い出の自動まとめ（AI）
 
@@ -123,7 +140,6 @@ https://kotonoha-48o0.onrender.com/
 ## 画面遷移図
 https://www.figma.com/design/7Zx2RbhwxDdRNnZVny8ov1/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C%E3%80%90%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%E3%80%91?node-id=0-1&t=yPohb3fnXBDzClK7-1
 
-※実装を通じて一部変更があります
 
 
 ## ER図
