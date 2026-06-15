@@ -118,7 +118,7 @@ GEM
     bootstrap5-kaminari-views (0.0.1)
       kaminari (>= 0.13)
       rails (>= 3.1)
-    brakeman (8.0.4)
+    brakeman (8.0.5)
       racc
     builder (3.3.0)
     bullet (8.1.0)
@@ -556,7 +556,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   bootstrap5-kaminari-views
-  brakeman (~> 8.0.4)
+  brakeman (~> 8.0.5)
   bullet
   capybara
   dartsass-rails
